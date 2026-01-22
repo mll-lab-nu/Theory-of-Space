@@ -1,0 +1,36 @@
+# config.yaml
+name: demo_env
+render_mode: vision  # options: vision or text
+
+seed-range: 0-9
+exp_type: active 
+# perspective: ego
+max_exp_steps: 20
+calculate_information_gain: true
+data_dir: "vagen/env/spatial/Player_platform/rooms"
+eval_task_counts:
+  dir: 3
+  pov: 3
+  bwd_pov_text: 3
+  bwd_pov_vision: 3
+  fwd_fov: 3
+  bwd_nav_text: 3
+  bwd_nav_vision: 3
+  e2a: 3
+  rot: 3
+  fwd_loc: 3
+  bwd_loc_text: 3
+  bwd_loc_vision: 3
+  
+prompt_config:
+  topdown: false
+  oblique: false
+  type: shorter
+  enable_think: true
+
+
+kwargs:
+  model_config:
+    model_name: human_player
+  all_override: true
+  output_dir: "results"

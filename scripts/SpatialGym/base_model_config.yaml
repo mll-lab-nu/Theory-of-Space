@@ -1,0 +1,195 @@
+models:
+  gpt-4.1-mini:
+    provider: openai
+    model_name: gpt-4.1-mini
+    max_tokens: 8192
+    temperature: 0.0
+    max_workers: 64
+    presence_penalty: 0.0
+    frequency_penalty: 0.0
+    max_retries: 3
+    timeout: 60
+
+  gpt-4.1:
+    provider: openai
+    model_name: gpt-4.1
+    max_tokens: 8192
+    temperature: 0.0
+    max_workers: 64
+    presence_penalty: 0.0
+    frequency_penalty: 0.0
+    max_retries: 3
+    timeout: 60
+
+  o4-mini:
+    provider: openai
+    model_name: o4-mini
+    max_completion_tokens: 8192
+    temperature: 1.0
+    max_workers: 64
+    presence_penalty: 0.0
+    frequency_penalty: 0.0
+    max_retries: 3
+    timeout: 120
+
+  gpt-5-mini:
+    provider: openai
+    model_name: gpt-5-mini
+    max_completion_tokens: 32768
+    temperature: 1.0
+    max_workers: 32
+    presence_penalty: 0.0
+    frequency_penalty: 0.0
+    max_retries: 3
+    timeout: 180
+
+  gpt-5:
+    provider: openai
+    model_name: gpt-5
+    max_completion_tokens: 32768
+    temperature: 1.0
+    max_workers: 128
+    presence_penalty: 0.0
+    frequency_penalty: 0.0
+    max_retries: 5
+    max_retries_api: 5
+    timeout: 500
+    reasoning_effort: medium
+
+  gpt-5.1:
+    provider: openai
+    model_name: gpt-5.1
+    max_completion_tokens: 32768
+    temperature: 1.0
+    max_workers: 128
+    presence_penalty: 0.0
+    frequency_penalty: 0.0
+    max_retries: 5
+    max_retries_api: 5
+    timeout: 500
+    reasoning_effort: medium
+  
+  gpt-5.2:
+    provider: openai
+    model_name: gpt-5.2
+    max_completion_tokens: 32768
+    temperature: 1.0
+    max_workers: 128
+    presence_penalty: 0.0
+    frequency_penalty: 0.0
+    max_retries: 5
+    max_retries_api: 5
+    timeout: 500
+    reasoning_effort: medium
+
+  gemini-2.5-pro:
+    provider: openai
+    organization: google
+    model_name: gemini-2.5-pro
+    max_tokens: 32768
+    temperature: 0
+    max_workers: 32
+    base_url: https://generativelanguage.googleapis.com/v1beta/openai/
+    timeout: 500
+    max_retries: 5
+    reasoning_effort: medium
+  
+  gemini-3-pro-preview:
+    provider: openai
+    organization: google
+    model_name: gemini-3-pro-preview
+    max_tokens: 32768
+    temperature: 1.0
+    max_workers: 32
+    base_url: https://generativelanguage.googleapis.com/v1beta/openai/
+    timeout: 500
+    max_retries: 5
+
+  gemini-2.5-flash:
+    provider: openai
+    organization: google
+    model_name: gemini-2.5-flash
+    max_tokens: 8192
+    temperature: 0
+    max_workers: 20
+    base_url: https://generativelanguage.googleapis.com/v1beta/openai/
+    timeout: 180
+    max_retries: 3
+
+  claude-sonnet-4-20250514:
+    provider: anthropic
+    model_name: claude-sonnet-4-20250514
+    max_tokens: 16384
+    temperature: 0
+    max_workers: 128
+
+  claude-sonnet-4-5:
+    provider: anthropic
+    model_name: claude-sonnet-4-5
+    max_tokens: 32768
+    budget_tokens: 30000
+    thinking: true
+    temperature: 1.0
+    max_workers: 32
+    timeout: 300
+
+  Qwen3-VL-32B-Instruct:
+    provider: together
+    model_name: Qwen3-VL-32B-Instruct
+    max_tokens: 32768
+    temperature: 0
+    max_workers: 32
+    timeout: 300
+
+  internvl3.5-241b-a28b:
+    provider: openai
+    organization: self-hosted
+    model_name: internvl3.5-241b-a28b
+    max_tokens: 16384
+    temperature: 0
+    max_workers: 64
+    base_url: https://xxx.com/v1
+    timeout: 500
+
+  GLM-4.5V:
+    provider: openai
+    organization: self-hosted
+    model_name: GLM-4.5V
+    max_tokens: 16384
+    temperature: 0
+    max_workers: 64
+    base_url: https://xxx.com/v1
+    timeout: 180
+
+  o3:
+    provider: azure_openai
+    model_name: o3
+    max_completion_tokens: 32768
+    temperature: 1.0
+    max_workers: 32
+    max_retries: 5
+    timeout: 300
+
+  glm-4.6v:
+    provider: openai
+    organization: openrouter
+    model_name: glm-4.6v
+    max_tokens: 32768
+    temperature: 0.0
+    max_workers: 32
+    base_url: https://openrouter.ai/api/v1
+    timeout: 300
+    max_retries: 5
+    max_retries_api: 5
+
+  qwen3-vl-235b-a22b-thinking:
+    provider: openai
+    organization: openrouter
+    model_name: qwen/qwen3-vl-235b-a22b-thinking
+    max_tokens: 32768
+    temperature: 0.0
+    max_workers: 32
+    base_url: https://openrouter.ai/api/v1
+    timeout: 300
+    max_retries: 5
+    max_retries_api: 5

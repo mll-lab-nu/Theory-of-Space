@@ -1,0 +1,235 @@
+room_config:
+  n_objects: 4
+  room_num: 4
+  topology: 1
+  room_size: [6, 6]
+
+_common: &common
+  env_name: spatial
+  train_size: 25
+  test_size: 2
+
+# prompt
+_prompt_standard: &prompt_standard
+  prompt_config:
+    topdown: false
+    cogmap: false
+
+_prompt_topdown: &prompt_topdown
+  prompt_config:
+    topdown: true
+    cogmap: false
+
+# exp_type
+_passive: &passive
+  exp_type: passive
+  n_objects: 8
+  level: 2
+  main: 6
+  room_size: [15, 15]
+  render_mode: vision
+  proxy_agent: scout
+
+
+_active: &active
+  exp_type: active
+  n_objects: 8
+  max_exp_steps: 20
+  room_size: [15, 15]
+  level: 2
+  main: 6
+  render_mode: vision
+  calculate_information_gain: True
+
+custom_envs:
+  PassiveDir:
+    <<: *common
+    env_config:
+      <<: *prompt_standard
+      <<: *passive
+      name: "passive_dir"
+      eval_tasks: [{task_type: "dir"}]
+
+  PassiveRot:
+    <<: *common
+    env_config:
+      <<: *prompt_standard
+      <<: *passive
+      name: "passive_rot"
+      eval_tasks: [{task_type: "rot"}]
+
+  PassiveRotDual:
+    <<: *common
+    env_config:
+      <<: *prompt_standard
+      <<: *passive
+      name: "passive_rot_dual"
+      eval_tasks: [{task_type: "rot_dual"}]
+
+  PassivePov:
+    <<: *common
+    env_config:
+      <<: *prompt_standard
+      <<: *passive
+      name: "passive_pov"
+      eval_tasks: [{task_type: "pov"}]
+
+  PassiveBwdPov:
+    <<: *common
+    env_config:
+      <<: *prompt_standard
+      <<: *passive
+      name: "passive_bwd_pov"
+      eval_tasks: [{task_type: "bwd_pov"}]
+
+  PassiveE2A:
+    <<: *common
+    env_config:
+      <<: *prompt_standard
+      <<: *passive
+      name: "passive_e2a"
+      eval_tasks: [{task_type: "e2a"}]
+
+  PassiveFwdLoc:
+    <<: *common
+    env_config:
+      <<: *prompt_standard
+      <<: *passive
+      name: "passive_fwd_loc"
+      eval_tasks: [{task_type: "fwd_loc"}]
+
+  PassiveBwdLoc:
+    <<: *common
+    env_config:
+      <<: *prompt_standard
+      <<: *passive
+      name: "passive_bwd_loc"
+      eval_tasks: [{task_type: "bwd_loc"}]
+
+  PassiveFwdFov:
+    <<: *common
+    env_config:
+      <<: *prompt_standard
+      <<: *passive
+      name: "passive_fwd_fov"
+      eval_tasks: [{task_type: "fwd_fov"}]
+
+  PassiveBwdNav:
+    <<: *common
+    env_config:
+      <<: *prompt_standard
+      <<: *passive
+      name: "passive_bwd_nav"
+      eval_tasks: [{task_type: "bwd_nav"}]
+
+  PassiveFalseBelief:
+    <<: *common
+    env_config:
+      <<: *prompt_standard
+      <<: *passive
+      name: "passive_false_belief"
+      eval_tasks: [{task_type: "false_belief"}]  
+
+  PassiveDirAnchor:
+    <<: *common
+    env_config:
+      <<: *prompt_standard
+      <<: *passive
+      name: "passive_dir_anchor"
+      eval_tasks: [{task_type: "dir_anchor"}]
+
+  ActiveDir:
+    <<: *common
+    env_config:
+      <<: *prompt_standard
+      <<: *active
+      name: "active_dir"
+      eval_tasks: [{task_type: "dir"}]
+
+  ActiveRot:
+    <<: *common
+    env_config:
+      <<: *prompt_standard
+      <<: *active
+      name: "active_rot"
+      eval_tasks: [{task_type: "rot"}]
+
+  ActiveRotDual:
+    <<: *common
+    env_config:
+      <<: *prompt_standard
+      <<: *active
+      name: "active_rot_dual"
+      eval_tasks: [{task_type: "rot_dual"}]
+
+  ActivePov:
+    <<: *common
+    env_config:
+      <<: *prompt_standard
+      <<: *active
+      name: "active_pov"
+      eval_tasks: [{task_type: "pov"}]
+
+  ActiveBwdPov:
+    <<: *common
+    env_config:
+      <<: *prompt_standard
+      <<: *active
+      name: "active_bwd_pov"
+      eval_tasks: [{task_type: "bwd_pov"}]
+
+  ActiveE2A:
+    <<: *common
+    env_config:
+      <<: *prompt_standard
+      <<: *active
+      name: "active_e2a"
+      eval_tasks: [{task_type: "e2a"}]
+
+  ActiveFwdLoc:
+    <<: *common
+    env_config:
+      <<: *prompt_standard
+      <<: *active
+      name: "active_fwd_loc"
+      eval_tasks: [{task_type: "fwd_loc"}]
+  
+  ActiveBwdLoc:
+    <<: *common
+    env_config:
+      <<: *prompt_standard
+      <<: *active
+      name: "active_bwd_loc"
+      eval_tasks: [{task_type: "bwd_loc"}]
+
+  ActiveFwdFov:
+    <<: *common
+    env_config:
+      <<: *prompt_standard
+      <<: *active
+      name: "active_fwd_fov"
+      eval_tasks: [{task_type: "fwd_fov"}]
+
+  ActiveBwdNav:
+    <<: *common
+    env_config:
+      <<: *prompt_standard
+      <<: *active
+      name: "active_bwd_nav"
+      eval_tasks: [{task_type: "bwd_nav"}]
+
+  ActiveFalseBelief:
+    <<: *common
+    env_config:
+      <<: *prompt_standard
+      <<: *active
+      name: "active_false_belief"
+      eval_tasks: [{task_type: "false_belief"}]
+
+  ActiveDirAnchor:
+    <<: *common
+    env_config:
+      <<: *prompt_standard
+      <<: *active
+      name: "active_dir_anchor"
+      eval_tasks: [{task_type: "dir_anchor"}]

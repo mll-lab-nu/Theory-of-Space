@@ -1,0 +1,46 @@
+# Server configuration
+server_url: "http://localhost:5001"
+server_timeout: 600
+server_max_workers: 64
+
+# Inference parameters
+batch_size: 32
+max_steps: 100
+split: "test"
+debug: false
+
+# Number of evaluation questions per environment type (strictly enforced without overrides)
+# Keys correspond to entries under custom_envs in base_env_config.yaml (e.g., PassiveRot, ActiveDir).
+# You may also use the env name (e.g., passive_rot). If both provided, env name wins.
+eval_task_counts:
+  dir: 3
+  pov: 3
+  bwd_pov_text: 3
+  bwd_pov_vision: 3
+  fwd_fov: 3
+  bwd_nav_text: 3
+  bwd_nav_vision: 3
+  e2a: 3
+  rot: 3
+  fwd_loc: 3
+  bwd_loc_text: 3
+  bwd_loc_vision: 3
+
+# Output configuration
+output_dir: "results"
+override: false
+evaluate_cogmap: false
+cogmap_config:
+  cogmap_type: standard
+  pos_allow_scale: False
+  scope: all
+override_cogmap: false
+cogmap_reevaluate: false
+
+# WandB configuration
+use_wandb: false
+wandb_project: "vagen-debug"
+val_generations_to_log_to_wandb: 10 
+
+# Display settings
+show_progress: true
