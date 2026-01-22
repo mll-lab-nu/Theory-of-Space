@@ -19,7 +19,7 @@ class VLLMModelConfig(BaseModelConfig):
     top_k: int = 50
     
     # VLM specific settings
-    image_input_type: str = "pixel_values"  # For Qwen-VL
+    # image_input_type: str = "pixel_values"  # For Qwen-VL
     image_token_id: Optional[int] = None
     image_input_shape: Optional[str] = None  # e.g., "1,3,224,224"
     image_feature_size: Optional[int] = None

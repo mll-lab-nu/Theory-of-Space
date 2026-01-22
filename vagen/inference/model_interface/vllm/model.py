@@ -42,7 +42,8 @@ class VLLMModelInterface(BaseModelInterface):
             "trust_remote_code": config.trust_remote_code,
             "enforce_eager": config.enforce_eager,
             "gpu_memory_utilization": config.gpu_memory_utilization,
-            "dtype": config.dtype
+            "dtype": config.dtype,
+            "max_model_len": config.max_tokens,
         }
         
         # If this is a multimodal model, try to handle according to vLLM VLM documentation
@@ -65,8 +66,8 @@ class VLLMModelInterface(BaseModelInterface):
             
             # Add additional args for VLM if provided in config
             extra_vlm_args = {}
-            if config.image_input_type:
-                extra_vlm_args["image_input_type"] = config.image_input_type
+            # if config.image_input_type:
+            #     extra_vlm_args["image_input_type"] = config.image_input_type
             if config.image_token_id is not None:
                 extra_vlm_args["image_token_id"] = config.image_token_id
             if config.image_input_shape:
@@ -75,27 +76,17 @@ class VLLMModelInterface(BaseModelInterface):
                 extra_vlm_args["image_feature_size"] = config.image_feature_size
             
             try:
-                # Try to create engine args with VLM-specific parameters
-                vlm_engine_args = EngineArgs(**engine_args_dict, **extra_vlm_args)
-                model_kwargs["engine_args"] = vlm_engine_args
-                logger.info("Successfully created VLM engine args with multimodal parameters")
-            except TypeError as e:
-                logger.warning(f"Failed to create VLM engine args: {e}")
-                logger.info("Trying direct initialization approach...")
-                
-                # Fallback to direct parameter passing method
-                try:
-                    # For newer vLLM versions that directly support VLM parameters
-                    model_kwargs.update(extra_vlm_args)
-                    logger.info("Using direct VLM parameters instead of engine_args")
-                except Exception as e:
-                    logger.error(f"Both VLM initialization methods failed. Running in text-only mode: {e}")
-                    # Remove all VLM-specific parameters to ensure text mode works
-                    for key in ["image_input_type", "image_token_id", "image_input_shape", "image_feature_size"]:
-                        if key in model_kwargs:
-                            del model_kwargs[key]
-                    # Mark as non-multimodal to prevent VLM-specific processing
-                    self.is_multimodal = False
+                # For newer vLLM versions that directly support VLM parameters
+                model_kwargs.update(extra_vlm_args)
+                logger.info("Using direct VLM parameters instead of engine_args")
+            except Exception as e:
+                logger.error(f"Both VLM initialization methods failed. Running in text-only mode: {e}")
+                # Remove all VLM-specific parameters to ensure text mode works
+                for key in ["image_input_type", "image_token_id", "image_input_shape", "image_feature_size"]:
+                    if key in model_kwargs:
+                        del model_kwargs[key]
+                # Mark as non-multimodal to prevent VLM-specific processing
+                self.is_multimodal = False
         
         # Load model
         logger.info(f"Loading {'multimodal' if self.is_multimodal else 'text'} model {self.model_name} with vLLM...")

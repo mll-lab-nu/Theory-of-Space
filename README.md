@@ -22,7 +22,95 @@ Add api keys (optional)
 
 The script supports multiple experiment types (active/passive), render modes (vision/text), and flexible seed ranges.
 
-### Quick start to reproduce the results
+### Download the datasets
+
+```bash
+hf download yw12356/tos_dataset_0117_3room_100runs --repo-type dataset --local-dir data
+```
+
+## Quick Start
+
+To add a new model, edit `scripts/SpatialGym/base_model_config.yaml` and add an entry under the `models` section. Each model requires specific parameters based on its provider:
+
+### OpenAI Models
+```yaml
+models:
+  gpt-4.1-mini:
+    provider: openai
+    model_name: gpt-4.1-mini  # Actual model identifier
+    max_tokens: 8192
+    temperature: 0.0
+    max_workers: 64
+    presence_penalty: 0.0
+    frequency_penalty: 0.0
+    max_retries: 3
+    timeout: 60
+```
+
+### Google Models (via OpenAI API)
+```yaml
+  gemini-2.5-pro:
+    provider: openai
+    organization: google
+    model_name: gemini-2.5-pro
+    max_tokens: 32768
+    temperature: 0
+    max_workers: 32
+    base_url: https://generativelanguage.googleapis.com/v1beta/openai/
+    timeout: 500
+    max_retries: 5
+```
+
+### Self-Hosted Models
+```yaml
+  your-custom-model:
+    provider: openai
+    organization: self-hosted
+    model_name: your-model-name
+    max_tokens: 16384
+    temperature: 0
+    max_workers: 64
+    base_url: https://your-api-endpoint.com/v1
+    timeout: 500
+```
+
+### VLLM Models
+```yaml
+  Qwen3-VL-2B-Instruct:
+    provider: vllm
+    model_name: models/Qwen3-VL-2B-Instruct
+    max_tokens: 8192
+    temperature: 0.0
+    max_workers: 16
+    gpu_memory_utilization: 0.7
+```
+  
+### Common Parameters
+- `provider`: API provider (`openai`, `anthropic`, `together`, `azure_openai`)
+- `model_name`: Model identifier used by the API
+- `max_tokens` or `max_completion_tokens`: Maximum tokens for response
+- `temperature`: Sampling temperature (0 = deterministic)
+- `max_workers`: Maximum parallel API calls
+- `timeout`: Request timeout in seconds
+- `max_retries`: Number of retry attempts on failure
+- `base_url`: Custom API endpoint (for non-default providers)
+- `organization`: Provider organization (for routing)
+
+After adding your model, reproduce the result
+```bash
+python scripts/SpatialGym/spatial_run.py \
+  --phase all \
+  --model-name your-model-name \
+  --num 25
+  --data-dir data/ \
+  --output-root result/ \
+  --render-mode vision,text \
+  --exp-type active,passive \
+  --cogmap \
+  --false-belief-exp \
+```
+
+## More Options
 ```bash
 # passive
 python scripts/SpatialGym/spatial_run.py \
@@ -118,88 +206,7 @@ python scripts/SpatialGym/spatial_run.py \
   - `1`: Enable thinking
   - `0`: Disable thinking
 
-### Override Options
-- `--all-override`: Override all history (delete entire sample path)
-- `--eval-override`: Override evaluation history only
-- `--cogmap-override`: Override cognitive map cache only
-- `--cogmap`: Enable cognitive map phase in `all` mode
 
-### Evaluation Options
-- `--eval-task-counts`: JSON string specifying evaluation task counts
-  - Example: `'{"dir": 1, "loc": 2}'`
-  - If omitted, uses `eval_task_counts` from `inference_config.yaml`
-
-### Inference Options
-- `--inference-mode`: Inference execution mode (default: `direct`)
-  - `direct`: Direct API calls
-  - `batch`: OpenAI batch API
-
-### Server Options
-- `--no-server`: Don't start internal environment server (assume external server running)
-- `--server-host`: Server host (default: `127.0.0.1`)
-- `--server-port`: Server port (default: `5000`)
-  - Automatically finds available port if specified port is in use
-
-### Configuration Files
-- `--base-env`: Path to base environment config (default: `base_env_config.yaml`)
-- `--base-infer`: Path to inference config (default: `inference_config.yaml`)
-- `--base-model`: Path to base model config (default: `base_model_config.yaml`)
-
-## Workflow
-
-### Phase: Exploration
-1. Load base configurations and room config
-2. Start environment server (if not disabled)
-3. For each combination of `exp_type` and `render_mode`:
-   - Generate temporary YAML configurations
-   - Create dataset using `vagen.env.create_dataset`
-   - Run exploration inference
-4. Stop environment server
-
-### Phase: Evaluation
-1. Compute combo directory paths from previous exploration
-2. Load evaluation task counts
-3. Build evaluation messages for all combo directories
-4. Run evaluation inference
-
-### Phase: Cognitive Map
-1. Compute combo directory paths from previous exploration
-2. Build cognitive map messages for all combo directories
-3. Run cognitive map inference
-
-### Phase: Aggregation
-1. Aggregate all logs and images using `SpatialEnvLogger`
-2. Generate consolidated results
-
-## Configuration Structure
-
-### Environment Config (`base_env_config.yaml`)
-Must contain `room_config` for spatial environment setup:
-```yaml
-room_config:
-  n_objects: 9
-  room_num: 1
-  topology: "single"
-  room_size: [10, 10]
-```
-
-### Inference Config (`inference_config.yaml`)
-Must contain inference parameters and optional `eval_task_counts`:
-```yaml
-output_dir: "results"
-eval_task_counts:
-  dir: 1
-  loc: 2
-```
-
-### Model Config (`base_model_config.yaml`)
-Must contain a `models` section:
-```yaml
-models:
-  gpt-4o-mini:
-    model_name: "gpt-4o-mini"
-    # ... other model parameters
-```
 
 ## Output Structure
 

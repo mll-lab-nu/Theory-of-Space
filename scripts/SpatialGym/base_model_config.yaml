@@ -193,3 +193,19 @@ models:
     timeout: 300
     max_retries: 5
     max_retries_api: 5
+
+  Qwen2.5-VL-3B-Instruct:
+    provider: vllm
+    model_name: models/Qwen2.5-VL-3B-Instruct
+    max_tokens: 8192
+    temperature: 0.0
+    max_workers: 16
+    gpu_memory_utilization: 0.7
+
+  Qwen3-VL-2B-Instruct:
+    provider: vllm
+    model_name: models/Qwen3-VL-2B-Instruct
+    max_tokens: 8192
+    temperature: 0.0
+    max_workers: 16
+    gpu_memory_utilization: 0.7
