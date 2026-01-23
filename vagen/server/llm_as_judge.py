@@ -9,13 +9,11 @@ import uuid
 from hydra.core.global_hydra import GlobalHydra
 from omegaconf import DictConfig, OmegaConf
 from datetime import datetime
-from together import AsyncTogether
 from pathlib import Path
 import wandb
 import threading
 import random
 from contextlib import contextmanager
-from vagen.server.together_batch_request import run_together_request
 from vagen.server.gpt_batch_request import run_gpt_request
 # Global variables for wandb tracking per process
 _WANDB_INITIALIZED = {}  # Track initialization status per process

@@ -81,7 +81,7 @@ class SpatialGym(gym.Env):
                         image, image_path = self._get_multi_modal_data(proxy.mgr, t.pos, t.ori)
                         images.append(image)
                         image_paths.append(image_path)
-                assert images is not []
+                assert images, "No images captured for vision render mode"
                 exp_history['multi_modal_data'] = {self.config.image_placeholder: images}
                 exp_history['multi_modal_data_paths'] = image_paths
             else:

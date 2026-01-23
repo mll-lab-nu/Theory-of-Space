@@ -1,15 +1,12 @@
 # vagen/mllm_agent/model_interface/openai/model.py
 import base64
 import logging
-import re
 import os
 from typing import List, Dict, Any
 from concurrent.futures import ThreadPoolExecutor
 from openai import OpenAI
 from PIL import Image
 import io
-import json
-from copy import deepcopy
 
 from vagen.inference.model_interface.base_model import BaseModelInterface
 from .model_config import OpenAIModelConfig
@@ -31,11 +28,16 @@ class OpenAIModelInterface(BaseModelInterface):
         elif org == "google":
             api_key = config.api_key or os.getenv("GOOGLE_API_KEY")
         elif org == "self-hosted":
-            api_key = config.api_key or os.getenv("SELF_HOSTED_API_KEY")
+            api_key = config.api_key
+            if not api_key and config.base_url:
+                api_key = "EMPTY"
         elif org == "openrouter":
             api_key = config.api_key or os.getenv("OPENROUTER_API_KEY")
         else:
             api_key = config.api_key or os.getenv("OPENAI_API_KEY")
+
+        if not api_key and config.base_url:
+            api_key = "EMPTY"
 
         self.client = OpenAI(
             api_key=api_key,
@@ -179,10 +181,10 @@ class OpenAIModelInterface(BaseModelInterface):
             "messages": messages,
             "temperature": kwargs.get("temperature", self.config.temperature),
         }
-        if self.config.model_name.startswith("o") or 'gpt-5' in self.config.model_name:
-            msg_kwargs["max_completion_tokens"] = kwargs.get("max_completion_tokens", self.config.max_completion_tokens)
+        if self.config.max_completion_tokens is not None:
+            msg_kwargs["max_completion_tokens"] = self.config.max_completion_tokens
         else:
-            msg_kwargs["max_tokens"] = kwargs.get("max_tokens", self.config.max_tokens)
+            msg_kwargs["max_tokens"] = self.config.max_tokens
         if self.config.reasoning_effort:
             msg_kwargs['reasoning_effort'] = kwargs.get("reasoning_effort", self.config.reasoning_effort)
         return msg_kwargs
@@ -191,30 +193,10 @@ class OpenAIModelInterface(BaseModelInterface):
         """Make a single API call to OpenAI."""
         try:
             msg_kwargs = self._prepare_api_payload(messages, **kwargs)
-            tmp = deepcopy(msg_kwargs)
-            tmp.pop('messages')
 
             response = self.client.chat.completions.create(**msg_kwargs)
-            # print(f'[DEBUG] Response: {response}')
-            # print(f'[DEBUG] msg_kwargs: {msg_kwargs}')
-            
-
-            # save messages for debugging
-            # try:
-            #     with open("tmp_debug.txt", 'a') as f:
-            #         sanitized_messages = self._sanitize_messages_for_logging(messages)
-            #         f.write(json.dumps(sanitized_messages, indent=2) + "\n" + "-"*80 + "\n")
-            # except Exception as e:
-            #     logger.warning(f"Failed to log messages to tmp.txt: {e}")
-
-                
-            
-            # Extract text response
             response_text = response.choices[0].message.content
-            
-            # Convert response back to Qwen format if needed
-            # (OpenAI doesn't return images, so no conversion needed for output)
-            
+
             return {
                 "text": response_text,
                 "usage": {
@@ -255,10 +237,13 @@ class OpenAIModelInterface(BaseModelInterface):
         """Get detailed information about the model."""
         info = super().get_model_info()
         
+        model_name = self.config.model_name.lower()
+        supports_images = any(key in model_name for key in ["vision", "vl", "4o"])
+
         info.update({
             "name": self.config.model_name,
-            "type": "multimodal" if "vision" in self.config.model_name.lower() else "text",
-            "supports_images": "vision" in self.config.model_name.lower() or "4o" in self.config.model_name,
+            "type": "multimodal" if supports_images else "text",
+            "supports_images": supports_images,
             "max_tokens": self.config.max_tokens,
             "temperature": self.config.temperature,
             "config_id": self.config.config_id()
