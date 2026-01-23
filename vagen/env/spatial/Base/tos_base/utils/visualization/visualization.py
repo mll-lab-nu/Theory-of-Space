@@ -63,8 +63,11 @@ class HTMLGenerator:
         self.data = data
         self.output_html = output_html
         self.show_images = show_images
-        self.out_dir = os.path.dirname(output_html)
+        self.out_dir = os.path.abspath(os.path.dirname(output_html))
+        self.html_dir = self.out_dir
         self.base = Path(output_html).stem
+        self.page_urls: List[str] = []
+        self.current_page: int = 0
 
         # Extract data
         self.meta = data.get("meta_info", {})
@@ -93,12 +96,22 @@ class HTMLGenerator:
         obs_cfg = cfg.get("observation_config") or {}
         return str(obs_cfg.get("exp_type", "")).lower() == "passive"
 
-    def _to_rel_if_abs(self, p: str) -> str:
+    def _relpath_from_html(self, p: str) -> str:
         if not isinstance(p, str) or not p:
             return p
-        ap = p if os.path.isabs(p) else os.path.abspath(p)
-        if os.path.exists(ap):
-            return os.path.relpath(ap, self.out_dir)
+        if os.path.isabs(p):
+            if os.path.exists(p):
+                return os.path.relpath(p, self.html_dir)
+            return p
+
+        candidates = [
+            os.path.abspath(os.path.join(self.out_dir, p)),
+            os.path.abspath(os.path.join(os.path.dirname(self.html_dir), p)),
+            os.path.abspath(os.path.join(self.html_dir, p)),
+        ]
+        for ap in candidates:
+            if os.path.exists(ap):
+                return os.path.relpath(ap, self.html_dir)
         return p
 
     def _load_passive_prompt_context(self, entry: Dict) -> Optional[Dict[str, object]]:
@@ -145,7 +158,7 @@ class HTMLGenerator:
                 user_prompt = m.get("content") or ""
                 images = list(m.get("images") or [])
                 break
-        images = [self._to_rel_if_abs(p) for p in images if isinstance(p, str)]
+        images = [self._relpath_from_html(p) for p in images if isinstance(p, str)]
         return {"system": sys_prompt, "user": user_prompt, "images": images}
 
     def _extract_combinations_from_samples(self) -> List[str]:
@@ -158,6 +171,20 @@ class HTMLGenerator:
 
         # Return as sorted list for consistent ordering
         return sorted(list(combination_keys))
+
+    @staticmethod
+    def _safe_slug(s: object) -> str:
+        text = str(s or "")
+        return "".join(c if c.isalnum() or c in ("-", "_") else "_" for c in text).strip("_")
+
+    def _get_sample_subdir(self, sample_id: str, sample_data: Dict) -> str:
+        for entry in (sample_data or {}).values():
+            if isinstance(entry, dict):
+                subdir = (entry.get("config") or {}).get("_sample_subdir")
+                if isinstance(subdir, str) and subdir:
+                    return subdir
+        safe = self._safe_slug(sample_id)
+        return safe or stable_hash(str(sample_id))
 
     @staticmethod
     def _format_eval_task_label(mode_label: str, task_type: str) -> str:
@@ -433,6 +460,7 @@ class HTMLGenerator:
                 # Use flexible grid that can handle more plots
                 f.write("<div class='plots-grid'>")
                 for title, plot_uri, alt_text in available_plots:
+                    plot_uri = self._relpath_from_html(plot_uri)
                     f.write(f"<div class='plot-item'>")
                     f.write(f"<h6>{title}</h6>")
                     f.write(f"<img src='{plot_uri}' alt='{alt_text}' class='plot-image'>")
@@ -464,9 +492,10 @@ class HTMLGenerator:
                                if combo in sample_data and sample_data[combo] is not None]
             combo_count = len(available_combos)
 
+            href = self.page_urls[running_page] if len(self.page_urls) > running_page else "#"
             f.write(
                 f"<li>"
-                f"<a href='#' onclick=\"showPage({running_page}, {self.total_pages});return false;\">"
+                f"<a href='{href}#p{running_page + 1}'>"
                 f"{escape(sample_id)} ({combo_count} combinations)</a>"
                 f"</li>\n"
             )
@@ -541,14 +570,14 @@ class HTMLGenerator:
         f.write("</div>\n")  # End metrics-grid
         f.write("</div>\n")  # End metrics-section
 
-    def generate_cognitive_map_charts(self, f, entry: Dict, sample_name: str, sample_id: str = None) -> None:
+    def generate_cognitive_map_charts(self, f, entry: Dict, sample_name: str, sample_id: str) -> None:
         """Generate cognitive map charts and information gain chart in a single row"""
-        # Create plots directory for this sample if entry has sample_subdir
-        plots_dir = None
+        # Create plots directory for this sample
         sample_subdir = entry.get("config", {}).get("_sample_subdir")
-        if sample_subdir:
-            plots_dir = os.path.join(self.out_dir, sample_subdir, "plots")
-            os.makedirs(plots_dir, exist_ok=True)
+        if not sample_subdir:
+            sample_subdir = self._get_sample_subdir(sample_id, {"": entry})
+        plots_dir = os.path.join(self.out_dir, sample_subdir, "plots")
+        os.makedirs(plots_dir, exist_ok=True)
         
         # Extract information gain data from exploration turns
         infogain_per_turn = entry['metrics'].get('exploration', {}).pop('infogain_per_turn', [])
@@ -588,52 +617,52 @@ class HTMLGenerator:
 
         # Information gain plot
         if infogain_per_turn:
-            save_path = os.path.join(plots_dir, "infogain.png") if plots_dir else None
+            save_path = os.path.join(plots_dir, "infogain.png")
             infogain_plot = create_infogain_plot(infogain_per_turn, sample_name, save_path, base_dir=self.out_dir)
 
         # Cognitive map plots
         if any(cogmap_update_data.values()):
             title = f"{sample_name} - Global (Update)"
-            save_path = os.path.join(plots_dir, "cogmap_update.png") if plots_dir else None
+            save_path = os.path.join(plots_dir, "cogmap_update.png")
             update_plot = create_cogmap_metrics_plot(cogmap_update_data, title, save_path=save_path, base_dir=self.out_dir)
 
         if any(cogmap_full_data.values()):
             title = f"{sample_name} - Global (Full)"
-            save_path = os.path.join(plots_dir, "cogmap_full.png") if plots_dir else None
+            save_path = os.path.join(plots_dir, "cogmap_full.png")
             full_plot = create_cogmap_metrics_plot(cogmap_full_data, title, save_path=save_path, base_dir=self.out_dir)
 
         if any(self_tracking_data.values()):
             title = f"{sample_name} - Global (Self-Tracking)"
-            save_path = os.path.join(plots_dir, "cogmap_self_tracking.png") if plots_dir else None
+            save_path = os.path.join(plots_dir, "cogmap_self_tracking.png")
             self_tracking_plot = create_cogmap_metrics_plot(self_tracking_data, title, save_path=save_path, base_dir=self.out_dir)
 
         if isinstance(fb_unchanged_per_turn, dict) and any(fb_unchanged_per_turn.values()):
             title = f"{sample_name} - False Belief (Unchanged)"
-            save_path = os.path.join(plots_dir, "cogmap_fb_unchanged.png") if plots_dir else None
+            save_path = os.path.join(plots_dir, "cogmap_fb_unchanged.png")
             fb_unchanged_plot = create_cogmap_metrics_plot(fb_unchanged_per_turn, title, save_path=save_path, base_dir=self.out_dir)
 
         if isinstance(fog_probe_f1_per_turn, list):
-            save_path = os.path.join(plots_dir, "fog_probe_f1.png") if plots_dir else None
+            save_path = os.path.join(plots_dir, "fog_probe_f1.png")
             fog_probe_plots['f1'] = create_scalar_metric_plot(fog_probe_f1_per_turn, title=f"Fog Probe F1 per Turn - {sample_name}", y_label="F1", ylim=(0.0, 1.0), save_path=save_path, base_dir=self.out_dir)
         if isinstance(fog_probe_p_per_turn, list):
-            save_path = os.path.join(plots_dir, "fog_probe_p.png") if plots_dir else None
+            save_path = os.path.join(plots_dir, "fog_probe_p.png")
             fog_probe_plots['p'] = create_scalar_metric_plot(fog_probe_p_per_turn, title=f"Fog Probe Precision per Turn - {sample_name}", y_label="Precision", ylim=(0.0, 1.0), save_path=save_path, base_dir=self.out_dir)
         if isinstance(fog_probe_r_per_turn, list):
-            save_path = os.path.join(plots_dir, "fog_probe_r.png") if plots_dir else None
+            save_path = os.path.join(plots_dir, "fog_probe_r.png")
             fog_probe_plots['r'] = create_scalar_metric_plot(fog_probe_r_per_turn, title=f"Fog Probe Recall per Turn - {sample_name}", y_label="Recall", ylim=(0.0, 1.0), save_path=save_path, base_dir=self.out_dir)
 
         consistency_plots = {}
         if isinstance(pos_up_per_turn, list):
-            save_path = os.path.join(plots_dir, "position_update.png") if plots_dir else None
+            save_path = os.path.join(plots_dir, "position_update.png")
             consistency_plots['pos_up'] = create_scalar_metric_plot(pos_up_per_turn, title=f"Position Update - {sample_name}", y_label="Score", ylim=(0.0, 1.0), save_path=save_path, base_dir=self.out_dir)
         if isinstance(fac_up_per_turn, list):
-            save_path = os.path.join(plots_dir, "facing_update.png") if plots_dir else None
+            save_path = os.path.join(plots_dir, "facing_update.png")
             consistency_plots['fac_up'] = create_scalar_metric_plot(fac_up_per_turn, title=f"Facing Update - {sample_name}", y_label="Score", ylim=(0.0, 1.0), save_path=save_path, base_dir=self.out_dir)
         if isinstance(pos_stab_per_turn, list):
-            save_path = os.path.join(plots_dir, "position_stability.png") if plots_dir else None
+            save_path = os.path.join(plots_dir, "position_stability.png")
             consistency_plots['pos_stab'] = create_scalar_metric_plot(pos_stab_per_turn, title=f"Position Stability - {sample_name}", y_label="Score", ylim=(0.0, 1.0), save_path=save_path, base_dir=self.out_dir)
         if isinstance(fac_stab_per_turn, list):
-            save_path = os.path.join(plots_dir, "facing_stability.png") if plots_dir else None
+            save_path = os.path.join(plots_dir, "facing_stability.png")
             consistency_plots['fac_stab'] = create_scalar_metric_plot(fac_stab_per_turn, title=f"Facing Stability - {sample_name}", y_label="Score", ylim=(0.0, 1.0), save_path=save_path, base_dir=self.out_dir)
 
         # Display all plots in horizontal layout (up to 4 plots for samples)
@@ -675,6 +704,7 @@ class HTMLGenerator:
             f.write("<div class='three-plots-grid'>\n")
 
             for title, plot_uri, alt_text in available_plots:
+                plot_uri = self._relpath_from_html(plot_uri)
                 f.write("<div class='plot-item'>\n")
                 f.write(f"<h6>{title}</h6>\n")
                 f.write(f"<img src='{plot_uri}' alt='{alt_text}' class='plot-image'>\n")
@@ -760,7 +790,7 @@ class HTMLGenerator:
 
         # Display initial room image if available
         if self.show_images and entry.get("initial_room_image"):
-            img_name = entry["initial_room_image"]
+            img_name = self._relpath_from_html(entry["initial_room_image"])
             output.write(f"<img src='{img_name}' class='room' alt='Initial room state'>\n")
 
         # For passive runs, show prompt+images ONCE (do not repeat per question).
@@ -871,7 +901,7 @@ class HTMLGenerator:
                         for img_path in msg_imgs:
                             if not isinstance(img_path, str):
                                 continue
-                            img_src = self._to_rel_if_abs(img_path)
+                            img_src = self._relpath_from_html(img_path)
                             if "top_down_candidates" in img_src:
                                 f.write("<div class='fog-probe-image' style='flex: 1;'>")
                                 f.write(f"<figure><img src='{img_src}' class='room-plot' alt='Fog Probe Candidates' style='max-width: 100%;'><figcaption>Fog Probe Candidates</figcaption></figure>")
@@ -1068,17 +1098,20 @@ class HTMLGenerator:
             if t_idx > 0:
                 prev_img = env_turn_logs[t_idx-1].get('room_image')
                 if prev_img:
+                    prev_img = self._relpath_from_html(prev_img)
                     f.write(f"<figure><img src='{prev_img}' class='room-plot' alt='Previous state'><figcaption>State before Turn {t_idx+1}</figcaption></figure>\n")
 
             # Current image
             curr_img = env_log.get('room_image')
             if curr_img:
+                curr_img = self._relpath_from_html(curr_img)
                 f.write(f"<figure><img src='{curr_img}' class='room-plot' alt='Current state'><figcaption>State at Turn {t_idx+1}</figcaption></figure>\n")
 
             # Message images
             if 'message_images' in env_log:
                 for img_idx, img_path in enumerate(env_log['message_images']):
                     if isinstance(img_path, str):
+                        img_path = self._relpath_from_html(img_path)
                         f.write(f"<figure><img src='{img_path}' class='room-plot' alt='Environment image {img_idx + 1}'><figcaption>Observation {img_idx + 1}</figcaption></figure>\n")
 
         f.write("</div>\n")  # End turn-right
@@ -1295,7 +1328,7 @@ class HTMLGenerator:
                     if self.show_images:
                         # Current evaluation state image
                         if eval_log.get("room_image"):
-                            img_name = eval_log["room_image"]
+                            img_name = self._relpath_from_html(eval_log["room_image"])
                             f.write(f"<figure><img src='{img_name}' class='room-plot' alt='Evaluation state'><figcaption>Q{question_idx + 1}: {escape(task_type)}</figcaption></figure>\n")
 
                         # For passive exploration runs: do NOT repeat exploration-history images per question.
@@ -1306,10 +1339,12 @@ class HTMLGenerator:
                             if msg_imgs:
                                 img_path = msg_imgs[-1]
                                 if isinstance(img_path, str):
+                                    img_path = self._relpath_from_html(img_path)
                                     f.write(f"<figure><img src='{img_path}' class='room-plot' alt='Question image'><figcaption>Question Image</figcaption></figure>\n")
                         else:
                             for img_idx, img_path in enumerate(msg_imgs):
                                 if isinstance(img_path, str):
+                                    img_path = self._relpath_from_html(img_path)
                                     f.write(f"<figure><img src='{img_path}' class='room-plot' alt='Evaluation image {img_idx + 1}'><figcaption>Q{question_idx + 1} Image {img_idx + 1}</figcaption></figure>\n")
 
                     f.write("</div>\n")  # End question-right
@@ -1323,26 +1358,48 @@ class HTMLGenerator:
 
         f.write("</section>\n")
 
-    def generate_html(self) -> str:
-        """Generate the complete HTML file"""
-        with open(self.output_html, "w") as f:
-            # Write HTML header with CSS and JS
-            js_code = JAVASCRIPT_CODE.replace('{total_pages}', str(self.total_pages))
+    def _write_html_file(self, output_html: str, page_idx: int, page_urls: List[str], render_fn) -> None:
+        self.html_dir = os.path.dirname(output_html)
+        os.makedirs(self.html_dir, exist_ok=True)
+        self.page_urls = page_urls
+        self.current_page = page_idx
+
+        js_code = (
+            JAVASCRIPT_CODE
+            .replace('{total_pages}', str(self.total_pages))
+            .replace('{page_urls}', json.dumps(page_urls))
+            .replace('{current_page}', str(page_idx))
+        )
+        with open(output_html, "w") as f:
             f.write(HTML_TEMPLATE.format(
                 model_name=escape(self.meta.get('model_name', 'Unknown Model')),
                 total_pages=self.total_pages,
                 css_styles=CSS_STYLES,
                 javascript_code=js_code
             ))
-
-            # Generate TOC page (now with summaries)
-            self.generate_toc_page(f)
-
-            # Generate sample pages
-            for page_idx, (sample_id, sample_data) in enumerate(self.flat, start=1):
-                self.generate_sample_page(f, page_idx, sample_id, sample_data)
-
+            render_fn(f)
             f.write("</body></html>")
+
+    def generate_html(self) -> str:
+        """Generate the HTML files with summary + per-sample pages"""
+        page_paths = [self.output_html]
+        for sample_id, sample_data in self.flat:
+            sample_subdir = self._get_sample_subdir(sample_id, sample_data)
+            sample_html = os.path.join(self.out_dir, sample_subdir, "html", "index.html")
+            page_paths.append(sample_html)
+
+        for page_idx, output_html in enumerate(page_paths):
+            page_urls = [os.path.relpath(p, os.path.dirname(output_html)) for p in page_paths]
+            if page_idx == 0:
+                self._write_html_file(output_html, page_idx, page_urls, self.generate_toc_page)
+            else:
+                sample_id, sample_data = self.flat[page_idx - 1]
+                self._write_html_file(
+                    output_html,
+                    page_idx,
+                    page_urls,
+                    lambda f, s_id=sample_id, s_data=sample_data, idx=page_idx: self.generate_sample_page(f, idx, s_id, s_data),
+                )
 
         return self.output_html
 

@@ -1,5 +1,3 @@
-import base64
-from io import BytesIO
 from typing import Dict, List, Optional
 import numpy as np
 import matplotlib
@@ -8,8 +6,8 @@ import matplotlib.pyplot as plt
 import os
 
 
-def _save_fig_to_file(fig, save_path: Optional[str], base_dir: Optional[str] = None) -> str:
-    """Save figure to file and return relative path, or return data URI if no path provided
+def _save_fig_to_file(fig, save_path: str, base_dir: Optional[str] = None) -> str:
+    """Save figure to file and return relative path
     
     Args:
         fig: The matplotlib figure to save
@@ -17,7 +15,7 @@ def _save_fig_to_file(fig, save_path: Optional[str], base_dir: Optional[str] = N
         base_dir: Base directory to compute relative path from (e.g., model directory)
     
     Returns:
-        Relative path from base_dir if provided, otherwise falls back to heuristic extraction
+        Relative path from base_dir if provided, otherwise falls back to heuristic extraction.
     """
     # Create directory if it doesn't exist
     os.makedirs(os.path.dirname(save_path), exist_ok=True)
@@ -45,7 +43,7 @@ def _save_fig_to_file(fig, save_path: Optional[str], base_dir: Optional[str] = N
     return os.path.basename(save_path)
 
 
-def create_infogain_plot(infogain_per_turn: List[float], title: str, save_path: Optional[str] = None, base_dir: Optional[str] = None) -> str:
+def create_infogain_plot(infogain_per_turn: List[float], title: str, save_path: str, base_dir: Optional[str] = None) -> Optional[str]:
     fig, ax = plt.subplots(figsize=(8, 4))
     turns = list(range(1, len(infogain_per_turn) + 1))
     ax.plot(turns, infogain_per_turn, marker='o', linewidth=2, markersize=4)
@@ -61,8 +59,8 @@ def create_scalar_metric_plot(
     values: List[Optional[float]],
     title: str,
     y_label: str,
+    save_path: str,
     ylim: Optional[tuple[float, float]] = (0.0, 1.0),
-    save_path: Optional[str] = None,
     base_dir: Optional[str] = None,
 ) -> Optional[str]:
     if not isinstance(values, list) or len(values) == 0:
@@ -87,11 +85,11 @@ def create_scalar_metric_plot(
 def create_cogmap_metrics_plot(
     series: Dict[str, List[Optional[float]]],
     title: str,
+    save_path: str,
     include_dir: bool = True,
     include_facing: bool = True,
     include_pos: bool = True,
     include_overall: bool = True,
-    save_path: Optional[str] = None,
     base_dir: Optional[str] = None,
 ) -> Optional[str]:
     keys = [
@@ -137,8 +135,8 @@ def create_cogmap_metrics_plot(
 
 def create_correlation_scatter_plot(x_values: List[float], y_values: List[float],
                                    x_label: str, y_label: str, title: str,
+                                   save_path: str,
                                    correlation_info: Dict = None,
-                                   save_path: Optional[str] = None,
                                    base_dir: Optional[str] = None) -> Optional[str]:
     """
     Create a scatter plot to display correlation between two variables.
@@ -150,7 +148,7 @@ def create_correlation_scatter_plot(x_values: List[float], y_values: List[float]
         y_label: Y-axis label
         title: Chart title
         correlation_info: Correlation information dictionary containing pearson_r, p_value, etc.
-        save_path: Optional path to save the figure
+        save_path: Path to save the figure
 
     Returns:
         Chart data URI string or file path, or None if no data available
@@ -209,8 +207,8 @@ def create_correlation_scatter_plot(x_values: List[float], y_values: List[float]
 
 def create_correlation_plot(x_values: List[float], y_values: List[float],
                           x_label: str, y_label: str, title: str,
+                          save_path: str,
                           correlation_info: Dict = None,
-                          save_path: Optional[str] = None,
                           base_dir: Optional[str] = None) -> Optional[str]:
     """
     Create a correlation scatter plot between two lists.
@@ -222,7 +220,7 @@ def create_correlation_plot(x_values: List[float], y_values: List[float],
         y_label: Y-axis label
         title: Chart title
         correlation_info: Optional correlation information dictionary, auto-calculated if not provided
-        save_path: Optional path to save the figure
+        save_path: Path to save the figure
         base_dir: Base directory to compute relative path from (e.g., model directory)
 
     Returns:

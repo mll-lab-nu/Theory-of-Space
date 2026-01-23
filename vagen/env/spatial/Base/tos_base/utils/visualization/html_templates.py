@@ -1510,17 +1510,41 @@ a:hover {
 """
 
 JAVASCRIPT_CODE = """
-let currentPage = 0;
+const PAGE_URLS = {page_urls};
+const CURRENT_PAGE_INDEX = {current_page};
+let currentPage = CURRENT_PAGE_INDEX;
+
+function _navigateToPage(n) {
+    if (!PAGE_URLS || PAGE_URLS.length === 0) {
+        return false;
+    }
+    if (n === CURRENT_PAGE_INDEX) {
+        return false;
+    }
+    const target = PAGE_URLS[n];
+    if (!target) {
+        return false;
+    }
+    window.location.href = target + '#p' + (n + 1);
+    return true;
+}
 
 function showPage(n, total) {
-    currentPage = Math.max(0, Math.min(total-1, n));
+    currentPage = Math.max(0, Math.min(total - 1, n));
+    if (_navigateToPage(currentPage)) {
+        return;
+    }
     const pages = document.querySelectorAll('.sample-page');
-    pages.forEach((p, i) => {
-        p.classList.toggle('active', i === currentPage);
-    });
-    document.getElementById('counter').innerText = (currentPage+1) + ' / ' + total;
-    document.getElementById('goto').value = currentPage+1;
-    location.hash = '#p' + (currentPage+1);
+    if (PAGE_URLS && PAGE_URLS.length > 0) {
+        pages.forEach((p) => p.classList.add('active'));
+    } else {
+        pages.forEach((p, i) => {
+            p.classList.toggle('active', i === currentPage);
+        });
+    }
+    document.getElementById('counter').innerText = (currentPage + 1) + ' / ' + total;
+    document.getElementById('goto').value = currentPage + 1;
+    location.hash = '#p' + (currentPage + 1);
 
     // Smooth scroll to top
     window.scrollTo({
@@ -1571,9 +1595,13 @@ document.addEventListener('keydown', (e) => {
 
 // Initialize on page load
 window.addEventListener('load', () => {
+    if (PAGE_URLS && PAGE_URLS.length > 0) {
+        showPage(CURRENT_PAGE_INDEX, {total_pages});
+        return;
+    }
     const m = location.hash.match(/#p(\\d+)/);
     if (m) {
-        showPage(parseInt(m[1], 10)-1, {total_pages});
+        showPage(parseInt(m[1], 10) - 1, {total_pages});
     } else {
         showPage(0, {total_pages});
     }
