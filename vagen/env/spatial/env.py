@@ -242,6 +242,8 @@ class SpatialGym(gym.Env):
             if not hasattr(self, '_observed_changed_objects'):
                 self._observed_changed_objects = set()
             self._observed_changed_objects.update(newly_observed)
+            if self._fb_all_changed_seen_cost is None and self._observed_changed_objects >= changed_names:
+                self._fb_all_changed_seen_cost = self._fb_action_cost()
         
         # Create FBLog
         fb_log = FBLog(
@@ -259,10 +261,15 @@ class SpatialGym(gym.Env):
             
             f1 = self._evaluate_changes(reported_changes, self.ground_truth_changes)
             
-            info['success'] = f1
-            reward = f1
+            info['success'] = f1['overall']
+            reward = f1['overall']
             
-            fb_log.correctly_identified_changes = f1
+            fb_log.correctly_identified_changes = f1['overall']
+            fb_log.f1_overall = f1['overall']
+            fb_log.f1_position = f1['position']
+            fb_log.f1_facing = f1['facing']
+            fb_log.action_cost = self._fb_action_cost()
+            fb_log.action_cost_after_seen = self._fb_action_cost_after_seen()
             
         # Save turn log
         self._save_turn_log(current_obs, llm_response, think_content, action,
@@ -271,30 +278,45 @@ class SpatialGym(gym.Env):
         self.observed_image_paths = []
         return obs, reward, done, info
 
-    def _evaluate_changes(self, reported: List[Any], ground_truth: List[Any]) -> float:
+    def _evaluate_changes(self, reported: List[Any], ground_truth: List[Any]) -> Dict[str, float]:
         """
         Calculate F1 of reported changes against ground truth.
-        Treat each (object, change_type) as a label.
+        Treat each (object, change_type) as a label, and also compute per-type F1.
         """
+        def _f1(gt: set, rep: set) -> float:
+            if not gt:
+                return 0.0
+            correct = len(gt.intersection(rep))
+            precision = float(correct) / float(len(rep)) if rep else 0.0
+            recall = float(correct) / float(len(gt)) if gt else 0.0
+            return (2.0 * precision * recall / (precision + recall)) if (precision + recall) > 0 else 0.0
+
         if not ground_truth:
-            return 0.0
+            return {"overall": 0.0, "position": 0.0, "facing": 0.0}
             
-        gt_changes = set()
-        for c in ground_truth:
-            if c.pos: gt_changes.add((c.name, 'position'))
-            if c.ori: gt_changes.add((c.name, 'orientation'))
-                
-        rep_changes = set()
-        for c in reported:
-            # c is ChangedObject
-            if c.pos: rep_changes.add((c.name, 'position'))
-            if c.ori: rep_changes.add((c.name, 'orientation'))
-        
-        # Calculate intersection
-        correct = len(gt_changes.intersection(rep_changes))
-        precision = float(correct) / float(len(rep_changes)) if rep_changes else 0.0
-        recall = float(correct) / float(len(gt_changes)) if gt_changes else 0.0
-        return (2.0 * precision * recall / (precision + recall)) if (precision + recall) > 0 else 0.0
+        gt_pos = {c.name for c in ground_truth if c.pos}
+        gt_facing = {c.name for c in ground_truth if c.ori}
+        rep_pos = {c.name for c in reported if c.pos}
+        rep_facing = {c.name for c in reported if c.ori}
+
+        gt_changes = {(c.name, 'position') for c in ground_truth if c.pos}
+        gt_changes |= {(c.name, 'orientation') for c in ground_truth if c.ori}
+        rep_changes = {(c.name, 'position') for c in reported if c.pos}
+        rep_changes |= {(c.name, 'orientation') for c in reported if c.ori}
+
+        return {
+            "overall": _f1(gt_changes, rep_changes),
+            "position": _f1(gt_pos, rep_pos),
+            "facing": _f1(gt_facing, rep_facing),
+        }
+
+    def _fb_action_cost(self) -> int:
+        return int(self.exploration_manager.action_cost) - int(getattr(self, "_fb_action_cost_start", 0))
+
+    def _fb_action_cost_after_seen(self) -> Optional[int]:
+        if self._fb_all_changed_seen_cost is None:
+            return None
+        return self._fb_action_cost() - int(self._fb_all_changed_seen_cost)
 
     def _execute_action(self, action: str):
         """Execute action and return results. Shared by exploration and false belief phases."""
@@ -373,15 +395,18 @@ class SpatialGym(gym.Env):
             message_images=self.observed_image_paths,
             info={"reward": reward, "is_done": is_last_exp, **info}
         )
+        replay = self.config.replay
         if is_exploration:
-            replay = self.config.replay
             if replay or not self.history_manager.has_exploration(self.current_turn_number - 1):
                 self.history_manager.update_turn_log(turn_log.to_dict(), replay=replay)
                 self.history_manager.save_exploration()
         else:
             # false belief
-            self.history_manager.update_turn_log(turn_log.to_dict())
-            self.history_manager.save_false_belief()
+            fb_step = getattr(false_belief_log, "step", None)
+            fb_idx = int(fb_step) - 1 if isinstance(fb_step, (int, float)) else None
+            if replay or (fb_idx is not None and not self.history_manager.has_false_belief(fb_idx)):
+                self.history_manager.update_turn_log(turn_log.to_dict(), replay=replay)
+                self.history_manager.save_false_belief()
         self.turn_logs.append(turn_log)
 
     def render(self):
@@ -398,6 +423,8 @@ class SpatialGym(gym.Env):
         self.in_false_belief_phase = True
         self.false_belief_step = 0
         self._observed_changed_objects = set()  # Track which changed objects have been observed
+        self._fb_action_cost_start = int(self.exploration_manager.action_cost)
+        self._fb_all_changed_seen_cost = None
         
         # Modify room - exactly four changes (2 moves, 2 rotations)
         modifier = ObjectModifier(seed=self.current_seed, n_changes=4, agent_pos=self.agent.init_pos)

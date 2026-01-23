@@ -126,6 +126,9 @@ class HistoryManager:
     def has_exploration(self, index):
         return 0 <= index < len(self.exploration_turn_logs)
 
+    def has_false_belief(self, index):
+        return 0 <= index < len(self.false_belief_turn_logs)
+
     def _generate_room_key(self, room_dict, agent_dict):
         # Do NOT mutate the input dict: we still need pos/ori for saving state.
         a = dict(agent_dict or {})
@@ -259,11 +262,23 @@ class HistoryManager:
             assert not self.has_exploration(turn_idx), f"Turn {turn_log['turn_number']} already exists"
             self.exploration_turn_logs.append(turn_log)
 
-    def update_false_belief_turn_log(self, turn_log: Dict) -> None:
+    def update_false_belief_turn_log(self, turn_log: Dict, replay: bool = False) -> None:
         assert not turn_log['is_exploration_phase']
         assert turn_log.get('false_belief_log')
         self._attach_room_image(turn_log, f"room_false_belief_{turn_log['turn_number']}.png")
-        self.false_belief_turn_logs.append(turn_log)
+        fb_step = (turn_log.get('false_belief_log') or {}).get('step')
+        idx = int(fb_step) - 1 if isinstance(fb_step, (int, float)) else None
+        if replay:
+            assert idx is not None and 0 <= idx < len(self.false_belief_turn_logs), (
+                f"Invalid false belief step {fb_step} for replay (max: {len(self.false_belief_turn_logs)}), output directory: {self.output_dir}"
+            )
+            turn_log['false_belief_log']['cogmap_log'] = (self.false_belief_turn_logs[idx].get('false_belief_log') or {}).get('cogmap_log')
+            self.false_belief_turn_logs[idx] = turn_log
+        else:
+            assert idx is not None and idx >= len(self.false_belief_turn_logs), (
+                f"False belief step {fb_step} already exists for output directory {self.output_dir}"
+            )
+            self.false_belief_turn_logs.append(turn_log)
 
     def update_eval_turn_log(self, turn_log: Dict) -> None:
         assert not turn_log['is_exploration_phase']
@@ -282,14 +297,17 @@ class HistoryManager:
     def update_turn_log(self, turn_log: Dict, replay: bool = False) -> None:
         """Dispatch to specific update functions (kept for compatibility)."""
         if turn_log.get('false_belief_log'):
-            self.update_false_belief_turn_log(turn_log)
+            self.update_false_belief_turn_log(turn_log, replay=replay)
         elif turn_log['is_exploration_phase']:
             self.update_exp_turn_log(turn_log, replay=replay)
         else:
             self.update_eval_turn_log(turn_log)
 
     def get_responses(self) -> List[Dict]:
-        return [log.get('assistant_raw_message') for log in self.exploration_turn_logs if log.get('assistant_raw_message') is not None]
+        msgs = [log.get('assistant_raw_message') for log in self.exploration_turn_logs if log.get('assistant_raw_message') is not None]
+        if self.false_belief_turn_logs:
+            msgs.extend([log.get('assistant_raw_message') for log in self.false_belief_turn_logs if log.get('assistant_raw_message') is not None])
+        return msgs
 
 
     def update_cogmap(self, turn_log: Dict) -> None:

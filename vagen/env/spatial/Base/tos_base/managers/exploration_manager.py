@@ -230,6 +230,10 @@ class ExplorationManager:
             'avg_final_information_gain': _avg_key('final_information_gain'),
             'avg_false_belief_steps': _avg_key('false_belief_steps'),
             'avg_false_belief_f1': _avg_key('false_belief_f1'),
+            'avg_false_belief_f1_position': _avg_key('false_belief_f1_position'),
+            'avg_false_belief_f1_facing': _avg_key('false_belief_f1_facing'),
+            'avg_false_belief_action_cost': _avg_key('false_belief_action_cost'),
+            'avg_false_belief_action_cost_after_seen': _avg_key('false_belief_action_cost_after_seen'),
             'infogain_per_turn': ExplorationManager._avg_lists_carry_forward([p.get('information_gain_per_turn') or [] for p in pre]),
         }
 
@@ -352,10 +356,26 @@ class ExplorationManager:
         fb_turn_logs = env_data.get('false_belief_turn_logs') or []
         fb_steps = len(fb_turn_logs) or None
         fb_f1 = None
+        fb_f1_position = None
+        fb_f1_facing = None
+        fb_action_cost = None
+        fb_action_cost_after_seen = None
+
         for t in reversed(fb_turn_logs):
-            v = (t.get('false_belief_log') or {}).get('correctly_identified_changes')
-            if isinstance(v, (int, float)):
-                fb_f1 = float(v)
+            fb_log = t.get('false_belief_log') or {}
+            if fb_action_cost is None and isinstance(fb_log.get('action_cost'), (int, float)):
+                fb_action_cost = int(fb_log.get('action_cost'))
+            if fb_action_cost_after_seen is None and isinstance(fb_log.get('action_cost_after_seen'), (int, float)):
+                fb_action_cost_after_seen = int(fb_log.get('action_cost_after_seen'))
+            if fb_f1 is None and isinstance(fb_log.get('f1_overall'), (int, float)):
+                fb_f1 = float(fb_log.get('f1_overall'))
+            if fb_f1 is None and isinstance(fb_log.get('correctly_identified_changes'), (int, float)):
+                fb_f1 = float(fb_log.get('correctly_identified_changes'))
+            if fb_f1_position is None and isinstance(fb_log.get('f1_position'), (int, float)):
+                fb_f1_position = float(fb_log.get('f1_position'))
+            if fb_f1_facing is None and isinstance(fb_log.get('f1_facing'), (int, float)):
+                fb_f1_facing = float(fb_log.get('f1_facing'))
+            if fb_f1 is not None and fb_f1_position is not None and fb_f1_facing is not None:
                 break
 
         return {
@@ -370,6 +390,10 @@ class ExplorationManager:
             'valid_action_ratio': valid_action_ratio,
             'false_belief_steps': fb_steps,
             'false_belief_f1': fb_f1,
+            'false_belief_f1_position': fb_f1_position,
+            'false_belief_f1_facing': fb_f1_facing,
+            'false_belief_action_cost': fb_action_cost,
+            'false_belief_action_cost_after_seen': fb_action_cost_after_seen,
         }
     
     # No passive history generation here; proxies produce text histories directly.

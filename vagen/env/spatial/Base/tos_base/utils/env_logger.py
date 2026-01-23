@@ -24,6 +24,11 @@ class FBLog:
     
     # Final step info
     correctly_identified_changes: Optional[float] = None
+    f1_overall: Optional[float] = None
+    f1_position: Optional[float] = None
+    f1_facing: Optional[float] = None
+    action_cost: Optional[int] = None
+    action_cost_after_seen: Optional[int] = None
     ground_truth_changes: Optional[List[Any]] = None # List[ChangedObject]
     reported_changes: Optional[List[Dict]] = None
     cogmap_log: Optional[Dict] = None
@@ -35,6 +40,11 @@ class FBLog:
             "room_state": self.room_state.to_dict() if self.room_state else {},
             "agent_state": self.agent_state.to_dict() if self.agent_state else {},
             "correctly_identified_changes": self.correctly_identified_changes,
+            "f1_overall": self.f1_overall,
+            "f1_position": self.f1_position,
+            "f1_facing": self.f1_facing,
+            "action_cost": self.action_cost,
+            "action_cost_after_seen": self.action_cost_after_seen,
             "ground_truth_changes": [c.to_dict() for c in self.ground_truth_changes] if self.ground_truth_changes else [],
             "reported_changes": [c.to_dict() for c in self.reported_changes] if self.reported_changes else [],
             "cogmap_log": self.cogmap_log.to_dict() if hasattr(self.cogmap_log, 'to_dict') else (self.cogmap_log or {}),
