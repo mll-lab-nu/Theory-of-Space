@@ -409,6 +409,10 @@ class HistoryManager:
                     model_dir=model_dir,
                 )
                 if sample_data:
+                    # Store the hash directory name in sample_data for use in visualization
+                    sample_data["config"]["_hash_dir"] = sample_dir
+                    # Store the full sample subdirectory path for plots
+                    sample_data["config"]["_sample_subdir"] = os.path.relpath(combo_path, model_dir)
                     samples[sample_key][config_key] = sample_data
                     all_config_keys.add(config_key)
 

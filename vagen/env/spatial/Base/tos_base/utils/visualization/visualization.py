@@ -170,6 +170,10 @@ class HTMLGenerator:
         f.write("<div class='config-summaries'>\n")
         f.write("<h3>📋 Configuration Summaries</h3>\n")
 
+        # Create plots directory for summary plots
+        plots_dir = os.path.join(self.out_dir, "plots")
+        os.makedirs(plots_dir, exist_ok=True)
+
         for gname in self.combinations:
             # Count samples that have this combination
             sample_count = sum(1 for sample_data in self.samples.values()
@@ -194,7 +198,8 @@ class HTMLGenerator:
                 exp_group = self.exp_summary["group_performance"][gname]
                 infogain_per_turn = exp_group.pop("infogain_per_turn", [])
                 if infogain_per_turn:
-                    infogain_plot = create_infogain_plot(infogain_per_turn, gname)
+                    save_path = os.path.join(plots_dir, f"infogain_{gname}.png")
+                    infogain_plot = create_infogain_plot(infogain_per_turn, gname, save_path, base_dir=self.out_dir)
 
             # Cognitive map plots (only global now)
             if self.cogmap_summary.get("group_performance", {}).get(gname):
@@ -221,42 +226,53 @@ class HTMLGenerator:
                 global_update = update_data if isinstance(update_data, dict) else {}
                 if global_update and any(global_update.values()):
                     title = f"{gname} - Global (Update)"
-                    cogmap_update_plot = create_cogmap_metrics_plot(global_update, title)
+                    save_path = os.path.join(plots_dir, f"cogmap_update_{gname}.png")
+                    cogmap_update_plot = create_cogmap_metrics_plot(global_update, title, save_path=save_path, base_dir=self.out_dir)
 
                 # Full mode plot (global only)
                 global_full = full_data if isinstance(full_data, dict) else {}
                 if global_full and any(global_full.values()):
                     title = f"{gname} - Global (Full)"
-                    cogmap_full_plot = create_cogmap_metrics_plot(global_full, title)
+                    save_path = os.path.join(plots_dir, f"cogmap_full_{gname}.png")
+                    cogmap_full_plot = create_cogmap_metrics_plot(global_full, title, save_path=save_path, base_dir=self.out_dir)
 
                 # Self-tracking plot (agent only)
                 global_self_tracking = self_tracking_data if isinstance(self_tracking_data, dict) else {}
                 if global_self_tracking and any(global_self_tracking.values()):
                     title = f"{gname} - Global (Self-Tracking)"
-                    cogmap_self_tracking_plot = create_cogmap_metrics_plot(global_self_tracking, title)
+                    save_path = os.path.join(plots_dir, f"cogmap_self_tracking_{gname}.png")
+                    cogmap_self_tracking_plot = create_cogmap_metrics_plot(global_self_tracking, title, save_path=save_path, base_dir=self.out_dir)
 
                 # Fog Probe plots
                 fog_probe_plots = {}
                 if isinstance(fog_probe_f1, list):
-                    fog_probe_plots['f1'] = create_scalar_metric_plot(fog_probe_f1, title=f"Fog Probe F1 per Turn - {gname}", y_label="F1", ylim=(0.0, 1.0))
+                    save_path = os.path.join(plots_dir, f"fog_probe_f1_{gname}.png")
+                    fog_probe_plots['f1'] = create_scalar_metric_plot(fog_probe_f1, title=f"Fog Probe F1 per Turn - {gname}", y_label="F1", ylim=(0.0, 1.0), save_path=save_path, base_dir=self.out_dir)
                 if isinstance(fog_probe_p, list):
-                    fog_probe_plots['p'] = create_scalar_metric_plot(fog_probe_p, title=f"Fog Probe Precision per Turn - {gname}", y_label="Precision", ylim=(0.0, 1.0))
+                    save_path = os.path.join(plots_dir, f"fog_probe_p_{gname}.png")
+                    fog_probe_plots['p'] = create_scalar_metric_plot(fog_probe_p, title=f"Fog Probe Precision per Turn - {gname}", y_label="Precision", ylim=(0.0, 1.0), save_path=save_path, base_dir=self.out_dir)
                 if isinstance(fog_probe_r, list):
-                    fog_probe_plots['r'] = create_scalar_metric_plot(fog_probe_r, title=f"Fog Probe Recall per Turn - {gname}", y_label="Recall", ylim=(0.0, 1.0))
+                    save_path = os.path.join(plots_dir, f"fog_probe_r_{gname}.png")
+                    fog_probe_plots['r'] = create_scalar_metric_plot(fog_probe_r, title=f"Fog Probe Recall per Turn - {gname}", y_label="Recall", ylim=(0.0, 1.0), save_path=save_path, base_dir=self.out_dir)
 
                 fb_series = fb_unchanged_series if isinstance(fb_unchanged_series, dict) else {}
                 if fb_series and any(fb_series.values()):
                     title = f"{gname} - False Belief (Unchanged)"
-                    cogmap_fb_unchanged_plot = create_cogmap_metrics_plot(fb_series, title)
+                    save_path = os.path.join(plots_dir, f"cogmap_fb_unchanged_{gname}.png")
+                    cogmap_fb_unchanged_plot = create_cogmap_metrics_plot(fb_series, title, save_path=save_path, base_dir=self.out_dir)
 
             if isinstance(pos_up, list):
-                consistency_plots['pos_up'] = create_scalar_metric_plot(pos_up, title=f"Position Update - {gname}", y_label="Score", ylim=(0.0, 1.0))
+                save_path = os.path.join(plots_dir, f"position_update_{gname}.png")
+                consistency_plots['pos_up'] = create_scalar_metric_plot(pos_up, title=f"Position Update - {gname}", y_label="Score", ylim=(0.0, 1.0), save_path=save_path, base_dir=self.out_dir)
             if isinstance(fac_up, list):
-                consistency_plots['fac_up'] = create_scalar_metric_plot(fac_up, title=f"Facing Update - {gname}", y_label="Score", ylim=(0.0, 1.0))
+                save_path = os.path.join(plots_dir, f"facing_update_{gname}.png")
+                consistency_plots['fac_up'] = create_scalar_metric_plot(fac_up, title=f"Facing Update - {gname}", y_label="Score", ylim=(0.0, 1.0), save_path=save_path, base_dir=self.out_dir)
             if isinstance(pos_stab, list):
-                consistency_plots['pos_stab'] = create_scalar_metric_plot(pos_stab, title=f"Position Stability - {gname}", y_label="Score", ylim=(0.0, 1.0))
+                save_path = os.path.join(plots_dir, f"position_stability_{gname}.png")
+                consistency_plots['pos_stab'] = create_scalar_metric_plot(pos_stab, title=f"Position Stability - {gname}", y_label="Score", ylim=(0.0, 1.0), save_path=save_path, base_dir=self.out_dir)
             if isinstance(fac_stab, list):
-                consistency_plots['fac_stab'] = create_scalar_metric_plot(fac_stab, title=f"Facing Stability - {gname}", y_label="Score", ylim=(0.0, 1.0))
+                save_path = os.path.join(plots_dir, f"facing_stability_{gname}.png")
+                consistency_plots['fac_stab'] = create_scalar_metric_plot(fac_stab, title=f"Facing Stability - {gname}", y_label="Score", ylim=(0.0, 1.0), save_path=save_path, base_dir=self.out_dir)
 
 
             # Generate correlation plots
@@ -270,22 +286,28 @@ class HTMLGenerator:
                 # Call twice to generate two scatter plots using existing correlation_info
                 if cogmap_values and acc_values:
                     acc_correlation = correlation_data.get('cogmap_acc_correlations', {}).get('avg_accuracy', None)
+                    save_path = os.path.join(plots_dir, f"correlation_cogmap_vs_accuracy_{gname}.png")
                     correlation_plots['cogmap_vs_accuracy'] = create_correlation_plot(
                         cogmap_values, acc_values,
                         'Cognitive Map Score (Last Global vs GT Full)',
                         'Average Accuracy',
                         'Cognitive Map Score vs Average Accuracy',
-                        acc_correlation
+                        acc_correlation,
+                        save_path,
+                        base_dir=self.out_dir
                     )
 
                 if cogmap_values and infogain_values:
                     infogain_correlation = correlation_data.get('cogmap_infogain_correlation', None)
+                    save_path = os.path.join(plots_dir, f"correlation_cogmap_vs_infogain_{gname}.png")
                     correlation_plots['cogmap_vs_infogain'] = create_correlation_plot(
                         cogmap_values, infogain_values,
                         'Cognitive Map Score (Last Global vs GT Full)',
                         'Information Gain',
                         'Cognitive Map Score vs Information Gain',
-                        infogain_correlation
+                        infogain_correlation,
+                        save_path,
+                        base_dir=self.out_dir
                     )
 
             # Config metrics section with four-column layout (display metrics first)
@@ -519,8 +541,15 @@ class HTMLGenerator:
         f.write("</div>\n")  # End metrics-grid
         f.write("</div>\n")  # End metrics-section
 
-    def generate_cognitive_map_charts(self, f, entry: Dict, sample_name: str) -> None:
+    def generate_cognitive_map_charts(self, f, entry: Dict, sample_name: str, sample_id: str = None) -> None:
         """Generate cognitive map charts and information gain chart in a single row"""
+        # Create plots directory for this sample if entry has sample_subdir
+        plots_dir = None
+        sample_subdir = entry.get("config", {}).get("_sample_subdir")
+        if sample_subdir:
+            plots_dir = os.path.join(self.out_dir, sample_subdir, "plots")
+            os.makedirs(plots_dir, exist_ok=True)
+        
         # Extract information gain data from exploration turns
         infogain_per_turn = entry['metrics'].get('exploration', {}).pop('infogain_per_turn', [])
         cogmap_metrics = entry['metrics'].get('cogmap', {}) or {}
@@ -559,41 +588,53 @@ class HTMLGenerator:
 
         # Information gain plot
         if infogain_per_turn:
-            infogain_plot = create_infogain_plot(infogain_per_turn, sample_name)
+            save_path = os.path.join(plots_dir, "infogain.png") if plots_dir else None
+            infogain_plot = create_infogain_plot(infogain_per_turn, sample_name, save_path, base_dir=self.out_dir)
 
         # Cognitive map plots
         if any(cogmap_update_data.values()):
             title = f"{sample_name} - Global (Update)"
-            update_plot = create_cogmap_metrics_plot(cogmap_update_data, title)
+            save_path = os.path.join(plots_dir, "cogmap_update.png") if plots_dir else None
+            update_plot = create_cogmap_metrics_plot(cogmap_update_data, title, save_path=save_path, base_dir=self.out_dir)
 
         if any(cogmap_full_data.values()):
             title = f"{sample_name} - Global (Full)"
-            full_plot = create_cogmap_metrics_plot(cogmap_full_data, title)
+            save_path = os.path.join(plots_dir, "cogmap_full.png") if plots_dir else None
+            full_plot = create_cogmap_metrics_plot(cogmap_full_data, title, save_path=save_path, base_dir=self.out_dir)
 
         if any(self_tracking_data.values()):
             title = f"{sample_name} - Global (Self-Tracking)"
-            self_tracking_plot = create_cogmap_metrics_plot(self_tracking_data, title)
+            save_path = os.path.join(plots_dir, "cogmap_self_tracking.png") if plots_dir else None
+            self_tracking_plot = create_cogmap_metrics_plot(self_tracking_data, title, save_path=save_path, base_dir=self.out_dir)
 
         if isinstance(fb_unchanged_per_turn, dict) and any(fb_unchanged_per_turn.values()):
             title = f"{sample_name} - False Belief (Unchanged)"
-            fb_unchanged_plot = create_cogmap_metrics_plot(fb_unchanged_per_turn, title)
+            save_path = os.path.join(plots_dir, "cogmap_fb_unchanged.png") if plots_dir else None
+            fb_unchanged_plot = create_cogmap_metrics_plot(fb_unchanged_per_turn, title, save_path=save_path, base_dir=self.out_dir)
 
         if isinstance(fog_probe_f1_per_turn, list):
-            fog_probe_plots['f1'] = create_scalar_metric_plot(fog_probe_f1_per_turn, title=f"Fog Probe F1 per Turn - {sample_name}", y_label="F1", ylim=(0.0, 1.0))
+            save_path = os.path.join(plots_dir, "fog_probe_f1.png") if plots_dir else None
+            fog_probe_plots['f1'] = create_scalar_metric_plot(fog_probe_f1_per_turn, title=f"Fog Probe F1 per Turn - {sample_name}", y_label="F1", ylim=(0.0, 1.0), save_path=save_path, base_dir=self.out_dir)
         if isinstance(fog_probe_p_per_turn, list):
-            fog_probe_plots['p'] = create_scalar_metric_plot(fog_probe_p_per_turn, title=f"Fog Probe Precision per Turn - {sample_name}", y_label="Precision", ylim=(0.0, 1.0))
+            save_path = os.path.join(plots_dir, "fog_probe_p.png") if plots_dir else None
+            fog_probe_plots['p'] = create_scalar_metric_plot(fog_probe_p_per_turn, title=f"Fog Probe Precision per Turn - {sample_name}", y_label="Precision", ylim=(0.0, 1.0), save_path=save_path, base_dir=self.out_dir)
         if isinstance(fog_probe_r_per_turn, list):
-            fog_probe_plots['r'] = create_scalar_metric_plot(fog_probe_r_per_turn, title=f"Fog Probe Recall per Turn - {sample_name}", y_label="Recall", ylim=(0.0, 1.0))
+            save_path = os.path.join(plots_dir, "fog_probe_r.png") if plots_dir else None
+            fog_probe_plots['r'] = create_scalar_metric_plot(fog_probe_r_per_turn, title=f"Fog Probe Recall per Turn - {sample_name}", y_label="Recall", ylim=(0.0, 1.0), save_path=save_path, base_dir=self.out_dir)
 
         consistency_plots = {}
         if isinstance(pos_up_per_turn, list):
-            consistency_plots['pos_up'] = create_scalar_metric_plot(pos_up_per_turn, title=f"Position Update - {sample_name}", y_label="Score", ylim=(0.0, 1.0))
+            save_path = os.path.join(plots_dir, "position_update.png") if plots_dir else None
+            consistency_plots['pos_up'] = create_scalar_metric_plot(pos_up_per_turn, title=f"Position Update - {sample_name}", y_label="Score", ylim=(0.0, 1.0), save_path=save_path, base_dir=self.out_dir)
         if isinstance(fac_up_per_turn, list):
-            consistency_plots['fac_up'] = create_scalar_metric_plot(fac_up_per_turn, title=f"Facing Update - {sample_name}", y_label="Score", ylim=(0.0, 1.0))
+            save_path = os.path.join(plots_dir, "facing_update.png") if plots_dir else None
+            consistency_plots['fac_up'] = create_scalar_metric_plot(fac_up_per_turn, title=f"Facing Update - {sample_name}", y_label="Score", ylim=(0.0, 1.0), save_path=save_path, base_dir=self.out_dir)
         if isinstance(pos_stab_per_turn, list):
-            consistency_plots['pos_stab'] = create_scalar_metric_plot(pos_stab_per_turn, title=f"Position Stability - {sample_name}", y_label="Score", ylim=(0.0, 1.0))
+            save_path = os.path.join(plots_dir, "position_stability.png") if plots_dir else None
+            consistency_plots['pos_stab'] = create_scalar_metric_plot(pos_stab_per_turn, title=f"Position Stability - {sample_name}", y_label="Score", ylim=(0.0, 1.0), save_path=save_path, base_dir=self.out_dir)
         if isinstance(fac_stab_per_turn, list):
-            consistency_plots['fac_stab'] = create_scalar_metric_plot(fac_stab_per_turn, title=f"Facing Stability - {sample_name}", y_label="Score", ylim=(0.0, 1.0))
+            save_path = os.path.join(plots_dir, "facing_stability.png") if plots_dir else None
+            consistency_plots['fac_stab'] = create_scalar_metric_plot(fac_stab_per_turn, title=f"Facing Stability - {sample_name}", y_label="Score", ylim=(0.0, 1.0), save_path=save_path, base_dir=self.out_dir)
 
         # Display all plots in horizontal layout (up to 4 plots for samples)
         available_plots = []
@@ -715,7 +756,7 @@ class HTMLGenerator:
         self.generate_sample_metrics(output, entry, f"{combo} {sample_id}")
 
         # Generate Performance Charts (Information Gain + Cognitive Map plots)
-        self.generate_cognitive_map_charts(output, entry, f"{combo} {sample_id}")
+        self.generate_cognitive_map_charts(output, entry, f"{combo} {sample_id}", sample_id)
 
         # Display initial room image if available
         if self.show_images and entry.get("initial_room_image"):

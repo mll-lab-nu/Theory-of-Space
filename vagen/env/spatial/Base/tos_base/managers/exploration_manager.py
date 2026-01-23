@@ -234,7 +234,7 @@ class ExplorationManager:
             'avg_false_belief_f1_facing': _avg_key('false_belief_f1_facing'),
             'avg_false_belief_action_cost': _avg_key('false_belief_action_cost'),
             'avg_false_belief_action_cost_after_seen': _avg_key('false_belief_action_cost_after_seen'),
-            'infogain_per_turn': ExplorationManager._avg_lists_carry_forward([p.get('information_gain_per_turn') or [] for p in pre]),
+            'infogain_per_turn': ExplorationManager._avg_lists_carry_forward([p.get('infogain_per_turn') or [] for p in pre]),
         }
 
         # Average action counts
@@ -384,7 +384,7 @@ class ExplorationManager:
             'n_exploration_steps': steps,
             'action_counts': action_counts,
             'action_cost': action_cost,
-            'information_gain_per_turn': info_gain_list or [],
+            'infogain_per_turn': info_gain_list or [],
             'final_information_gain': final_infogain,
             'action_fail_ratio': action_fail_ratio,
             'valid_action_ratio': valid_action_ratio,

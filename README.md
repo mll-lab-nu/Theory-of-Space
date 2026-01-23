@@ -1,12 +1,32 @@
-<h1 align="center">THEORY OF SPACE: Can foundation models construct spatial beliefs through active perception?</h1>
+<h1 align="center">Theory of Space: Can foundation models construct spatial beliefs through active perception?</h1>
 <p align="center" style="font-size: 16px;">
   Pingyue Zhang*, Zihan Huang*, Yue Wang*, Jieyu Zhang*,Letian Xue, Zihan Wang, Qineng Wang, Keshigeyan Chandrasegaran, Ruohan Zhang, Yejin Choi, Ranjay Krishna, Jiajun Wu, Li Fei-Fei, Manling Li
 </p>
 <p align="center" style="font-size: 12px;"><i>(* equal contribution)</i></p>
 
-This repository contains the official implementation of our paper, THEORY OF SPACE: Can foundation models construct spatial beliefs through active perception?
+## Introduction
+This repository contains the official implementation of our paper, Theory of Space: Can foundation models construct spatial beliefs through active perception?
 
 To build agents with spatial intelligence, we argue for evaluating not merely passive reasoning, but the active, self-directed construction of spatial belief from partial observations. We introduce **Theory of Space (ToS)**, a conceptual counterpart to Theory of Mind (ToM). While ToM models hidden mental states of others, ToS models uncertain, currently unobserved structure of space.
+
+![image](assets/main.jpg)
+
+Standard multimodal foundation models, despite their strong performance on passive tasks, struggle with embodied intelligence in multi-turn environments due to:
+
+1.  **Passive Reasoning vs. Active Exploration**: For humans, active exploration constructs a mental map through movement, while current models often rely on passive reasoning from static views. This makes them ill-equipped for handling partial observations and uncertainty.
+2.  **Information Acquisition Gap**: Current models do not yet reliably decide what to observe next to reduce uncertainty. They lack the ability to actively acquire information through self-directed exploration.
+3.  **Spatial Belief Management**: There is a critical need for agents to construct, update, and exploit a **globally consistent spatial belief** of unobserved structures derived from sequential, partial observations.
+
+**ToS** provides a benchmark to evaluate these capabilities by shifting the focus from specific task performance to assessing the quality of the underlying spatial model itself through curiosity-driven exploration.
+
+## Evaluation Tasks
+![image](assets/tasks.png)
+
+Theory Of Space task suite covering route-level egocentric reasoning and survey-level
+allocentric mapping. Route tasks evaluate path-based inference and egocentric observations. Survey
+tasks test global mapping, geometric transformation, and perspective conversion. Together they
+cover both local navigation reasoning and global spatial abstraction.
+
 
 ## Setup (run everything)
 Run `setup.sh` to install deps, download data into `room_data/3-room/`, and run the default experiment (a subset of 10 runs). You can set API keys in the script.
