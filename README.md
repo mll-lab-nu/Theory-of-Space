@@ -9,7 +9,7 @@ This repository contains the official implementation of our paper, THEORY OF SPA
 To build agents with spatial intelligence, we argue for evaluating not merely passive reasoning, but the active, self-directed construction of spatial belief from partial observations. We introduce **Theory of Space (ToS)**, a conceptual counterpart to Theory of Mind (ToM). While ToM models hidden mental states of others, ToS models uncertain, currently unobserved structure of space.
 
 ## Setup (run everything)
-Run `setup.sh` to install deps, download/unzip data, and run the default experiment. You can set API keys in the script.
+Run `setup.sh` to install deps, download data into `room_data/3-room/`, and run the default experiment (a subset of 10 runs). You can set API keys in the script.
 ```bash
 bash setup.sh
 ```

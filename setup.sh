@@ -20,21 +20,10 @@ done
 rm room_data/*.zip
 
 # Run the experiments
-# python scripts/SpatialGym/spatial_run.py \
-#   --phase all \
-#   --model-name gpt-5.2 \
-#   --num 1 \
-#   --data-dir room_data/3-room/ \
-#   --output-root result/ \
-#   --render-mode vision,text \
-#   --exp-type active,passive \
-#   --cogmap \
-#   --false-belief-exp \
-
 python scripts/SpatialGym/spatial_run.py \
   --phase all \
-  --model-name gpt-4.1-mini \
-  --num 1 \
+  --model-name gpt-5.2 \
+  --num 10 \
   --data-dir room_data/3-room/ \
   --output-root result/ \
   --render-mode vision,text \
