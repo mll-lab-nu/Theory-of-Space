@@ -6,11 +6,12 @@ Generates two plots:
 2. Information gain comparison for Active Vision configurations
 
 Usage:
-    python plot_info_gain_simple.py
+    python analysis/plot_info_gain.py --results_dir result/ --output_dir plots/
 """
 
 import os
 import json
+import argparse
 import matplotlib.pyplot as plt
 import numpy as np
 from typing import Dict, Optional, List
@@ -508,9 +509,22 @@ def plot_config_group_line_style(info_gains: Dict[str, Dict[str, List[float]]],
 
 def main():
     """Main entrypoint"""
-    results_dir = "result"
+    parser = argparse.ArgumentParser(description="Plot information gain visualization")
+    parser.add_argument("--results_dir", type=str, default="result",
+                        help="Directory containing experimental results (default: result)")
+    parser.add_argument("--output_dir", type=str, default=".",
+                        help="Directory to save output plots (default: current directory)")
+    parser.add_argument("--plot_cogmap", action="store_true", default=False,
+                        help="Plot cognitive map overlay (default: False)")
+
+    args = parser.parse_args()
     
-    PLOT_COGMAP = True 
+    results_dir = args.results_dir
+    output_dir = args.output_dir
+    PLOT_COGMAP = args.plot_cogmap
+    
+    # Create output directory if it doesn't exist
+    os.makedirs(output_dir, exist_ok=True)
 
     # Read information gain data and sample end steps
     info_gains, sample_end_steps, cogmap_full, sample_counts_per_turn = read_info_gain_from_models(results_dir)
@@ -536,7 +550,7 @@ def main():
 
     # Generate plots (line style) for each configuration group
     for group_name, group_configs in config_groups.items():
-        save_path = "info_gain_across_models.pdf"
+        save_path = os.path.join(output_dir, "info_gain_across_models.pdf")
         plot_config_group_line_style(
             info_gains,
             sample_end_steps,

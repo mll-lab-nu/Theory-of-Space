@@ -121,4 +121,40 @@ Results are organized as:
                   └─ images/
 ```
 
+## Analysis Scripts
+
+This repository provides four analysis scripts in the `analysis/` directory for visualizing and computing statistics from experimental results:
+
+### 1. Plot Cost-Performance Trade-off (`plot_cost_performance.py`)
+
+Generates scatter plots showing the relationship between exploration cost (number of actions) and evaluation performance.
+
+**Usage:**
+```bash
+python analysis/plot_cost_performance.py \
+  --results_dir result/ \
+  --output_dir plots/ \
+  --data_dir room_data/3-room/
+```
+
+**Output:** Four scatter plots comparing exploration cost vs. accuracy:
+1. Text (Active + Passive)
+2. Vision (Active + Passive)
+3. Active Text & Vision
+4. All configurations
+
+### 2. Plot Information Gain (`plot_info_gain.py`)
+
+Visualizes information gain progression during active exploration for text and vision modalities.
+
+**Basic Usage:**
+```bash
+python analysis/plot_info_gain.py \
+  --results_dir result/ \
+  --output_dir plots/
+```
+
+**Parameters:**
+- `--results_dir`: Directory containing experimental results (default: `result`)
+- `--output_dir`: Directory to save output plots (default: current directory)
 
