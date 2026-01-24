@@ -1,6 +1,16 @@
-conda create -n tos python=3.10 -y
+#!/usr/bin/env bash
+set -euo pipefail
+
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+  echo "Run: source setup.sh  (keeps conda env active)"
+  exit 1
+fi
+
+source "$(conda info --base)/etc/profile.d/conda.sh"
+cd "$(dirname "${BASH_SOURCE[0]}")"
+conda create -n tos python=3.10 -y || true
 conda activate tos
-pip install -e .
+python -m pip install -e .
 
 # Add api keys (optional)
 # export OPENAI_API_KEY=
@@ -21,12 +31,12 @@ rm room_data/*.zip
 
 # Run the experiments
 python scripts/SpatialGym/spatial_run.py \
-  --phase all \
-  --model-name gpt-5.2 \
-  --num 10 \
+  --phase explore \
+  --model-name gemini-3-pro-preview \
+  --num 100 \
   --data-dir room_data/3-room/ \
-  --output-root result/ \
-  --render-mode vision,text \
-  --exp-type active,passive \
-  --cogmap \
+  --output-root results_arxiv/ \
+  --render-mode text,vision \
+  --exp-type active \
   --false-belief-exp \
+  --replay

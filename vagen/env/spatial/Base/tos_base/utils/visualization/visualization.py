@@ -192,6 +192,17 @@ class HTMLGenerator:
             return task_type
         return f"{mode_label} / {task_type}"
 
+    @staticmethod
+    def _order_fb_metrics(metrics: Dict) -> Dict:
+        if not isinstance(metrics, dict):
+            return metrics
+        preferred = ["changed", "unchanged", "unchanged_exploration"]
+        ordered = {k: metrics[k] for k in preferred if k in metrics}
+        for k, v in metrics.items():
+            if k not in ordered:
+                ordered[k] = v
+        return ordered
+
     def generate_config_summaries(self, f) -> None:
         """Generate summaries for each config combination"""
         f.write("<div class='config-summaries'>\n")
@@ -564,7 +575,7 @@ class HTMLGenerator:
             if fb_avg:
                 f.write("<div class='metrics-box cogmap-fb'>\n")
                 f.write("<h4>🧭 False Belief CogMap</h4>\n")
-                f.write(VisualizationHelper.dict_to_html(fb_avg))
+                f.write(VisualizationHelper.dict_to_html(self._order_fb_metrics(fb_avg)))
                 f.write("</div>\n")
 
         f.write("</div>\n")  # End metrics-grid
