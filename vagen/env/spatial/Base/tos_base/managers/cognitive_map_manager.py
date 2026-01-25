@@ -157,11 +157,42 @@ class CognitiveMapManager:
         # State tracking for newly observed items
         self._last_observed_items: Set[str] = set()
 
-    def evaluate_false_belief_cogmap(self, assistant_response: str, fb_turn_log: Dict[str, Any]) -> Dict[str, Any]:
+    def _compute_retention(self, pred_br: BaseRoom, exp_pred_json: Dict, name: str, flags: Optional[Dict] = None) -> Dict[str, Optional[float]]:
+        """Compute retention metric for a single object (new pred vs old pred).
+        Object names may use spaces or underscores in JSON keys.
+        If flags given, only compute pos/facing based on change type; otherwise compute both.
+        """
+        exp_info = exp_pred_json.get(name) or exp_pred_json.get(name.replace(" ", "_"))
+        if not (exp_info and isinstance(exp_info, dict)):
+            return {"dir": None, "pos": None, "facing": None, "overall": None}
+        exp_br = self._parse_section_to_baseroom({name: exp_info}, "exp")
+        exp_only = self._filter_br_by_names(exp_br, {name}) if exp_br else None
+        if not (exp_only and exp_only.objects):
+            return {"dir": None, "pos": None, "facing": None, "overall": None}
+        m = self._compare_baserooms(pred_br, exp_only)
+        if not m.valid:
+            return {"dir": None, "pos": None, "facing": None, "overall": None}
+        if flags:
+            return {"dir": None, "pos": float(m.pos) if flags.get("pos") else None,
+                    "facing": float(m.facing) if flags.get("ori") else None, "overall": None}
+        return {"dir": None, "pos": float(m.pos), "facing": float(m.facing), "overall": None}
+
+    def evaluate_false_belief_cogmap(
+        self, assistant_response: str, fb_turn_log: Dict[str, Any],
+        exploration_room_dict: Optional[Dict[str, Any]] = None,
+        exploration_agent_dict: Optional[Dict[str, Any]] = None,
+        last_exploration_cogmap: Optional[Dict[str, Any]] = None,
+    ) -> Dict[str, Any]:
         """Evaluate false-belief (global) cognitive map.
 
         The returned dict is intended to be stored at:
         `turn_log["false_belief_log"]["cogmap_log"]`.
+        
+        Args:
+            exploration_room_dict/exploration_agent_dict: If provided, use these
+                to compute pos_norm_L (from exploration stage, before FB changes).
+            last_exploration_cogmap: The cogmap_log from the last exploration turn.
+                Used to compute retention metric (new prediction vs old prediction).
         """
         if not isinstance(fb_turn_log, dict):
             return {}
@@ -172,6 +203,12 @@ class CognitiveMapManager:
 
         gt_room = Room.from_dict(room_dict)
         gt_agent = Agent.from_dict(agent_dict)
+        
+        # Compute pos_norm_L from exploration room (before FB changes)
+        if exploration_room_dict and exploration_agent_dict:
+            exp_room = Room.from_dict(exploration_room_dict)
+            exp_agent = Agent.from_dict(exploration_agent_dict)
+            self._ensure_pos_norm_L(exp_room, exp_agent)
 
         fb_log = fb_turn_log.get("false_belief_log") or {}
         newly_observed_changed = fb_log.get("newly_observed_changed_objects") or []
@@ -194,6 +231,10 @@ class CognitiveMapManager:
 
         responses_by_type = {"global": str(assistant_response or "")}
         changed_objects_metrics: Dict[str, Dict[str, float]] = {}
+        retention_metrics: Dict[str, Dict[str, Optional[float]]] = {}
+
+        # Extract last exploration pred_json for retention metric
+        exp_pred_json = ((last_exploration_cogmap or {}).get("global") or {}).get("pred_json") or {}
 
         # Evaluate each newly observed changed object separately (pos+facing only; ignore dir).
         for obj_name in newly_observed_changed:
@@ -204,7 +245,6 @@ class CognitiveMapManager:
             single = self.evaluate_cogmaps(responses_by_type, gt_room, gt_agent, [name])
             if not (single and single.global_log and single.global_log.pred_room_state and single.global_log.gt_room_state):
                 continue
-            self._ensure_pos_norm_L(gt_room, gt_agent)
             pred_only = self._filter_br_by_names(single.global_log.pred_room_state, {name})
             gt_only = self._filter_br_by_names(single.global_log.gt_room_state, {name})
             m = self._compare_baserooms(pred_only, gt_only)
@@ -214,6 +254,8 @@ class CognitiveMapManager:
                 "facing": (float(m.facing) if flags.get("ori") else None),
                 "overall": None,
             }
+            # Compute retention: current prediction vs last exploration prediction
+            retention_metrics[name] = self._compute_retention(pred_only, exp_pred_json, name, flags)
 
         # Evaluate unchanged objects as a single (global) cogmap log.
         unchanged_log = (
@@ -224,6 +266,7 @@ class CognitiveMapManager:
         return {
             "original_response": str(assistant_response or ""),
             "changed_objects_per_object": changed_objects_metrics,
+            "retention_per_object": retention_metrics,
             "unchanged_objects": (unchanged_log.to_dict() if unchanged_log else {}),
             "newly_observed_changed_objects": [str(x).replace("_", " ") for x in newly_observed_changed if isinstance(x, str)],
             "all_changed_object_names": sorted(all_changed_names),
@@ -580,9 +623,57 @@ class CognitiveMapManager:
         return m.to_dict() if m.valid else {}
 
     @staticmethod
+    def compute_first_fb_unchanged_retention(
+        last_cogmap_log: Optional[Dict[str, Any]],
+        fb_turn_logs: List[Dict],
+        gt_room_dict: Optional[Dict[str, Any]] = None,
+        gt_agent_dict: Optional[Dict[str, Any]] = None,
+    ) -> Dict[str, Optional[float]]:
+        """Compute unchanged_retention: first FB prediction vs last exploration prediction for unchanged objects.
+        Uses same metric calculation as _compute_retention (per object, then average).
+        """
+        if not last_cogmap_log or not fb_turn_logs or not gt_room_dict or not gt_agent_dict:
+            return {}
+        exp_pred_json = ((last_cogmap_log.get('global') or {}).get('pred_json') or {})
+        first_fb = (fb_turn_logs[0].get('false_belief_log') or {}).get('cogmap_log') or {}
+        fb_pred_json = ((first_fb.get('unchanged_objects') or {}).get('global') or {}).get('pred_json') or {}
+        unchanged_names = first_fb.get('unchanged_object_names') or []
+        if not exp_pred_json or not fb_pred_json or not unchanged_names:
+            return {}
+        # Create temp manager with proper pos_norm_L
+        gt_room = Room.from_dict(gt_room_dict)
+        gt_agent = Agent.from_dict(gt_agent_dict)
+        tmp_mgr = CognitiveMapManager(scope="global")
+        tmp_mgr._ensure_pos_norm_L(gt_room, gt_agent)
+        # Compute retention per object using same logic as _compute_retention
+        pos_vals, facing_vals = [], []
+        for name in unchanged_names:
+            fb_obj = fb_pred_json.get(name) or fb_pred_json.get(name.replace(" ", "_"))
+            if not (fb_obj and isinstance(fb_obj, dict)):
+                continue
+            fb_br = tmp_mgr._parse_section_to_baseroom({name: fb_obj}, "fb")
+            fb_only = tmp_mgr._filter_br_by_names(fb_br, {name}) if fb_br else None
+            if not (fb_only and fb_only.objects):
+                continue
+            m = tmp_mgr._compute_retention(fb_only, exp_pred_json, name)  # No flags = compute both pos & facing
+            if isinstance(m.get('pos'), (int, float)):
+                pos_vals.append(float(m['pos']))
+            # Skip facing for objects without orientation or doors/gates
+            obj = fb_only.objects[0]
+            name_l = name.lower()
+            if obj.has_orientation and "door" not in name_l and "gate" not in name_l:
+                if isinstance(m.get('facing'), (int, float)):
+                    facing_vals.append(float(m['facing']))
+        if not pos_vals and not facing_vals:
+            return {}
+        avg = lambda v: sum(v) / len(v) if v else None
+        return {'dir': None, 'pos': avg(pos_vals), 'facing': avg(facing_vals), 'overall': None}
+
+    @staticmethod
     def compute_false_belief_metrics(
         fb_turn_logs: List[Dict],
         last_exploration_unchanged: Optional[Dict[str, float]] = None,
+        first_fb_unchanged_retention: Optional[Dict[str, Optional[float]]] = None,
     ) -> Dict:
         """Compute aggregated false belief metrics from turn logs."""
         if not fb_turn_logs:
@@ -595,10 +686,15 @@ class CognitiveMapManager:
         # Changed: average ONLY the relevant metric per change type (pos or facing). No per-turn.
         pos_vals: List[float] = []
         facing_vals: List[float] = []
+        # retention: compare against last exploration cogmap prediction
+        ret_pos_vals: List[float] = []
+        ret_facing_vals: List[float] = []
+
         for fb_turn in (fb_turn_logs or []):
             fb_log = fb_turn.get('false_belief_log') or {}
             cm_log = fb_log.get('cogmap_log') or {}
             per_obj = cm_log.get('changed_objects_per_object') or {}
+            ret_per_obj = cm_log.get('retention_per_object') or {}
 
             # name -> {pos, ori}
             changes_map: dict[str, dict[str, bool]] = {}
@@ -625,10 +721,26 @@ class CognitiveMapManager:
                     v = m.get('facing')
                     if isinstance(v, (int, float)):
                         facing_vals.append(float(v))
+
+            # Aggregate retention metrics
+            for obj_name, m_ret in (ret_per_obj or {}).items():
+                if not isinstance(m_ret, dict):
+                    continue
+                name = str(obj_name).replace('_', ' ')
+                flags = changes_map.get(name) or {}
+                if flags.get('pos'):
+                    v = m_ret.get('pos')
+                    if isinstance(v, (int, float)):
+                        ret_pos_vals.append(float(v))
+                if flags.get('ori'):
+                    v = m_ret.get('facing')
+                    if isinstance(v, (int, float)):
+                        ret_facing_vals.append(float(v))
         
         changed_avg = {'dir': None, 'pos': _avg(pos_vals), 'facing': _avg(facing_vals), 'overall': None}
+        retention_avg = {'dir': None, 'pos': _avg(ret_pos_vals), 'facing': _avg(ret_facing_vals), 'overall': None}
 
-        # Unchanged: same shape as normal cogmap global metrics
+        # Unchanged: averaged across turns
         unchanged_metrics: List[MapCogMetrics] = []
         for fb_turn in (fb_turn_logs or []):
             cm_log = ((fb_turn.get('false_belief_log') or {}).get('cogmap_log') or {})
@@ -640,8 +752,11 @@ class CognitiveMapManager:
 
         metrics = {
             'changed': changed_avg,
+            'retention': retention_avg,
             'unchanged': unchanged_avg,
         }
+        if isinstance(first_fb_unchanged_retention, dict) and first_fb_unchanged_retention:
+            metrics['unchanged_retention'] = first_fb_unchanged_retention
         if isinstance(last_exploration_unchanged, dict) and last_exploration_unchanged:
             metrics['unchanged_exploration'] = last_exploration_unchanged
         return {'metrics': metrics}
@@ -693,6 +808,11 @@ class CognitiveMapManager:
                 (last_turn or {}).get('agent_state'),
             ) if fb_turn_logs else {}
         )
+        fb_first_retention = (
+            CognitiveMapManager.compute_first_fb_unchanged_retention(
+                last, fb_turn_logs, (last_turn or {}).get('room_state'), (last_turn or {}).get('agent_state'))
+            if fb_turn_logs else {}
+        )
         fb_unchanged_turn = (
             CognitiveMapManager.compute_false_belief_unchanged_per_turn(fb_turn_logs, fb_last_unchanged)
             if fb_turn_logs else None
@@ -711,7 +831,7 @@ class CognitiveMapManager:
             if fb_unchanged_turn:
                 res['per_turn_metrics']['cogmap_fb_unchanged_per_turn'] = fb_unchanged_turn
             cogmap_fb_metrics = (
-                CognitiveMapManager.compute_false_belief_metrics(fb_turn_logs, fb_last_unchanged)
+                CognitiveMapManager.compute_false_belief_metrics(fb_turn_logs, fb_last_unchanged, fb_first_retention)
                 if fb_turn_logs else {}
             )
             if cogmap_fb_metrics:
@@ -834,7 +954,7 @@ class CognitiveMapManager:
         # Process false belief cogmap data if available
         if fb_unchanged_turn:
             per_turn_metrics['cogmap_fb_unchanged_per_turn'] = fb_unchanged_turn
-        cogmap_fb_metrics = CognitiveMapManager.compute_false_belief_metrics(fb_turn_logs, fb_last_unchanged) if fb_turn_logs else {}
+        cogmap_fb_metrics = CognitiveMapManager.compute_false_belief_metrics(fb_turn_logs, fb_last_unchanged, fb_first_retention) if fb_turn_logs else {}
 
         result = {
             'exploration': {

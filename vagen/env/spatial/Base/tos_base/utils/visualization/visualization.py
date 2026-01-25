@@ -196,7 +196,7 @@ class HTMLGenerator:
     def _order_fb_metrics(metrics: Dict) -> Dict:
         if not isinstance(metrics, dict):
             return metrics
-        preferred = ["changed", "unchanged", "unchanged_exploration"]
+        preferred = ["changed", "retention", "unchanged", "unchanged_retention", "unchanged_exploration"]
         ordered = {k: metrics[k] for k in preferred if k in metrics}
         for k, v in metrics.items():
             if k not in ordered:
@@ -1202,9 +1202,13 @@ class HTMLGenerator:
                     
                     # Display per-object metrics for changed objects
                     per_obj_metrics = cm_log.get('changed_objects_per_object', {})
+                    ret_per_obj = cm_log.get('retention_per_object', {})
                     if per_obj_metrics:
                         for obj_name, obj_metrics in per_obj_metrics.items():
                             metrics_block[f'Changed: {obj_name}'] = obj_metrics
+                            ret_m = ret_per_obj.get(obj_name)
+                            if ret_m:
+                                metrics_block[f'Retention: {obj_name}'] = ret_m
                     
                     if cm_log.get('unchanged_objects'):
                          metrics_block['Unchanged (all)'] = cm_log['unchanged_objects'].get('global', {}).get('metrics')
