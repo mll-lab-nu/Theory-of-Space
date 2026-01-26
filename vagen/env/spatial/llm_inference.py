@@ -234,11 +234,6 @@ def map_llm_responses(
 
     # Process cogmap groups
     if cogmap_groups:
-        # If some map types or turns are missing from the new LLM outputs,
-        # default them to the existing `cogmap_log` stored in the current
-        # exploration turn logs (use original_response when available).
-        # This makes the default value for each `t_idx`/`responses_by_type`
-        # come from the current exploration cogmap.
         for idx, turn_log in enumerate(history.exploration_turn_logs):
             existing_cogmap = turn_log.get("cogmap_log", {}) or {}
             # Extract original responses saved previously
@@ -285,12 +280,18 @@ def map_llm_responses(
     if cogmap_fb_groups:
         cm_cfg = cogmap_config or {"cogmap_type": "standard", "pos_allow_scale": False, "scope": "all"}
         cm = CognitiveMapManager(**cm_cfg)
+        # Get last exploration turn for pos_norm_L computation and changed_exp metric
+        last_exp = next((t for t in reversed(history.exploration_turn_logs) if t.get('cogmap_log')), None)
+        exp_room = (last_exp or {}).get('room_state')
+        exp_agent = (last_exp or {}).get('agent_state')
+        last_exp_cogmap = (last_exp or {}).get('cogmap_log')
         
         for fb_idx, response_text in cogmap_fb_groups.items():
             if not (0 <= fb_idx < len(history.false_belief_turn_logs)):
                 continue
             fb_turn_log = history.false_belief_turn_logs[fb_idx]
-            fb_turn_log.setdefault('false_belief_log', {})['cogmap_log'] = cm.evaluate_false_belief_cogmap(response_text, fb_turn_log)
+            fb_turn_log.setdefault('false_belief_log', {})['cogmap_log'] = cm.evaluate_false_belief_cogmap(
+                response_text, fb_turn_log, exp_room, exp_agent, last_exp_cogmap)
             fb_turn_log.pop('cogmap_log', None)
         
         # Save updated false belief logs
@@ -460,6 +461,11 @@ def reevaluate_cogmap_fb_combo_dir(combo_dir: str) -> int:
 
     # Initialize cognitive map manager with default config
     cm = CognitiveMapManager(cogmap_type="standard", pos_allow_scale=False, scope="all")
+    # Get last exploration turn for pos_norm_L computation and changed_exp metric
+    last_exp = next((t for t in reversed(history.exploration_turn_logs) if t.get('cogmap_log')), None)
+    exp_room = (last_exp or {}).get('room_state')
+    exp_agent = (last_exp or {}).get('agent_state')
+    last_exp_cogmap = (last_exp or {}).get('cogmap_log')
 
     count = 0
     # Re-evaluate false belief turn cogmaps
@@ -479,7 +485,7 @@ def reevaluate_cogmap_fb_combo_dir(combo_dir: str) -> int:
 
         # Re-evaluate with separate metrics for changed and unchanged objects
         try:
-            cogmap_result = cm.evaluate_false_belief_cogmap(original_response, fb_turn_log)
+            cogmap_result = cm.evaluate_false_belief_cogmap(original_response, fb_turn_log, exp_room, exp_agent, last_exp_cogmap)
             fb_turn_log.setdefault("false_belief_log", {})["cogmap_log"] = cogmap_result
             fb_turn_log.pop("cogmap_log", None)
             count += 1

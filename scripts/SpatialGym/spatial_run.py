@@ -65,8 +65,8 @@ def parse_args():
     )
     # Phase selection
     p.add_argument("--phase", type=str, default="all",
-                   choices=['explore', 'eval', 'cogmap', 'all', 'aggregate', 'reeval', 'cogmap_reeval', 'cogmap_fb', 'cogmap_fb_reeval'],
-                   help="Which phase to run: explore, eval, cogmap, reeval, cogmap_reeval, cogmap_fb, cogmap_fb_reeval, aggregate, or all")
+                   choices=['explore', 'explore_fb', 'eval', 'cogmap', 'cogmap_fb', 'all', 'aggregate', 'reeval', 'cogmap_reeval', 'cogmap_fb_reeval'],
+                   help="Which phase to run: explore, explore_fb, eval, cogmap, cogmap_fb, reeval, cogmap_reeval, cogmap_fb_reeval, aggregate, all")
 
     # Common parameters
     p.add_argument("--exp-type", type=str, dest="exp_type", 
@@ -101,8 +101,6 @@ def parse_args():
                    help='JSON string for eval task counts, e.g., {"dir": 1}. If omitted, use inference_config.yaml eval_task_counts')
     p.add_argument("--tasks", nargs='+', type=str, dest="tasks", default=None,
                    help="List of tasks to run (e.g. 'dir' 'pov'). If not provided, run all tasks in eval-task-counts.")
-    p.add_argument("--cogmap", action="store_true", dest="cogmap",
-                   help="Run cognitive map phase")
     p.add_argument("--eval-override", action="store_true", dest="eval_override",
                    help="Override evaluation history (delete evaluation json only)")
     p.add_argument("--eval-mode", type=str, dest="eval_mode", default="default",
@@ -112,12 +110,8 @@ def parse_args():
                    help="Override cognitive map cache (regenerate cogmap prompts)")
     p.add_argument("--cogmap-last-global-only", action="store_true", dest="cogmap_last_global_only",
                    help="Run only the last global cogmap per sample")
-    p.add_argument("--false-belief-exp", action="store_true", dest="false_belief_exp",
-                   help="Enable false belief experiment")
     p.add_argument("--false-belief-override", action="store_true", dest="false_belief_override",
                    help="Override false belief experiment cache (delete false belief json)")
-    p.add_argument("--cogmap-fb", action="store_true", dest="cogmap_fb",
-                   help="Run cognitive map evaluation for false belief experiment")
     p.add_argument("--cogmap-fb-override", action="store_true", dest="cogmap_fb_override",
                    help="Override false belief cognitive map cache (regenerate false belief cogmap prompts)")
     
@@ -644,6 +638,9 @@ def run_aggregation_phase(args):
 def main():
     args = parse_args()
 
+    # Determine false_belief_exp based on phase
+    args.false_belief_exp = args.phase == 'explore_fb'
+
     # Stream prints when piping (e.g., "2>&1 | tee ...")
     try:
         sys.stdout.reconfigure(line_buffering=True)
@@ -690,26 +687,22 @@ def main():
             server_url = f"http://{args.server_host}:{actual_port}"
         
         # Run requested phase(s)
-        if args.phase == 'explore':
+        if args.phase in ['explore', 'explore_fb']:
             run_exploration_phase(args, seed_opts, server_url, exp_types, render_modes)
         elif args.phase == 'eval':
             run_phase(args, mode="eval", seed_opts=seed_opts,
                               exp_types=exp_types, render_modes=render_modes)
         elif args.phase == 'cogmap':
-            if args.cogmap_fb:
-                run_phase(args, mode="cogmap_fb", seed_opts=seed_opts,
-                              exp_types=exp_types, render_modes=render_modes)
-            else:
-                run_phase(args, mode="cogmap", seed_opts=seed_opts,
-                              exp_types=exp_types, render_modes=render_modes)
+            run_phase(args, mode="cogmap", seed_opts=seed_opts,
+                          exp_types=exp_types, render_modes=render_modes)
+        elif args.phase == 'cogmap_fb':
+            run_phase(args, mode="cogmap_fb", seed_opts=seed_opts,
+                          exp_types=exp_types, render_modes=render_modes)
         elif args.phase == 'reeval':
             run_phase(args, mode="reeval", seed_opts=seed_opts,
                               exp_types=exp_types, render_modes=render_modes)
         elif args.phase == 'cogmap_reeval':
             run_phase(args, mode="cogmap_reeval", seed_opts=seed_opts,
-                              exp_types=exp_types, render_modes=render_modes)
-        elif args.phase == 'cogmap_fb':
-            run_phase(args, mode="cogmap_fb", seed_opts=seed_opts,
                               exp_types=exp_types, render_modes=render_modes)
         elif args.phase == 'cogmap_fb_reeval':
             run_phase(args, mode="cogmap_fb_reeval", seed_opts=seed_opts,
@@ -718,22 +711,18 @@ def main():
             run_exploration_phase(args, seed_opts, server_url, exp_types, render_modes)
             run_phase(args, mode="eval", seed_opts=seed_opts,
                               exp_types=exp_types, render_modes=render_modes)
-            # Run cogmap only for active exp_types
-            if 'active' in exp_types and args.cogmap:
+            # Run cogmap for active exp_types
+            if 'active' in exp_types:
                 active_exp_types = [e for e in exp_types if e == 'active']
                 run_phase(args, mode="cogmap", seed_opts=seed_opts,
                                   exp_types=active_exp_types, render_modes=render_modes)
-            # Run cogmap_fb if --cogmap-fb is set (can reuse existing false belief logs)
-            if args.cogmap_fb:
-                run_phase(args, mode="cogmap_fb", seed_opts=seed_opts,
-                                  exp_types=exp_types, render_modes=render_modes)
         run_aggregation_phase(args)
     
     except Exception as e:
         raise e
     
     finally:
-        if args.phase in ['explore', 'all'] and not args.no_server:
+        if args.phase in ['explore', 'explore_fb', 'all'] and not args.no_server:
             stop_env_server(server_proc)
     
     print("\n" + "="*60)

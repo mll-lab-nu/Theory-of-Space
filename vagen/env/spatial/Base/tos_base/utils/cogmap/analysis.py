@@ -16,14 +16,15 @@ def _avg_metrics(keys: List[str], metrics_list: List[Dict[str, float]]) -> Dict[
     return {k: _avg([float(m.get(k, 0.0)) for m in metrics_list if isinstance(m, dict)]) for k in keys}
 
 
-def _avg_list_of_lists(list_of_lists: List[List[float]]) -> List[float]:
+def _avg_list_of_lists(list_of_lists: List[List[float]]) -> List[Optional[float]]:
+    """Average lists element-wise, returning None for positions with no valid data."""
     if not list_of_lists:
         return []
     max_len = max(len(lst) for lst in list_of_lists)
     out = []
     for i in range(max_len):
         vals = [lst[i] for lst in list_of_lists if i < len(lst) and isinstance(lst[i], (int, float))]
-        out.append(_avg(vals) if vals else 0.0)
+        out.append(_avg(vals) if vals else None)
     return out
 
 

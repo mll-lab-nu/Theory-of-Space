@@ -32,7 +32,8 @@ class FBLog:
     ground_truth_changes: Optional[List[Any]] = None # List[ChangedObject]
     reported_changes: Optional[List[Dict]] = None
     cogmap_log: Optional[Dict] = None
-    newly_observed_changed_objects: List[str] = field(default_factory=list)  # Changed objects observed for the first time in this turn
+    newly_observed_changed_objects: List[str] = field(default_factory=list)
+    newly_observed_unchanged_objects: List[str] = field(default_factory=list)
     
     def to_dict(self):
         return {
@@ -49,6 +50,7 @@ class FBLog:
             "reported_changes": [c.to_dict() for c in self.reported_changes] if self.reported_changes else [],
             "cogmap_log": self.cogmap_log.to_dict() if hasattr(self.cogmap_log, 'to_dict') else (self.cogmap_log or {}),
             "newly_observed_changed_objects": self.newly_observed_changed_objects,
+            "newly_observed_unchanged_objects": self.newly_observed_unchanged_objects,
         }
 
 @dataclass
