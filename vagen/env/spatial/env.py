@@ -232,17 +232,18 @@ class SpatialGym(gym.Env):
         """Handle step logic for false belief phase."""
         self.false_belief_step += 1
         
-        # Track which changed objects were newly observed in this turn
-        newly_observed_changed = []
+        # Track which objects were newly observed in this turn
+        newly_observed_changed, newly_observed_unchanged = [], []
         if exp_log and hasattr(exp_log, 'visible_objects'):
             changed_names = {c.name for c in self.ground_truth_changes}
             visible = set(exp_log.visible_objects or [])
-            newly_observed = visible & changed_names - getattr(self, '_observed_changed_objects', set())
-            newly_observed_changed = list(newly_observed)
-            if not hasattr(self, '_observed_changed_objects'):
-                self._observed_changed_objects = set()
-            self._observed_changed_objects.update(newly_observed)
-            if self._fb_all_changed_seen_cost is None and self._observed_changed_objects >= changed_names:
+            if not hasattr(self, '_fb_observed_objects'):
+                self._fb_observed_objects = set()
+            newly_observed = visible - self._fb_observed_objects
+            self._fb_observed_objects.update(newly_observed)
+            newly_observed_changed = list(newly_observed & changed_names)
+            newly_observed_unchanged = list(newly_observed - changed_names)
+            if self._fb_all_changed_seen_cost is None and self._fb_observed_objects >= changed_names:
                 self._fb_all_changed_seen_cost = self._fb_action_cost()
         
         # Create FBLog
@@ -251,7 +252,8 @@ class SpatialGym(gym.Env):
             room_state=room_state,
             agent_state=agent_state,
             ground_truth_changes=self.ground_truth_changes,
-            newly_observed_changed_objects=newly_observed_changed
+            newly_observed_changed_objects=newly_observed_changed,
+            newly_observed_unchanged_objects=newly_observed_unchanged,
         )
 
         if done:

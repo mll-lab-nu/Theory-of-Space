@@ -234,11 +234,6 @@ def map_llm_responses(
 
     # Process cogmap groups
     if cogmap_groups:
-        # If some map types or turns are missing from the new LLM outputs,
-        # default them to the existing `cogmap_log` stored in the current
-        # exploration turn logs (use original_response when available).
-        # This makes the default value for each `t_idx`/`responses_by_type`
-        # come from the current exploration cogmap.
         for idx, turn_log in enumerate(history.exploration_turn_logs):
             existing_cogmap = turn_log.get("cogmap_log", {}) or {}
             # Extract original responses saved previously

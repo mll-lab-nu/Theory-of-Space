@@ -196,7 +196,7 @@ class HTMLGenerator:
     def _order_fb_metrics(metrics: Dict) -> Dict:
         if not isinstance(metrics, dict):
             return metrics
-        preferred = ["changed", "retention", "unchanged", "unchanged_retention", "unchanged_exploration"]
+        preferred = ["changed", "retention", "unchanged", "unchanged_retention", "unchanged_retention_minus_retention", "unchanged_exploration"]
         ordered = {k: metrics[k] for k in preferred if k in metrics}
         for k, v in metrics.items():
             if k not in ordered:
