@@ -18,7 +18,7 @@ python -m pip install -e .
 # export GOOGLE_API_KEY=
 
 # Download the dataset
-hf download yw12356/tos_dataset_0117_3room_100runs --repo-type dataset --local-dir room_data
+hf download yw12356/tos_dataset_0125_3room_100runs --repo-type dataset --local-dir room_data
 mkdir -p room_data/3-room
 unzip room_data/*.zip -d room_data/3-room
 for dir in room_data/3-room/*; do
@@ -30,13 +30,14 @@ done
 rm room_data/*.zip
 
 # Run the experiments
+mkdir logs
 python scripts/SpatialGym/spatial_run.py \
-  --phase explore \
-  --model-name gemini-3-pro-preview \
-  --num 100 \
+  --phase all \
+  --model-name gpt-5.2 \
+  --num 25 \
   --data-dir room_data/3-room/ \
-  --output-root results_arxiv/ \
+  --output-root results/ \
   --render-mode text,vision \
-  --exp-type active \
-  --false-belief-exp \
-  --replay
+  --exp-type passive,active \
+  --inference-mode batch \
+  --false-belief-exp 2>&1 | tee logs/gpt-5.2.log
