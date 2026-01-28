@@ -119,7 +119,7 @@ class ObjectModifier(RoomModifier):
             tuple(map(int, p))
             for p in valid
             if tuple(map(int, p)) not in occupied
-            and ((int(p[0]) - cur[0]) ** 2 + (int(p[1]) - cur[1]) ** 2) >= 4
+            and ((int(p[0]) - cur[0]) ** 2 + (int(p[1]) - cur[1]) ** 2) >= 36
         ]
         if not candidates:
             return False

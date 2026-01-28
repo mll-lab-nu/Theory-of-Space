@@ -66,6 +66,7 @@ models:
     max_retries: 5
     max_retries_api: 5
 
+  # vllm
   qwen3-vl-2b-instruct:
     provider: openai
     organization: self-hosted
