@@ -196,10 +196,10 @@ class HTMLGenerator:
     def _order_fb_metrics(metrics: Dict) -> Dict:
         if not isinstance(metrics, dict):
             return metrics
-        preferred = ["changed", "retention", "unchanged", "unchanged_retention", "unchanged_retention_minus_retention", "unchanged_exploration"]
+        preferred = ["inertia", "changed", "retention", "unchanged", "unchanged_retention", "unchanged_retention_minus_retention", "unchanged_exploration"]
         ordered = {k: metrics[k] for k in preferred if k in metrics}
         for k, v in metrics.items():
-            if k not in ordered:
+            if k not in ordered and k != "inertia_list":  # exclude inertia_list from display
                 ordered[k] = v
         return ordered
 
@@ -410,7 +410,7 @@ class HTMLGenerator:
                 if cogmap_fb_data and cogmap_fb_data.get('metrics'):
                     f.write("<div class='metrics-box cogmap-fb'>\n")
                     f.write("<h4>🧭 False Belief CogMap</h4>\n")
-                    f.write(VisualizationHelper.dict_to_html(cogmap_fb_data['metrics']))
+                    f.write(VisualizationHelper.dict_to_html(self._order_fb_metrics(cogmap_fb_data['metrics'])))
                     f.write("</div>\n")
 
             # Group correlation performance

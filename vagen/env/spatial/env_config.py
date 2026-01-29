@@ -43,7 +43,7 @@ class SpatialGymConfig(BaseEnvConfig):
     exp_type: str = 'passive'
     perspective: str = 'ego'
     max_exp_steps: int = 20
-    max_false_belief_exp_steps: int = 10
+    max_false_belief_exp_steps: int = 15
     kwargs: Dict = None
     proxy_agent: str = 'scout'
     false_belief_exp: bool = False
