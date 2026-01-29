@@ -540,3 +540,43 @@ Each sample page features comprehensive data for each turn, along with relevant 
 <p align="center">
   <img src="assets/visualization_sample.png" width="60%" alt="Visulization of each sample" />
 </p>
+
+---
+
+## Visual Scene Generation (ToS-vision-scenes)
+
+The `ToS-vision-scenes/` submodule provides tools to generate custom multi-room 3D environments using TDW (ThreeDWorld). Use this if you want to create your own visual scene datasets.
+
+### Pre-generated Datasets
+
+We provide pre-generated visual scene datasets on Hugging Face:
+
+| Dataset | Rooms | Runs | Link |
+|---------|-------|------|------|
+| 2-room scenes | 2 | 25 | [tos_dataset_0103_2room_25runs](https://huggingface.co/datasets/yw12356/tos_dataset_0103_2room_25runs) |
+| 3-room scenes | 3 | 100 | [tos_dataset_0127_3room_100runs](https://huggingface.co/datasets/yw12356/tos_dataset_0127_3room_100runs) |
+| 4-room scenes | 4 | 25 | [tos_dataset_0103_4room_25runs](https://huggingface.co/datasets/yw12356/tos_dataset_0103_4room_25runs) |
+
+> **Note**: The 3-room dataset includes false-belief experiment data (`falsebelief_exp.json`) for each run, used for belief updating evaluation.
+
+### Features
+- Procedural room layout generation
+- Custom 3D model support with asset bundle building
+- False-belief experiment scene generation
+- Pre-render validation for spatial tasks
+
+### Quick Start
+
+```bash
+# Clone with submodule
+git clone --recursive https://github.com/williamzhangNU/Theory-of-Space.git
+
+# Or update submodule if already cloned
+git submodule update --init --recursive
+
+# Setup (after running main setup.sh)
+cd ToS-vision-scenes
+source setup.sh
+```
+
+See [`ToS-vision-scenes/README.md`](ToS-vision-scenes/README.md) for full documentation.
