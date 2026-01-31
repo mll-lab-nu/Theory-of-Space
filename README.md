@@ -48,7 +48,7 @@ Survey-level probes ask whether a model can infer unseen views and handle geomet
 </div>
 
 #### Results (Active Exploration)
-<table>
+<table style="font-size: 12px;">
   <thead>
     <tr>
       <th rowspan="2">Methods</th>
@@ -147,7 +147,7 @@ Survey-level probes ask whether a model can infer unseen views and handle geomet
 
 
 #### Results (Passive Understanding)
-<table>
+<table style="font-size: 12px;">
   <thead>
     <tr>
       <th rowspan="2">Methods</th>
@@ -250,7 +250,7 @@ We probe the agent's internal belief state to understand *why* failures occur. W
 *   **Uncertainty**: Can the agent identify which regions it hasn't seen yet?
 
 #### Results
-<table>
+<table style="font-size: 12px;">
   <thead>
     <tr>
       <th rowspan="2">Methods</th>
@@ -320,7 +320,7 @@ We probe the agent's internal belief state to understand *why* failures occur. W
 An agent must revise its belief when new evidence conflicts with earlier assumptions. We introduce a dynamic perturbation task to probe **Belief Update**. After exploration, objects are secretly relocated, creating a "false belief" that conflicts with new observations. The agent must actively re-explore to identify changes and revise its map.
 
 #### Results
-<table>
+<table style="font-size: 12px;">
   <thead>
     <tr>
       <th rowspan="2">Methods</th>
@@ -380,7 +380,7 @@ Active exploration is a key bottleneck: performance drops when models must choos
   <img src="assets/passive-active-gap-vision.png" width="45%" alt="Passive vs active gap in vision world" />
 </p>
 <p align="center">
-  <img src="assets/infogain.png" width="60%" alt="Information gain analysis" />
+  <img src="assets/infogain.png" width="45%" alt="Information gain analysis" />
 </p>
 
 #### 02. Modality Gap
@@ -394,7 +394,7 @@ A clear modality gap persists: text-based settings consistently outperform visio
 #### 03. Active-Passive Gap Increases with Complexity
 The active–passive gap increases with complexity; Gemini-3 Pro scales much better. As the number of rooms increases, exploration cost rises accordingly. For both GPT-5.2 and Gemini-3 Pro, performance declines as the room number increases, and the active–passive performance gap widens with room number.
 
-<table>
+<table style="font-size: 12px;">
   <thead>
     <tr>
       <th rowspan="2">Methods</th>
@@ -438,9 +438,9 @@ Vision perception remains a key bottleneck, especially for object orientation. U
 ## Usage
 
 ### Setup (run everything)
-Run `setup.sh` to install deps, download data into `room_data/3-room/`, and run the default experiment (a subset of 10 runs). You can set API keys in the script.
+Run `setup.sh` to install deps, download data into `room_data/3-room/`, and run the default experiment (a subset of 10 runs). Set API keys in the script before running.
 ```bash
-bash setup.sh
+source setup.sh
 ```
 
 ### Model configuration
@@ -449,17 +449,16 @@ To add a new model, edit `scripts/SpatialGym/base_model_config.yaml` and add an 
 
 #### OpenAI Models
 ```yaml
-models:
-  gpt-5.2:
-    provider: openai # API provider (`openai`, `anthropic`)
-    model_name: gpt-5.2 # Model identifier used by the API
-    max_completion_tokens: 32768 # Maximum tokens for response
-    temperature: 1.0 # Sampling temperature
-    max_workers: 128 # Maximum parallel API calls
-    max_retries: 5 # Retry rounds for batch requests
-    max_retries_api: 5 # Retry attempts per API request
-    timeout: 500 # Request timeout in seconds
-    reasoning_effort: medium # Reasoning effort (low, medium, high)
+gpt-5.2:
+  provider: openai # API provider (`openai`, `anthropic`)
+  model_name: gpt-5.2 # Model identifier used by the API
+  max_completion_tokens: 32768 # Maximum tokens for response
+  temperature: 1.0 # Sampling temperature
+  max_workers: 128 # Maximum parallel API calls
+  max_retries: 5 # Retry rounds for batch requests
+  max_retries_api: 5 # Retry attempts per API request
+  timeout: 500 # Request timeout in seconds
+  reasoning_effort: medium # Reasoning effort (low, medium, high)
 ```
 
 #### VLLM Models
@@ -475,22 +474,22 @@ vllm serve Qwen/Qwen3-VL-2B-Instruct \
 
 Then add the following entry to `scripts/SpatialGym/base_model_config.yaml`:
 ```yaml
-  qwen3-vl-2b-instruct:
-    provider: openai
-    organization: self-hosted
-    model_name: qwen3-vl-2b-instruct # same as served-model-name in vllm serve command
-    base_url: http://localhost:9999/v1 # same as host and port in vllm serve command
-    max_completion_tokens: 8192
-    temperature: 0.0
-    max_workers: 16
-    max_retries: 3
-    timeout: 600
+qwen3-vl-2b-instruct:
+  provider: openai
+  organization: self-hosted
+  model_name: qwen3-vl-2b-instruct # same as served-model-name in vllm serve command
+  base_url: http://localhost:9999/v1 # same as host and port in vllm serve command
+  max_completion_tokens: 8192
+  temperature: 0.0
+  max_workers: 16
+  max_retries: 3
+  timeout: 600
 ```
   
 For other models, you can refer to the `scripts/SpatialGym/base_model_config.yaml` for more details.
 
 ### Commands
-Run a single full pipeline (explore + eval + optional cogmap):
+Run a single full pipeline (explore + eval + cogmap):
 ```bash
 python scripts/SpatialGym/spatial_run.py \
   --phase all \
@@ -500,8 +499,7 @@ python scripts/SpatialGym/spatial_run.py \
   --output-root result/ \
   --render-mode vision,text \ # run both vision and text world
   --exp-type active,passive \ # run both active and passive exploration
-  --cogmap \ # run cognitive map evaluation
-  --false-belief-exp \ # run false belief experiment
+  --inference-mode batch # run batch (or direct) inference
 ```
 See `scripts/SpatialGym/README.md` for more commands.
 
@@ -527,8 +525,10 @@ Results are organized as:
                   └─ images/
 ```
 
-### Visulization
-You can find the visulization html under result/gpt-5.2/env_data.html
+### Visulization & Analysis
+You can find the visulization html under result/gpt-5.2/env_data.html.
+
+By executing `python -m http.server <port>` under the root directory, you can access the visulization html at `http://localhost:<port>/result/gpt-5.2/env_data.html`.
 
 The main page will have explore + eval + optional cogmap + false belief + correlation metrics.
 <p align="center">
