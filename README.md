@@ -547,6 +547,8 @@ Each sample page features comprehensive data for each turn, along with relevant 
 
 The `ToS-vision-scenes/` submodule provides tools to generate custom multi-room 3D environments using TDW (ThreeDWorld). Use this if you want to create your own visual scene datasets.
 
+> **Note**: This submodule is available on the `scene_gen` branch (not included in the main release).
+
 > **Remote Server Requirement**: If running on a remote server, make sure the server has a **graphical display** attached (not headless). TDW and Unity require a display for rendering.
 
 ### Pre-generated Datasets
@@ -568,13 +570,16 @@ We provide pre-generated visual scene datasets on Hugging Face:
 ### Quick Start
 
 ```bash
-# Clone with submodule
-git clone --recursive https://github.com/williamzhangNU/Theory-of-Space.git
+# Clone the repo
+git clone https://github.com/williamzhangNU/Theory-of-Space.git
+cd Theory-of-Space
 
-# Or update submodule if already cloned
+# Switch to scene_gen branch and init submodule
+git checkout scene_gen
 git submodule update --init --recursive
 
-# Setup (after running main setup.sh)
+# Setup
+source setup.sh
 cd ToS-vision-scenes
 source setup.sh
 ```
