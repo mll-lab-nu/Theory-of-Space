@@ -555,10 +555,9 @@ We provide pre-generated visual scene datasets on Hugging Face:
 
 | Dataset | Rooms | Runs | Link |
 |---------|-------|------|------|
-| 3-room scenes | 3 | 100 | [tos_3room_100runs](https://huggingface.co/datasets/yw12356/tos_3room_100runs) |
-| 4-room scenes | 4 | 25 | [tos_4room_25runs](https://huggingface.co/datasets/yw12356/tos_4room_25runs) |
+| 3-room scenes | 3 | 100 | [tos_data](https://huggingface.co/datasets/yw12356/tos_data) |
 
-> **Note**: The 3-room dataset includes false-belief experiment data (`falsebelief_exp.json`) for each run, used for belief updating evaluation.
+> **Note**: If you run `setup.sh` in the main ToS repo, this dataset is already downloaded. It is the 3-room setting with 100 runs and includes false-belief data.
 
 ### Features
 - Procedural room layout generation

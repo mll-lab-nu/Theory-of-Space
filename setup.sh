@@ -18,7 +18,7 @@ python -m pip install -e .
 # export GOOGLE_API_KEY=
 
 # Download the dataset
-hf download yw12356/tos_3room_100runs --repo-type dataset --local-dir room_data
+hf download yw12356/tos_data --repo-type dataset --local-dir room_data
 mkdir -p room_data/3-room
 unzip room_data/*.zip -d room_data/3-room
 for dir in room_data/3-room/*; do
