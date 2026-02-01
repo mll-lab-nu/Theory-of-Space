@@ -1,0 +1,18 @@
+{
+  "model_name": "gpt-5.2",
+  "max_tokens": 1024,
+  "temperature": 1.0,
+  "seed": null,
+  "max_workers": 128,
+  "api_key": null,
+  "organization": null,
+  "base_url": null,
+  "max_retries": 5,
+  "max_retries_api": 5,
+  "timeout": 500,
+  "max_completion_tokens": 32768,
+  "presence_penalty": 0.0,
+  "frequency_penalty": 0.0,
+  "reasoning_effort": "medium",
+  "provider": "openai"
+}

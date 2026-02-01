@@ -1,0 +1,4435 @@
+{
+  "room_size": [
+    15.0,
+    15.0
+  ],
+  "screen_size": [
+    768,
+    768
+  ],
+  "seed": 8,
+  "run_seed": 8,
+  "min_distance": 1.42,
+  "objects": [
+    {
+      "object_id": 4373722,
+      "model": "laptop11",
+      "name": "laptop",
+      "label": "1",
+      "pos": {
+        "x": -2.0,
+        "y": 0.05,
+        "z": 6.0
+      },
+      "rot": {
+        "x": 0,
+        "y": 180,
+        "z": 0
+      },
+      "size": [
+        1.0,
+        1.0
+      ],
+      "attributes": {
+        "scale": 0.02,
+        "has_orientation": true,
+        "room_id": 1,
+        "orientation": "south"
+      }
+    },
+    {
+      "object_id": 4618674,
+      "model": "television5",
+      "name": "television",
+      "label": "2",
+      "pos": {
+        "x": 0.0,
+        "y": 0.05,
+        "z": -6.0
+      },
+      "rot": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "size": [
+        1.0,
+        1.0
+      ],
+      "attributes": {
+        "scale": 0.007,
+        "has_orientation": true,
+        "room_id": 2,
+        "orientation": "north"
+      }
+    },
+    {
+      "object_id": 9812632,
+      "model": "backpack5",
+      "name": "backpack",
+      "label": "3",
+      "pos": {
+        "x": 2.0,
+        "y": 0.05,
+        "z": 2.0
+      },
+      "rot": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "size": [
+        1.0,
+        1.0
+      ],
+      "attributes": {
+        "scale": 0.013,
+        "has_orientation": true,
+        "room_id": 3,
+        "orientation": "north"
+      }
+    },
+    {
+      "object_id": 3452297,
+      "model": "desklamp2",
+      "name": "desklamp",
+      "label": "4",
+      "pos": {
+        "x": -4.0,
+        "y": 0.05,
+        "z": 4.0
+      },
+      "rot": {
+        "x": 0,
+        "y": 90,
+        "z": 0
+      },
+      "size": [
+        1.0,
+        1.0
+      ],
+      "attributes": {
+        "scale": 0.1,
+        "has_orientation": true,
+        "room_id": 1,
+        "orientation": "east"
+      }
+    },
+    {
+      "object_id": 4958139,
+      "model": "kids_luggage_1",
+      "name": "suitcase",
+      "label": "5",
+      "pos": {
+        "x": -2.0,
+        "y": 0.05,
+        "z": -2.0
+      },
+      "rot": {
+        "x": 0,
+        "y": 270,
+        "z": 0
+      },
+      "size": [
+        0.36162876,
+        0.15895742399999999
+      ],
+      "attributes": {
+        "scale": 1.2,
+        "has_orientation": true,
+        "room_id": 2,
+        "orientation": "west"
+      }
+    },
+    {
+      "object_id": 1377592,
+      "model": "bike12",
+      "name": "bike",
+      "label": "6",
+      "pos": {
+        "x": 4.0,
+        "y": 0.11,
+        "z": 4.0
+      },
+      "rot": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "size": [
+        1.0,
+        1.0
+      ],
+      "attributes": {
+        "scale": 0.0035,
+        "has_orientation": true,
+        "room_id": 3,
+        "orientation": "north"
+      }
+    },
+    {
+      "object_id": 6046206,
+      "model": "b05_shopping_cart3",
+      "name": "shoppingcart",
+      "label": "7",
+      "pos": {
+        "x": -4.0,
+        "y": 0.05,
+        "z": 2.0
+      },
+      "rot": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "size": [
+        0.35637528,
+        0.6403290599999999
+      ],
+      "attributes": {
+        "scale": 0.6,
+        "has_orientation": true,
+        "room_id": 1,
+        "orientation": "north"
+      }
+    },
+    {
+      "object_id": 2530183,
+      "model": "toy_truck4",
+      "name": "truck",
+      "label": "8",
+      "pos": {
+        "x": -6.0,
+        "y": 0.05,
+        "z": 6.0
+      },
+      "rot": {
+        "x": 0,
+        "y": 270,
+        "z": 0
+      },
+      "size": [
+        1.0,
+        1.0
+      ],
+      "attributes": {
+        "scale": 0.015,
+        "has_orientation": true,
+        "room_id": 1,
+        "orientation": "west"
+      }
+    },
+    {
+      "object_id": 3962096,
+      "model": "chair11",
+      "name": "chair",
+      "label": "9",
+      "pos": {
+        "x": 0.0,
+        "y": 0.05,
+        "z": -4.0
+      },
+      "rot": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "size": [
+        1.0,
+        1.0
+      ],
+      "attributes": {
+        "scale": 0.005,
+        "has_orientation": true,
+        "room_id": 2,
+        "orientation": "north"
+      }
+    },
+    {
+      "object_id": 4679694,
+      "model": "pillow10",
+      "name": "pillow",
+      "label": "10",
+      "pos": {
+        "x": 2.0,
+        "y": 0.05,
+        "z": 6.0
+      },
+      "rot": {
+        "x": 0,
+        "y": 180,
+        "z": 0
+      },
+      "size": [
+        1.0,
+        1.0
+      ],
+      "attributes": {
+        "scale": 0.01,
+        "has_orientation": false,
+        "room_id": 3
+      }
+    },
+    {
+      "object_id": 2762716,
+      "model": "table1",
+      "name": "table",
+      "label": "11",
+      "pos": {
+        "x": -4.0,
+        "y": 0.05,
+        "z": -2.0
+      },
+      "rot": {
+        "x": 0,
+        "y": 180,
+        "z": 0
+      },
+      "size": [
+        1.0,
+        1.0
+      ],
+      "attributes": {
+        "scale": 0.008,
+        "has_orientation": false,
+        "room_id": 2
+      }
+    },
+    {
+      "object_id": 4998106,
+      "model": "books1",
+      "name": "books",
+      "label": "12",
+      "pos": {
+        "x": 4.0,
+        "y": 0.05,
+        "z": 6.0
+      },
+      "rot": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "size": [
+        1.0,
+        1.0
+      ],
+      "attributes": {
+        "scale": 0.015,
+        "has_orientation": false,
+        "room_id": 3
+      }
+    },
+    {
+      "object_id": 20062,
+      "model": "red_door",
+      "name": "red door",
+      "pos": {
+        "x": 0.0,
+        "y": 0,
+        "z": 2.0
+      },
+      "rot": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "size": [
+        1,
+        2.0
+      ],
+      "attributes": {
+        "color": "red",
+        "orientation": "vertical",
+        "connected_rooms": [
+          1,
+          3
+        ]
+      }
+    },
+    {
+      "object_id": 20172,
+      "model": "yellow_door",
+      "name": "yellow door",
+      "pos": {
+        "x": -2.0,
+        "y": 0,
+        "z": 0.0
+      },
+      "rot": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "size": [
+        1,
+        2.0
+      ],
+      "attributes": {
+        "color": "yellow",
+        "orientation": "horizontal",
+        "connected_rooms": [
+          1,
+          2
+        ]
+      }
+    }
+  ],
+  "cameras": [
+    {
+      "id": "agent",
+      "label": "A",
+      "position": {
+        "x": -1.0,
+        "y": 0.85,
+        "z": 4.0
+      },
+      "rotation": {
+        "y": 0.0
+      }
+    },
+    {
+      "id": "4373722",
+      "label": "1",
+      "position": {
+        "x": -2.0,
+        "y": 0.8,
+        "z": 6.0
+      },
+      "rotation": {
+        "y": 161.565051177078
+      }
+    },
+    {
+      "id": "4618674",
+      "label": "2",
+      "position": {
+        "x": 0.0,
+        "y": 0.8,
+        "z": -6.0
+      },
+      "rotation": {
+        "y": -0.0
+      }
+    },
+    {
+      "id": "9812632",
+      "label": "3",
+      "position": {
+        "x": 2.0,
+        "y": 0.8,
+        "z": 2.0
+      },
+      "rotation": {
+        "y": -135.0
+      }
+    },
+    {
+      "id": "3452297",
+      "label": "4",
+      "position": {
+        "x": -4.0,
+        "y": 0.8,
+        "z": 4.0
+      },
+      "rotation": {
+        "y": 135.0
+      }
+    },
+    {
+      "id": "4958139",
+      "label": "5",
+      "position": {
+        "x": -2.0,
+        "y": 0.8,
+        "z": -2.0
+      },
+      "rotation": {
+        "y": 45.0
+      }
+    },
+    {
+      "id": "1377592",
+      "label": "6",
+      "position": {
+        "x": 4.0,
+        "y": 0.8,
+        "z": 4.0
+      },
+      "rotation": {
+        "y": -135.0
+      }
+    },
+    {
+      "id": "6046206",
+      "label": "7",
+      "position": {
+        "x": -4.0,
+        "y": 0.8,
+        "z": 2.0
+      },
+      "rotation": {
+        "y": 116.56505117707799
+      }
+    },
+    {
+      "id": "2530183",
+      "label": "8",
+      "position": {
+        "x": -6.0,
+        "y": 0.8,
+        "z": 6.0
+      },
+      "rotation": {
+        "y": 135.0
+      }
+    },
+    {
+      "id": "3962096",
+      "label": "9",
+      "position": {
+        "x": 0.0,
+        "y": 0.8,
+        "z": -4.0
+      },
+      "rotation": {
+        "y": -0.0
+      }
+    },
+    {
+      "id": "4679694",
+      "label": "10",
+      "position": {
+        "x": 2.0,
+        "y": 0.8,
+        "z": 6.0
+      },
+      "rotation": {
+        "y": -161.565051177078
+      }
+    },
+    {
+      "id": "2762716",
+      "label": "11",
+      "position": {
+        "x": -4.0,
+        "y": 0.8,
+        "z": -2.0
+      },
+      "rotation": {
+        "y": 63.43494882292201
+      }
+    },
+    {
+      "id": "4998106",
+      "label": "12",
+      "position": {
+        "x": 4.0,
+        "y": 0.8,
+        "z": 6.0
+      },
+      "rotation": {
+        "y": -146.30993247402023
+      }
+    },
+    {
+      "id": "20062",
+      "label": "D20062",
+      "position": {
+        "x": 0.0,
+        "y": 0.8,
+        "z": 2.0
+      },
+      "rotation": {
+        "y": 0.0
+      }
+    },
+    {
+      "id": "20172",
+      "label": "D20172",
+      "position": {
+        "x": -2.0,
+        "y": 0.8,
+        "z": 0.0
+      },
+      "rotation": {
+        "y": 0.0
+      }
+    },
+    {
+      "id": "task_6_12",
+      "label": "T1",
+      "position": {
+        "x": -1.0,
+        "y": 0.8,
+        "z": 5.0
+      },
+      "rotation": {
+        "y": 270.0
+      },
+      "task_type": "bwd_loc_vision",
+      "task_group": "bwd_loc",
+      "task_short_name": "bwd_loc_vision",
+      "task_class": "Location2ActionVisionEvaluationTask",
+      "image_name": "6_12_facing_west"
+    },
+    {
+      "id": "task_9_10",
+      "label": "T2",
+      "position": {
+        "x": 2.0,
+        "y": 0.8,
+        "z": 3.0
+      },
+      "rotation": {
+        "y": 0.0
+      },
+      "task_type": "bwd_loc_vision",
+      "task_group": "bwd_loc",
+      "task_short_name": "bwd_loc_vision",
+      "task_class": "Location2ActionVisionEvaluationTask",
+      "image_name": "9_10_facing_north"
+    },
+    {
+      "id": "task_3_3",
+      "label": "T3",
+      "position": {
+        "x": -4.0,
+        "y": 0.8,
+        "z": -4.0
+      },
+      "rotation": {
+        "y": 90.0
+      },
+      "task_type": "bwd_loc_vision",
+      "task_group": "bwd_loc",
+      "task_short_name": "bwd_loc_vision",
+      "task_class": "Location2ActionVisionEvaluationTask",
+      "image_name": "3_3_facing_east"
+    }
+  ],
+  "images": [
+    {
+      "file": "top_down.png",
+      "cam_id": "top_down",
+      "pos": {
+        "x": 0,
+        "y": 20,
+        "z": 0
+      },
+      "direction": "down",
+      "object_ratios": []
+    },
+    {
+      "file": "top_down_annotated.png",
+      "cam_id": "top_down_annotated",
+      "pos": {
+        "x": 0,
+        "y": 20,
+        "z": 0
+      },
+      "direction": "down",
+      "object_ratios": []
+    },
+    {
+      "file": "agent_facing_north.png",
+      "cam_id": "agent",
+      "pos": {
+        "x": -1.0,
+        "y": 0.8,
+        "z": 4.0
+      },
+      "direction": "north",
+      "object_ratios": [
+        {
+          "object_id": 4373722,
+          "model": "laptop11",
+          "visibility_ratio": 1.0,
+          "occlusion_ratio": 0.0
+        }
+      ]
+    },
+    {
+      "file": "agent_facing_east.png",
+      "cam_id": "agent",
+      "pos": {
+        "x": -1.0,
+        "y": 0.8,
+        "z": 4.0
+      },
+      "direction": "east",
+      "object_ratios": []
+    },
+    {
+      "file": "agent_facing_south.png",
+      "cam_id": "agent",
+      "pos": {
+        "x": -1.0,
+        "y": 0.8,
+        "z": 4.0
+      },
+      "direction": "south",
+      "object_ratios": []
+    },
+    {
+      "file": "agent_facing_west.png",
+      "cam_id": "agent",
+      "pos": {
+        "x": -1.0,
+        "y": 0.8,
+        "z": 4.0
+      },
+      "direction": "west",
+      "object_ratios": [
+        {
+          "object_id": 3452297,
+          "model": "desklamp2",
+          "visibility_ratio": 1.0,
+          "occlusion_ratio": 0.0
+        },
+        {
+          "object_id": 6046206,
+          "model": "b05_shopping_cart3",
+          "visibility_ratio": 1.0,
+          "occlusion_ratio": 0.0
+        },
+        {
+          "object_id": 2530183,
+          "model": "toy_truck4",
+          "visibility_ratio": 1.0,
+          "occlusion_ratio": 0.0
+        }
+      ]
+    },
+    {
+      "file": "4373722_facing_north.png",
+      "cam_id": "4373722",
+      "pos": {
+        "x": -2.0,
+        "y": 0.8,
+        "z": 6.0
+      },
+      "direction": "north",
+      "object_ratios": []
+    },
+    {
+      "file": "4373722_facing_east.png",
+      "cam_id": "4373722",
+      "pos": {
+        "x": -2.0,
+        "y": 0.8,
+        "z": 6.0
+      },
+      "direction": "east",
+      "object_ratios": []
+    },
+    {
+      "file": "4373722_facing_south.png",
+      "cam_id": "4373722",
+      "pos": {
+        "x": -2.0,
+        "y": 0.8,
+        "z": 6.0
+      },
+      "direction": "south",
+      "object_ratios": [
+        {
+          "object_id": 3452297,
+          "model": "desklamp2",
+          "visibility_ratio": 0.5,
+          "occlusion_ratio": 0.0
+        },
+        {
+          "object_id": 6046206,
+          "model": "b05_shopping_cart3",
+          "visibility_ratio": 1.0,
+          "occlusion_ratio": 0.0
+        }
+      ]
+    },
+    {
+      "file": "4373722_facing_west.png",
+      "cam_id": "4373722",
+      "pos": {
+        "x": -2.0,
+        "y": 0.8,
+        "z": 6.0
+      },
+      "direction": "west",
+      "object_ratios": [
+        {
+          "object_id": 3452297,
+          "model": "desklamp2",
+          "visibility_ratio": 0.5,
+          "occlusion_ratio": 0.0
+        },
+        {
+          "object_id": 2530183,
+          "model": "toy_truck4",
+          "visibility_ratio": 1.0,
+          "occlusion_ratio": 0.0
+        }
+      ]
+    },
+    {
+      "file": "4618674_facing_north.png",
+      "cam_id": "4618674",
+      "pos": {
+        "x": 0.0,
+        "y": 0.8,
+        "z": -6.0
+      },
+      "direction": "north",
+      "object_ratios": [
+        {
+          "object_id": 4958139,
+          "model": "kids_luggage_1",
+          "visibility_ratio": 1.0,
+          "occlusion_ratio": 0.0
+        },
+        {
+          "object_id": 3962096,
+          "model": "chair11",
+          "visibility_ratio": 1.0,
+          "occlusion_ratio": 0.0
+        },
+        {
+          "object_id": 2762716,
+          "model": "table1",
+          "visibility_ratio": 0.5,
+          "occlusion_ratio": 0.0
+        }
+      ]
+    },
+    {
+      "file": "4618674_facing_east.png",
+      "cam_id": "4618674",
+      "pos": {
+        "x": 0.0,
+        "y": 0.8,
+        "z": -6.0
+      },
+      "direction": "east",
+      "object_ratios": []
+    },
+    {
+      "file": "4618674_facing_south.png",
+      "cam_id": "4618674",
+      "pos": {
+        "x": 0.0,
+        "y": 0.8,
+        "z": -6.0
+      },
+      "direction": "south",
+      "object_ratios": []
+    },
+    {
+      "file": "4618674_facing_west.png",
+      "cam_id": "4618674",
+      "pos": {
+        "x": 0.0,
+        "y": 0.8,
+        "z": -6.0
+      },
+      "direction": "west",
+      "object_ratios": [
+        {
+          "object_id": 2762716,
+          "model": "table1",
+          "visibility_ratio": 0.5,
+          "occlusion_ratio": 0.0
+        }
+      ]
+    },
+    {
+      "file": "9812632_facing_north.png",
+      "cam_id": "9812632",
+      "pos": {
+        "x": 2.0,
+        "y": 0.8,
+        "z": 2.0
+      },
+      "direction": "north",
+      "object_ratios": [
+        {
+          "object_id": 1377592,
+          "model": "bike12",
+          "visibility_ratio": 0.5,
+          "occlusion_ratio": 0.0
+        },
+        {
+          "object_id": 4679694,
+          "model": "pillow10",
+          "visibility_ratio": 1.0,
+          "occlusion_ratio": 0.0
+        },
+        {
+          "object_id": 4998106,
+          "model": "books1",
+          "visibility_ratio": 1.0,
+          "occlusion_ratio": 0.0
+        }
+      ]
+    },
+    {
+      "file": "9812632_facing_east.png",
+      "cam_id": "9812632",
+      "pos": {
+        "x": 2.0,
+        "y": 0.8,
+        "z": 2.0
+      },
+      "direction": "east",
+      "object_ratios": [
+        {
+          "object_id": 1377592,
+          "model": "bike12",
+          "visibility_ratio": 0.5,
+          "occlusion_ratio": 0.0
+        }
+      ]
+    },
+    {
+      "file": "9812632_facing_south.png",
+      "cam_id": "9812632",
+      "pos": {
+        "x": 2.0,
+        "y": 0.8,
+        "z": 2.0
+      },
+      "direction": "south",
+      "object_ratios": []
+    },
+    {
+      "file": "9812632_facing_west.png",
+      "cam_id": "9812632",
+      "pos": {
+        "x": 2.0,
+        "y": 0.8,
+        "z": 2.0
+      },
+      "direction": "west",
+      "object_ratios": []
+    },
+    {
+      "file": "3452297_facing_north.png",
+      "cam_id": "3452297",
+      "pos": {
+        "x": -4.0,
+        "y": 0.8,
+        "z": 4.0
+      },
+      "direction": "north",
+      "object_ratios": [
+        {
+          "object_id": 4373722,
+          "model": "laptop11",
+          "visibility_ratio": 0.5,
+          "occlusion_ratio": 0.0
+        },
+        {
+          "object_id": 2530183,
+          "model": "toy_truck4",
+          "visibility_ratio": 0.5,
+          "occlusion_ratio": 0.0
+        }
+      ]
+    },
+    {
+      "file": "3452297_facing_east.png",
+      "cam_id": "3452297",
+      "pos": {
+        "x": -4.0,
+        "y": 0.8,
+        "z": 4.0
+      },
+      "direction": "east",
+      "object_ratios": [
+        {
+          "object_id": 4373722,
+          "model": "laptop11",
+          "visibility_ratio": 0.5,
+          "occlusion_ratio": 0.0
+        }
+      ]
+    },
+    {
+      "file": "3452297_facing_south.png",
+      "cam_id": "3452297",
+      "pos": {
+        "x": -4.0,
+        "y": 0.8,
+        "z": 4.0
+      },
+      "direction": "south",
+      "object_ratios": [
+        {
+          "object_id": 6046206,
+          "model": "b05_shopping_cart3",
+          "visibility_ratio": 1.0,
+          "occlusion_ratio": 0.0
+        }
+      ]
+    },
+    {
+      "file": "3452297_facing_west.png",
+      "cam_id": "3452297",
+      "pos": {
+        "x": -4.0,
+        "y": 0.8,
+        "z": 4.0
+      },
+      "direction": "west",
+      "object_ratios": [
+        {
+          "object_id": 2530183,
+          "model": "toy_truck4",
+          "visibility_ratio": 0.5,
+          "occlusion_ratio": 0.0
+        }
+      ]
+    },
+    {
+      "file": "4958139_facing_north.png",
+      "cam_id": "4958139",
+      "pos": {
+        "x": -2.0,
+        "y": 0.8,
+        "z": -2.0
+      },
+      "direction": "north",
+      "object_ratios": []
+    },
+    {
+      "file": "4958139_facing_east.png",
+      "cam_id": "4958139",
+      "pos": {
+        "x": -2.0,
+        "y": 0.8,
+        "z": -2.0
+      },
+      "direction": "east",
+      "object_ratios": [
+        {
+          "object_id": 3962096,
+          "model": "chair11",
+          "visibility_ratio": 0.5,
+          "occlusion_ratio": 0.0
+        }
+      ]
+    },
+    {
+      "file": "4958139_facing_south.png",
+      "cam_id": "4958139",
+      "pos": {
+        "x": -2.0,
+        "y": 0.8,
+        "z": -2.0
+      },
+      "direction": "south",
+      "object_ratios": [
+        {
+          "object_id": 4618674,
+          "model": "television5",
+          "visibility_ratio": 1.0,
+          "occlusion_ratio": 0.0
+        },
+        {
+          "object_id": 3962096,
+          "model": "chair11",
+          "visibility_ratio": 0.5,
+          "occlusion_ratio": 0.0
+        }
+      ]
+    },
+    {
+      "file": "4958139_facing_west.png",
+      "cam_id": "4958139",
+      "pos": {
+        "x": -2.0,
+        "y": 0.8,
+        "z": -2.0
+      },
+      "direction": "west",
+      "object_ratios": [
+        {
+          "object_id": 2762716,
+          "model": "table1",
+          "visibility_ratio": 1.0,
+          "occlusion_ratio": 0.0
+        }
+      ]
+    },
+    {
+      "file": "1377592_facing_north.png",
+      "cam_id": "1377592",
+      "pos": {
+        "x": 4.0,
+        "y": 0.8,
+        "z": 4.0
+      },
+      "direction": "north",
+      "object_ratios": [
+        {
+          "object_id": 4679694,
+          "model": "pillow10",
+          "visibility_ratio": 0.5,
+          "occlusion_ratio": 0.0
+        },
+        {
+          "object_id": 4998106,
+          "model": "books1",
+          "visibility_ratio": 1.0,
+          "occlusion_ratio": 0.0
+        }
+      ]
+    },
+    {
+      "file": "1377592_facing_east.png",
+      "cam_id": "1377592",
+      "pos": {
+        "x": 4.0,
+        "y": 0.8,
+        "z": 4.0
+      },
+      "direction": "east",
+      "object_ratios": []
+    },
+    {
+      "file": "1377592_facing_south.png",
+      "cam_id": "1377592",
+      "pos": {
+        "x": 4.0,
+        "y": 0.8,
+        "z": 4.0
+      },
+      "direction": "south",
+      "object_ratios": [
+        {
+          "object_id": 9812632,
+          "model": "backpack5",
+          "visibility_ratio": 0.5,
+          "occlusion_ratio": 0.0
+        }
+      ]
+    },
+    {
+      "file": "1377592_facing_west.png",
+      "cam_id": "1377592",
+      "pos": {
+        "x": 4.0,
+        "y": 0.8,
+        "z": 4.0
+      },
+      "direction": "west",
+      "object_ratios": [
+        {
+          "object_id": 9812632,
+          "model": "backpack5",
+          "visibility_ratio": 0.5,
+          "occlusion_ratio": 0.0
+        },
+        {
+          "object_id": 4679694,
+          "model": "pillow10",
+          "visibility_ratio": 0.5,
+          "occlusion_ratio": 0.0
+        }
+      ]
+    },
+    {
+      "file": "6046206_facing_north.png",
+      "cam_id": "6046206",
+      "pos": {
+        "x": -4.0,
+        "y": 0.8,
+        "z": 2.0
+      },
+      "direction": "north",
+      "object_ratios": [
+        {
+          "object_id": 4373722,
+          "model": "laptop11",
+          "visibility_ratio": 1.0,
+          "occlusion_ratio": 0.0
+        },
+        {
+          "object_id": 3452297,
+          "model": "desklamp2",
+          "visibility_ratio": 1.0,
+          "occlusion_ratio": 0.0
+        },
+        {
+          "object_id": 2530183,
+          "model": "toy_truck4",
+          "visibility_ratio": 1.0,
+          "occlusion_ratio": 0.0
+        }
+      ]
+    },
+    {
+      "file": "6046206_facing_east.png",
+      "cam_id": "6046206",
+      "pos": {
+        "x": -4.0,
+        "y": 0.8,
+        "z": 2.0
+      },
+      "direction": "east",
+      "object_ratios": []
+    },
+    {
+      "file": "6046206_facing_south.png",
+      "cam_id": "6046206",
+      "pos": {
+        "x": -4.0,
+        "y": 0.8,
+        "z": 2.0
+      },
+      "direction": "south",
+      "object_ratios": []
+    },
+    {
+      "file": "6046206_facing_west.png",
+      "cam_id": "6046206",
+      "pos": {
+        "x": -4.0,
+        "y": 0.8,
+        "z": 2.0
+      },
+      "direction": "west",
+      "object_ratios": []
+    },
+    {
+      "file": "2530183_facing_north.png",
+      "cam_id": "2530183",
+      "pos": {
+        "x": -6.0,
+        "y": 0.8,
+        "z": 6.0
+      },
+      "direction": "north",
+      "object_ratios": []
+    },
+    {
+      "file": "2530183_facing_east.png",
+      "cam_id": "2530183",
+      "pos": {
+        "x": -6.0,
+        "y": 0.8,
+        "z": 6.0
+      },
+      "direction": "east",
+      "object_ratios": [
+        {
+          "object_id": 4373722,
+          "model": "laptop11",
+          "visibility_ratio": 1.0,
+          "occlusion_ratio": 0.0
+        },
+        {
+          "object_id": 3452297,
+          "model": "desklamp2",
+          "visibility_ratio": 0.5,
+          "occlusion_ratio": 0.0
+        }
+      ]
+    },
+    {
+      "file": "2530183_facing_south.png",
+      "cam_id": "2530183",
+      "pos": {
+        "x": -6.0,
+        "y": 0.8,
+        "z": 6.0
+      },
+      "direction": "south",
+      "object_ratios": [
+        {
+          "object_id": 3452297,
+          "model": "desklamp2",
+          "visibility_ratio": 0.5,
+          "occlusion_ratio": 0.0
+        },
+        {
+          "object_id": 6046206,
+          "model": "b05_shopping_cart3",
+          "visibility_ratio": 1.0,
+          "occlusion_ratio": 0.0
+        }
+      ]
+    },
+    {
+      "file": "2530183_facing_west.png",
+      "cam_id": "2530183",
+      "pos": {
+        "x": -6.0,
+        "y": 0.8,
+        "z": 6.0
+      },
+      "direction": "west",
+      "object_ratios": []
+    },
+    {
+      "file": "3962096_facing_north.png",
+      "cam_id": "3962096",
+      "pos": {
+        "x": 0.0,
+        "y": 0.8,
+        "z": -4.0
+      },
+      "direction": "north",
+      "object_ratios": [
+        {
+          "object_id": 4958139,
+          "model": "kids_luggage_1",
+          "visibility_ratio": 0.5,
+          "occlusion_ratio": 0.0
+        }
+      ]
+    },
+    {
+      "file": "3962096_facing_east.png",
+      "cam_id": "3962096",
+      "pos": {
+        "x": 0.0,
+        "y": 0.8,
+        "z": -4.0
+      },
+      "direction": "east",
+      "object_ratios": []
+    },
+    {
+      "file": "3962096_facing_south.png",
+      "cam_id": "3962096",
+      "pos": {
+        "x": 0.0,
+        "y": 0.8,
+        "z": -4.0
+      },
+      "direction": "south",
+      "object_ratios": [
+        {
+          "object_id": 4618674,
+          "model": "television5",
+          "visibility_ratio": 1.0,
+          "occlusion_ratio": 0.0
+        }
+      ]
+    },
+    {
+      "file": "3962096_facing_west.png",
+      "cam_id": "3962096",
+      "pos": {
+        "x": 0.0,
+        "y": 0.8,
+        "z": -4.0
+      },
+      "direction": "west",
+      "object_ratios": [
+        {
+          "object_id": 4958139,
+          "model": "kids_luggage_1",
+          "visibility_ratio": 0.5,
+          "occlusion_ratio": 0.0
+        },
+        {
+          "object_id": 2762716,
+          "model": "table1",
+          "visibility_ratio": 1.0,
+          "occlusion_ratio": 0.0
+        }
+      ]
+    },
+    {
+      "file": "4679694_facing_north.png",
+      "cam_id": "4679694",
+      "pos": {
+        "x": 2.0,
+        "y": 0.8,
+        "z": 6.0
+      },
+      "direction": "north",
+      "object_ratios": []
+    },
+    {
+      "file": "4679694_facing_east.png",
+      "cam_id": "4679694",
+      "pos": {
+        "x": 2.0,
+        "y": 0.8,
+        "z": 6.0
+      },
+      "direction": "east",
+      "object_ratios": [
+        {
+          "object_id": 1377592,
+          "model": "bike12",
+          "visibility_ratio": 0.5,
+          "occlusion_ratio": 0.0
+        },
+        {
+          "object_id": 4998106,
+          "model": "books1",
+          "visibility_ratio": 1.0,
+          "occlusion_ratio": 0.0
+        }
+      ]
+    },
+    {
+      "file": "4679694_facing_south.png",
+      "cam_id": "4679694",
+      "pos": {
+        "x": 2.0,
+        "y": 0.8,
+        "z": 6.0
+      },
+      "direction": "south",
+      "object_ratios": [
+        {
+          "object_id": 9812632,
+          "model": "backpack5",
+          "visibility_ratio": 1.0,
+          "occlusion_ratio": 0.0
+        },
+        {
+          "object_id": 1377592,
+          "model": "bike12",
+          "visibility_ratio": 0.5,
+          "occlusion_ratio": 0.0
+        }
+      ]
+    },
+    {
+      "file": "4679694_facing_west.png",
+      "cam_id": "4679694",
+      "pos": {
+        "x": 2.0,
+        "y": 0.8,
+        "z": 6.0
+      },
+      "direction": "west",
+      "object_ratios": []
+    },
+    {
+      "file": "2762716_facing_north.png",
+      "cam_id": "2762716",
+      "pos": {
+        "x": -4.0,
+        "y": 0.8,
+        "z": -2.0
+      },
+      "direction": "north",
+      "object_ratios": []
+    },
+    {
+      "file": "2762716_facing_east.png",
+      "cam_id": "2762716",
+      "pos": {
+        "x": -4.0,
+        "y": 0.8,
+        "z": -2.0
+      },
+      "direction": "east",
+      "object_ratios": [
+        {
+          "object_id": 4618674,
+          "model": "television5",
+          "visibility_ratio": 0.5,
+          "occlusion_ratio": 0.0
+        },
+        {
+          "object_id": 4958139,
+          "model": "kids_luggage_1",
+          "visibility_ratio": 1.0,
+          "occlusion_ratio": 0.0
+        },
+        {
+          "object_id": 3962096,
+          "model": "chair11",
+          "visibility_ratio": 1.0,
+          "occlusion_ratio": 0.0
+        }
+      ]
+    },
+    {
+      "file": "2762716_facing_south.png",
+      "cam_id": "2762716",
+      "pos": {
+        "x": -4.0,
+        "y": 0.8,
+        "z": -2.0
+      },
+      "direction": "south",
+      "object_ratios": [
+        {
+          "object_id": 4618674,
+          "model": "television5",
+          "visibility_ratio": 0.5,
+          "occlusion_ratio": 0.0
+        }
+      ]
+    },
+    {
+      "file": "2762716_facing_west.png",
+      "cam_id": "2762716",
+      "pos": {
+        "x": -4.0,
+        "y": 0.8,
+        "z": -2.0
+      },
+      "direction": "west",
+      "object_ratios": []
+    },
+    {
+      "file": "4998106_facing_north.png",
+      "cam_id": "4998106",
+      "pos": {
+        "x": 4.0,
+        "y": 0.8,
+        "z": 6.0
+      },
+      "direction": "north",
+      "object_ratios": []
+    },
+    {
+      "file": "4998106_facing_east.png",
+      "cam_id": "4998106",
+      "pos": {
+        "x": 4.0,
+        "y": 0.8,
+        "z": 6.0
+      },
+      "direction": "east",
+      "object_ratios": []
+    },
+    {
+      "file": "4998106_facing_south.png",
+      "cam_id": "4998106",
+      "pos": {
+        "x": 4.0,
+        "y": 0.8,
+        "z": 6.0
+      },
+      "direction": "south",
+      "object_ratios": [
+        {
+          "object_id": 9812632,
+          "model": "backpack5",
+          "visibility_ratio": 1.0,
+          "occlusion_ratio": 0.0
+        },
+        {
+          "object_id": 1377592,
+          "model": "bike12",
+          "visibility_ratio": 1.0,
+          "occlusion_ratio": 0.0
+        }
+      ]
+    },
+    {
+      "file": "4998106_facing_west.png",
+      "cam_id": "4998106",
+      "pos": {
+        "x": 4.0,
+        "y": 0.8,
+        "z": 6.0
+      },
+      "direction": "west",
+      "object_ratios": [
+        {
+          "object_id": 4679694,
+          "model": "pillow10",
+          "visibility_ratio": 1.0,
+          "occlusion_ratio": 0.0
+        }
+      ]
+    },
+    {
+      "file": "20062_facing_north.png",
+      "cam_id": "20062",
+      "pos": {
+        "x": 0.0,
+        "y": 0.8,
+        "z": 2.0
+      },
+      "direction": "north",
+      "object_ratios": [
+        {
+          "object_id": 4373722,
+          "model": "laptop11",
+          "visibility_ratio": 1.0,
+          "occlusion_ratio": 0.0
+        }
+      ]
+    },
+    {
+      "file": "20062_facing_east.png",
+      "cam_id": "20062",
+      "pos": {
+        "x": 0.0,
+        "y": 0.8,
+        "z": 2.0
+      },
+      "direction": "east",
+      "object_ratios": []
+    },
+    {
+      "file": "20062_facing_south.png",
+      "cam_id": "20062",
+      "pos": {
+        "x": 0.0,
+        "y": 0.8,
+        "z": 2.0
+      },
+      "direction": "south",
+      "object_ratios": []
+    },
+    {
+      "file": "20062_facing_west.png",
+      "cam_id": "20062",
+      "pos": {
+        "x": 0.0,
+        "y": 0.8,
+        "z": 2.0
+      },
+      "direction": "west",
+      "object_ratios": [
+        {
+          "object_id": 3452297,
+          "model": "desklamp2",
+          "visibility_ratio": 1.0,
+          "occlusion_ratio": 0.0
+        },
+        {
+          "object_id": 6046206,
+          "model": "b05_shopping_cart3",
+          "visibility_ratio": 1.0,
+          "occlusion_ratio": 0.0
+        },
+        {
+          "object_id": 2530183,
+          "model": "toy_truck4",
+          "visibility_ratio": 1.0,
+          "occlusion_ratio": 0.0
+        }
+      ]
+    },
+    {
+      "file": "20062_facing_north.png",
+      "cam_id": "20062",
+      "pos": {
+        "x": 0.0,
+        "y": 0.8,
+        "z": 2.0
+      },
+      "direction": "north",
+      "object_ratios": [
+        {
+          "object_id": 4679694,
+          "model": "pillow10",
+          "visibility_ratio": 1.0,
+          "occlusion_ratio": 0.0
+        },
+        {
+          "object_id": 4998106,
+          "model": "books1",
+          "visibility_ratio": 0.5,
+          "occlusion_ratio": 0.0
+        }
+      ]
+    },
+    {
+      "file": "20062_facing_east.png",
+      "cam_id": "20062",
+      "pos": {
+        "x": 0.0,
+        "y": 0.8,
+        "z": 2.0
+      },
+      "direction": "east",
+      "object_ratios": [
+        {
+          "object_id": 9812632,
+          "model": "backpack5",
+          "visibility_ratio": 1.0,
+          "occlusion_ratio": 0.0
+        },
+        {
+          "object_id": 1377592,
+          "model": "bike12",
+          "visibility_ratio": 1.0,
+          "occlusion_ratio": 0.0
+        },
+        {
+          "object_id": 4998106,
+          "model": "books1",
+          "visibility_ratio": 0.5,
+          "occlusion_ratio": 0.0
+        }
+      ]
+    },
+    {
+      "file": "20062_facing_south.png",
+      "cam_id": "20062",
+      "pos": {
+        "x": 0.0,
+        "y": 0.8,
+        "z": 2.0
+      },
+      "direction": "south",
+      "object_ratios": []
+    },
+    {
+      "file": "20062_facing_west.png",
+      "cam_id": "20062",
+      "pos": {
+        "x": 0.0,
+        "y": 0.8,
+        "z": 2.0
+      },
+      "direction": "west",
+      "object_ratios": []
+    },
+    {
+      "file": "20172_facing_north.png",
+      "cam_id": "20172",
+      "pos": {
+        "x": -2.0,
+        "y": 0.8,
+        "z": 0.0
+      },
+      "direction": "north",
+      "object_ratios": [
+        {
+          "object_id": 4373722,
+          "model": "laptop11",
+          "visibility_ratio": 1.0,
+          "occlusion_ratio": 0.0
+        },
+        {
+          "object_id": 3452297,
+          "model": "desklamp2",
+          "visibility_ratio": 1.0,
+          "occlusion_ratio": 0.0
+        },
+        {
+          "object_id": 6046206,
+          "model": "b05_shopping_cart3",
+          "visibility_ratio": 0.5,
+          "occlusion_ratio": 0.0
+        },
+        {
+          "object_id": 2530183,
+          "model": "toy_truck4",
+          "visibility_ratio": 1.0,
+          "occlusion_ratio": 0.0
+        }
+      ]
+    },
+    {
+      "file": "20172_facing_east.png",
+      "cam_id": "20172",
+      "pos": {
+        "x": -2.0,
+        "y": 0.8,
+        "z": 0.0
+      },
+      "direction": "east",
+      "object_ratios": []
+    },
+    {
+      "file": "20172_facing_south.png",
+      "cam_id": "20172",
+      "pos": {
+        "x": -2.0,
+        "y": 0.8,
+        "z": 0.0
+      },
+      "direction": "south",
+      "object_ratios": []
+    },
+    {
+      "file": "20172_facing_west.png",
+      "cam_id": "20172",
+      "pos": {
+        "x": -2.0,
+        "y": 0.8,
+        "z": 0.0
+      },
+      "direction": "west",
+      "object_ratios": [
+        {
+          "object_id": 6046206,
+          "model": "b05_shopping_cart3",
+          "visibility_ratio": 0.5,
+          "occlusion_ratio": 0.0
+        }
+      ]
+    },
+    {
+      "file": "20172_facing_north.png",
+      "cam_id": "20172",
+      "pos": {
+        "x": -2.0,
+        "y": 0.8,
+        "z": 0.0
+      },
+      "direction": "north",
+      "object_ratios": []
+    },
+    {
+      "file": "20172_facing_east.png",
+      "cam_id": "20172",
+      "pos": {
+        "x": -2.0,
+        "y": 0.8,
+        "z": 0.0
+      },
+      "direction": "east",
+      "object_ratios": []
+    },
+    {
+      "file": "20172_facing_south.png",
+      "cam_id": "20172",
+      "pos": {
+        "x": -2.0,
+        "y": 0.8,
+        "z": 0.0
+      },
+      "direction": "south",
+      "object_ratios": [
+        {
+          "object_id": 4618674,
+          "model": "television5",
+          "visibility_ratio": 1.0,
+          "occlusion_ratio": 0.0
+        },
+        {
+          "object_id": 4958139,
+          "model": "kids_luggage_1",
+          "visibility_ratio": 1.0,
+          "occlusion_ratio": 0.0
+        },
+        {
+          "object_id": 3962096,
+          "model": "chair11",
+          "visibility_ratio": 1.0,
+          "occlusion_ratio": 0.0
+        },
+        {
+          "object_id": 2762716,
+          "model": "table1",
+          "visibility_ratio": 0.5,
+          "occlusion_ratio": 0.0
+        }
+      ]
+    },
+    {
+      "file": "20172_facing_west.png",
+      "cam_id": "20172",
+      "pos": {
+        "x": -2.0,
+        "y": 0.8,
+        "z": 0.0
+      },
+      "direction": "west",
+      "object_ratios": [
+        {
+          "object_id": 2762716,
+          "model": "table1",
+          "visibility_ratio": 0.5,
+          "occlusion_ratio": 0.0
+        }
+      ]
+    },
+    {
+      "file": "6_12_facing_west.png",
+      "cam_id": "6_12",
+      "pos": {
+        "x": -1.0,
+        "y": 0.8,
+        "z": 5.0
+      },
+      "rotation": {
+        "y": 270.0
+      },
+      "direction": "west",
+      "task_type": "bwd_loc_vision",
+      "task_group": "bwd_loc",
+      "object_ratios": []
+    },
+    {
+      "file": "9_10_facing_north.png",
+      "cam_id": "9_10",
+      "pos": {
+        "x": 2.0,
+        "y": 0.8,
+        "z": 3.0
+      },
+      "rotation": {
+        "y": 0.0
+      },
+      "direction": "north",
+      "task_type": "bwd_loc_vision",
+      "task_group": "bwd_loc",
+      "object_ratios": []
+    },
+    {
+      "file": "3_3_facing_east.png",
+      "cam_id": "3_3",
+      "pos": {
+        "x": -4.0,
+        "y": 0.8,
+        "z": -4.0
+      },
+      "rotation": {
+        "y": 90.0
+      },
+      "direction": "east",
+      "task_type": "bwd_loc_vision",
+      "task_group": "bwd_loc",
+      "object_ratios": []
+    }
+  ],
+  "rooms": {
+    "1": {
+      "center": [
+        -3.5,
+        3.5
+      ],
+      "bounds": [
+        -6.5,
+        -0.5,
+        0.5,
+        6.5
+      ],
+      "area": 36,
+      "connected_rooms": [
+        2,
+        3
+      ]
+    },
+    "2": {
+      "center": [
+        -2.5,
+        -3.5
+      ],
+      "bounds": [
+        -5.5,
+        0.5,
+        -6.5,
+        -0.5
+      ],
+      "area": 36,
+      "connected_rooms": [
+        1
+      ]
+    },
+    "3": {
+      "center": [
+        3.5,
+        3.5
+      ],
+      "bounds": [
+        0.5,
+        6.5,
+        0.5,
+        6.5
+      ],
+      "area": 36,
+      "connected_rooms": [
+        1
+      ]
+    }
+  },
+  "doors": {
+    "100": {
+      "center": [
+        0.0,
+        2.0
+      ],
+      "color": "red",
+      "connected_rooms": [
+        1,
+        3
+      ],
+      "orientation": "vertical",
+      "width": 1
+    },
+    "101": {
+      "center": [
+        -2.0,
+        0.0
+      ],
+      "color": "yellow",
+      "connected_rooms": [
+        1,
+        2
+      ],
+      "orientation": "horizontal",
+      "width": 1
+    }
+  },
+  "room_object_assignments": {
+    "1": [
+      {
+        "object_id": 4373722,
+        "name": "laptop",
+        "label": "1"
+      },
+      {
+        "object_id": 3452297,
+        "name": "desklamp",
+        "label": "4"
+      },
+      {
+        "object_id": 6046206,
+        "name": "shoppingcart",
+        "label": "7"
+      },
+      {
+        "object_id": 2530183,
+        "name": "truck",
+        "label": "8"
+      }
+    ],
+    "2": [
+      {
+        "object_id": 4618674,
+        "name": "television",
+        "label": "2"
+      },
+      {
+        "object_id": 4958139,
+        "name": "suitcase",
+        "label": "5"
+      },
+      {
+        "object_id": 3962096,
+        "name": "chair",
+        "label": "9"
+      },
+      {
+        "object_id": 2762716,
+        "name": "table",
+        "label": "11"
+      }
+    ],
+    "3": [
+      {
+        "object_id": 9812632,
+        "name": "backpack",
+        "label": "3"
+      },
+      {
+        "object_id": 1377592,
+        "name": "bike",
+        "label": "6"
+      },
+      {
+        "object_id": 4679694,
+        "name": "pillow",
+        "label": "10"
+      },
+      {
+        "object_id": 4998106,
+        "name": "books",
+        "label": "12"
+      }
+    ]
+  },
+  "mask": [
+    [
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0
+    ],
+    [
+      0,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0
+    ],
+    [
+      0,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0
+    ],
+    [
+      0,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0
+    ],
+    [
+      0,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      101,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0
+    ],
+    [
+      0,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0
+    ],
+    [
+      0,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      0,
+      0,
+      100,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      0
+    ],
+    [
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      0,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      0
+    ],
+    [
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      0,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      0
+    ],
+    [
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      0,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      0
+    ],
+    [
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      0,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      0
+    ],
+    [
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      0,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      0
+    ],
+    [
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  ],
+  "offset": [
+    7,
+    7
+  ],
+  "validated_tasks": [
+    "rot",
+    "rot_dual",
+    "dir",
+    "pov",
+    "e2a",
+    "fwd_loc",
+    "bwd_loc",
+    "false_belief",
+    "fwd_fov",
+    "bwd_nav",
+    "bwd_pov"
+  ],
+  "topdown_map": {
+    "rows": 15,
+    "cols": 15,
+    "cell_size": 1.0,
+    "mapping": [
+      {
+        "row": 0,
+        "col": 7,
+        "world": {
+          "x": -7.0,
+          "z": 0.0
+        },
+        "pixel": {
+          "x": 52.2,
+          "y": 255.6
+        }
+      },
+      {
+        "row": 0,
+        "col": 8,
+        "world": {
+          "x": -7.0,
+          "z": 1.0
+        },
+        "pixel": {
+          "x": 52.5,
+          "y": 226.5
+        }
+      },
+      {
+        "row": 0,
+        "col": 9,
+        "world": {
+          "x": -7.0,
+          "z": 2.0
+        },
+        "pixel": {
+          "x": 52.5,
+          "y": 197.5
+        }
+      },
+      {
+        "row": 0,
+        "col": 10,
+        "world": {
+          "x": -7.0,
+          "z": 3.0
+        },
+        "pixel": {
+          "x": 52.4,
+          "y": 168.2
+        }
+      },
+      {
+        "row": 0,
+        "col": 11,
+        "world": {
+          "x": -7.0,
+          "z": 4.0
+        },
+        "pixel": {
+          "x": 52.5,
+          "y": 139.0
+        }
+      },
+      {
+        "row": 0,
+        "col": 12,
+        "world": {
+          "x": -7.0,
+          "z": 5.0
+        },
+        "pixel": {
+          "x": 52.5,
+          "y": 110.0
+        }
+      },
+      {
+        "row": 0,
+        "col": 13,
+        "world": {
+          "x": -7.0,
+          "z": 6.0
+        },
+        "pixel": {
+          "x": 52.5,
+          "y": 81.0
+        }
+      },
+      {
+        "row": 0,
+        "col": 14,
+        "world": {
+          "x": -7.0,
+          "z": 7.0
+        },
+        "pixel": {
+          "x": 52.5,
+          "y": 52.5
+        }
+      },
+      {
+        "row": 1,
+        "col": 0,
+        "world": {
+          "x": -6.0,
+          "z": -7.0
+        },
+        "pixel": {
+          "x": 81.66666666666667,
+          "y": 458.6666666666667
+        }
+      },
+      {
+        "row": 1,
+        "col": 1,
+        "world": {
+          "x": -6.0,
+          "z": -6.0
+        },
+        "pixel": {
+          "x": 81.5,
+          "y": 430.0
+        }
+      },
+      {
+        "row": 1,
+        "col": 2,
+        "world": {
+          "x": -6.0,
+          "z": -5.0
+        },
+        "pixel": {
+          "x": 81.5,
+          "y": 401.0
+        }
+      },
+      {
+        "row": 1,
+        "col": 3,
+        "world": {
+          "x": -6.0,
+          "z": -4.0
+        },
+        "pixel": {
+          "x": 81.5,
+          "y": 372.0
+        }
+      },
+      {
+        "row": 1,
+        "col": 4,
+        "world": {
+          "x": -6.0,
+          "z": -3.0
+        },
+        "pixel": {
+          "x": 81.4,
+          "y": 342.8
+        }
+      },
+      {
+        "row": 1,
+        "col": 5,
+        "world": {
+          "x": -6.0,
+          "z": -2.0
+        },
+        "pixel": {
+          "x": 81.5,
+          "y": 313.5
+        }
+      },
+      {
+        "row": 1,
+        "col": 6,
+        "world": {
+          "x": -6.0,
+          "z": -1.0
+        },
+        "pixel": {
+          "x": 81.5,
+          "y": 284.5
+        }
+      },
+      {
+        "row": 1,
+        "col": 7,
+        "world": {
+          "x": -6.0,
+          "z": 0.0
+        },
+        "pixel": {
+          "x": 81.2,
+          "y": 255.4
+        }
+      },
+      {
+        "row": 1,
+        "col": 8,
+        "world": {
+          "x": -6.0,
+          "z": 1.0
+        },
+        "pixel": {
+          "x": 81.0,
+          "y": 226.5
+        }
+      },
+      {
+        "row": 1,
+        "col": 9,
+        "world": {
+          "x": -6.0,
+          "z": 2.0
+        },
+        "pixel": {
+          "x": 81.0,
+          "y": 197.5
+        }
+      },
+      {
+        "row": 1,
+        "col": 10,
+        "world": {
+          "x": -6.0,
+          "z": 3.0
+        },
+        "pixel": {
+          "x": 80.875,
+          "y": 168.125
+        }
+      },
+      {
+        "row": 1,
+        "col": 11,
+        "world": {
+          "x": -6.0,
+          "z": 4.0
+        },
+        "pixel": {
+          "x": 81.0,
+          "y": 139.0
+        }
+      },
+      {
+        "row": 1,
+        "col": 12,
+        "world": {
+          "x": -6.0,
+          "z": 5.0
+        },
+        "pixel": {
+          "x": 81.0,
+          "y": 110.0
+        }
+      },
+      {
+        "row": 1,
+        "col": 13,
+        "world": {
+          "x": -6.0,
+          "z": 6.0
+        },
+        "pixel": {
+          "x": 81.0,
+          "y": 81.0
+        }
+      },
+      {
+        "row": 1,
+        "col": 14,
+        "world": {
+          "x": -6.0,
+          "z": 7.0
+        },
+        "pixel": {
+          "x": 81.0,
+          "y": 52.5
+        }
+      },
+      {
+        "row": 2,
+        "col": 0,
+        "world": {
+          "x": -5.0,
+          "z": -7.0
+        },
+        "pixel": {
+          "x": 110.0,
+          "y": 458.5
+        }
+      },
+      {
+        "row": 2,
+        "col": 1,
+        "world": {
+          "x": -5.0,
+          "z": -6.0
+        },
+        "pixel": {
+          "x": 110.0,
+          "y": 430.0
+        }
+      },
+      {
+        "row": 2,
+        "col": 2,
+        "world": {
+          "x": -5.0,
+          "z": -5.0
+        },
+        "pixel": {
+          "x": 110.0,
+          "y": 401.0
+        }
+      },
+      {
+        "row": 2,
+        "col": 3,
+        "world": {
+          "x": -5.0,
+          "z": -4.0
+        },
+        "pixel": {
+          "x": 110.0,
+          "y": 372.0
+        }
+      },
+      {
+        "row": 2,
+        "col": 4,
+        "world": {
+          "x": -5.0,
+          "z": -3.0
+        },
+        "pixel": {
+          "x": 110.0,
+          "y": 343.0
+        }
+      },
+      {
+        "row": 2,
+        "col": 5,
+        "world": {
+          "x": -5.0,
+          "z": -2.0
+        },
+        "pixel": {
+          "x": 110.0,
+          "y": 313.5
+        }
+      },
+      {
+        "row": 2,
+        "col": 6,
+        "world": {
+          "x": -5.0,
+          "z": -1.0
+        },
+        "pixel": {
+          "x": 110.0,
+          "y": 284.5
+        }
+      },
+      {
+        "row": 2,
+        "col": 7,
+        "world": {
+          "x": -5.0,
+          "z": 0.0
+        },
+        "pixel": {
+          "x": 110.0,
+          "y": 255.5
+        }
+      },
+      {
+        "row": 2,
+        "col": 8,
+        "world": {
+          "x": -5.0,
+          "z": 1.0
+        },
+        "pixel": {
+          "x": 110.0,
+          "y": 226.5
+        }
+      },
+      {
+        "row": 2,
+        "col": 9,
+        "world": {
+          "x": -5.0,
+          "z": 2.0
+        },
+        "pixel": {
+          "x": 110.0,
+          "y": 197.5
+        }
+      },
+      {
+        "row": 2,
+        "col": 10,
+        "world": {
+          "x": -5.0,
+          "z": 3.0
+        },
+        "pixel": {
+          "x": 110.0,
+          "y": 168.0
+        }
+      },
+      {
+        "row": 2,
+        "col": 11,
+        "world": {
+          "x": -5.0,
+          "z": 4.0
+        },
+        "pixel": {
+          "x": 110.0,
+          "y": 139.0
+        }
+      },
+      {
+        "row": 2,
+        "col": 12,
+        "world": {
+          "x": -5.0,
+          "z": 5.0
+        },
+        "pixel": {
+          "x": 110.0,
+          "y": 110.0
+        }
+      },
+      {
+        "row": 2,
+        "col": 13,
+        "world": {
+          "x": -5.0,
+          "z": 6.0
+        },
+        "pixel": {
+          "x": 110.0,
+          "y": 81.0
+        }
+      },
+      {
+        "row": 2,
+        "col": 14,
+        "world": {
+          "x": -5.0,
+          "z": 7.0
+        },
+        "pixel": {
+          "x": 110.0,
+          "y": 52.5
+        }
+      },
+      {
+        "row": 3,
+        "col": 0,
+        "world": {
+          "x": -4.0,
+          "z": -7.0
+        },
+        "pixel": {
+          "x": 139.0,
+          "y": 458.5
+        }
+      },
+      {
+        "row": 3,
+        "col": 1,
+        "world": {
+          "x": -4.0,
+          "z": -6.0
+        },
+        "pixel": {
+          "x": 139.0,
+          "y": 430.0
+        }
+      },
+      {
+        "row": 3,
+        "col": 2,
+        "world": {
+          "x": -4.0,
+          "z": -5.0
+        },
+        "pixel": {
+          "x": 139.0,
+          "y": 401.0
+        }
+      },
+      {
+        "row": 3,
+        "col": 3,
+        "world": {
+          "x": -4.0,
+          "z": -4.0
+        },
+        "pixel": {
+          "x": 139.0,
+          "y": 372.0
+        }
+      },
+      {
+        "row": 3,
+        "col": 4,
+        "world": {
+          "x": -4.0,
+          "z": -3.0
+        },
+        "pixel": {
+          "x": 139.0,
+          "y": 343.0
+        }
+      },
+      {
+        "row": 3,
+        "col": 5,
+        "world": {
+          "x": -4.0,
+          "z": -2.0
+        },
+        "pixel": {
+          "x": 139.0,
+          "y": 313.5
+        }
+      },
+      {
+        "row": 3,
+        "col": 6,
+        "world": {
+          "x": -4.0,
+          "z": -1.0
+        },
+        "pixel": {
+          "x": 139.0,
+          "y": 284.5
+        }
+      },
+      {
+        "row": 3,
+        "col": 7,
+        "world": {
+          "x": -4.0,
+          "z": 0.0
+        },
+        "pixel": {
+          "x": 139.0,
+          "y": 255.5
+        }
+      },
+      {
+        "row": 3,
+        "col": 8,
+        "world": {
+          "x": -4.0,
+          "z": 1.0
+        },
+        "pixel": {
+          "x": 139.0,
+          "y": 226.5
+        }
+      },
+      {
+        "row": 3,
+        "col": 9,
+        "world": {
+          "x": -4.0,
+          "z": 2.0
+        },
+        "pixel": {
+          "x": 139.0,
+          "y": 197.5
+        }
+      },
+      {
+        "row": 3,
+        "col": 10,
+        "world": {
+          "x": -4.0,
+          "z": 3.0
+        },
+        "pixel": {
+          "x": 139.0,
+          "y": 168.0
+        }
+      },
+      {
+        "row": 3,
+        "col": 11,
+        "world": {
+          "x": -4.0,
+          "z": 4.0
+        },
+        "pixel": {
+          "x": 139.0,
+          "y": 139.0
+        }
+      },
+      {
+        "row": 3,
+        "col": 12,
+        "world": {
+          "x": -4.0,
+          "z": 5.0
+        },
+        "pixel": {
+          "x": 139.0,
+          "y": 110.0
+        }
+      },
+      {
+        "row": 3,
+        "col": 13,
+        "world": {
+          "x": -4.0,
+          "z": 6.0
+        },
+        "pixel": {
+          "x": 139.0,
+          "y": 81.0
+        }
+      },
+      {
+        "row": 3,
+        "col": 14,
+        "world": {
+          "x": -4.0,
+          "z": 7.0
+        },
+        "pixel": {
+          "x": 139.0,
+          "y": 52.5
+        }
+      },
+      {
+        "row": 4,
+        "col": 0,
+        "world": {
+          "x": -3.0,
+          "z": -7.0
+        },
+        "pixel": {
+          "x": 168.2,
+          "y": 458.6
+        }
+      },
+      {
+        "row": 4,
+        "col": 1,
+        "world": {
+          "x": -3.0,
+          "z": -6.0
+        },
+        "pixel": {
+          "x": 168.125,
+          "y": 430.125
+        }
+      },
+      {
+        "row": 4,
+        "col": 2,
+        "world": {
+          "x": -3.0,
+          "z": -5.0
+        },
+        "pixel": {
+          "x": 168.0,
+          "y": 401.0
+        }
+      },
+      {
+        "row": 4,
+        "col": 3,
+        "world": {
+          "x": -3.0,
+          "z": -4.0
+        },
+        "pixel": {
+          "x": 168.0,
+          "y": 372.0
+        }
+      },
+      {
+        "row": 4,
+        "col": 4,
+        "world": {
+          "x": -3.0,
+          "z": -3.0
+        },
+        "pixel": {
+          "x": 168.0,
+          "y": 343.0
+        }
+      },
+      {
+        "row": 4,
+        "col": 5,
+        "world": {
+          "x": -3.0,
+          "z": -2.0
+        },
+        "pixel": {
+          "x": 168.0,
+          "y": 313.5
+        }
+      },
+      {
+        "row": 4,
+        "col": 6,
+        "world": {
+          "x": -3.0,
+          "z": -1.0
+        },
+        "pixel": {
+          "x": 168.0,
+          "y": 284.5
+        }
+      },
+      {
+        "row": 4,
+        "col": 7,
+        "world": {
+          "x": -3.0,
+          "z": 0.0
+        },
+        "pixel": {
+          "x": 168.0,
+          "y": 255.5
+        }
+      },
+      {
+        "row": 4,
+        "col": 8,
+        "world": {
+          "x": -3.0,
+          "z": 1.0
+        },
+        "pixel": {
+          "x": 168.0,
+          "y": 226.5
+        }
+      },
+      {
+        "row": 4,
+        "col": 9,
+        "world": {
+          "x": -3.0,
+          "z": 2.0
+        },
+        "pixel": {
+          "x": 168.0,
+          "y": 197.5
+        }
+      },
+      {
+        "row": 4,
+        "col": 10,
+        "world": {
+          "x": -3.0,
+          "z": 3.0
+        },
+        "pixel": {
+          "x": 168.0,
+          "y": 168.0
+        }
+      },
+      {
+        "row": 4,
+        "col": 11,
+        "world": {
+          "x": -3.0,
+          "z": 4.0
+        },
+        "pixel": {
+          "x": 168.0,
+          "y": 139.0
+        }
+      },
+      {
+        "row": 4,
+        "col": 12,
+        "world": {
+          "x": -3.0,
+          "z": 5.0
+        },
+        "pixel": {
+          "x": 168.0,
+          "y": 110.0
+        }
+      },
+      {
+        "row": 4,
+        "col": 13,
+        "world": {
+          "x": -3.0,
+          "z": 6.0
+        },
+        "pixel": {
+          "x": 168.125,
+          "y": 80.875
+        }
+      },
+      {
+        "row": 4,
+        "col": 14,
+        "world": {
+          "x": -3.0,
+          "z": 7.0
+        },
+        "pixel": {
+          "x": 168.2,
+          "y": 52.4
+        }
+      },
+      {
+        "row": 5,
+        "col": 0,
+        "world": {
+          "x": -2.0,
+          "z": -7.0
+        },
+        "pixel": {
+          "x": 197.5,
+          "y": 458.5
+        }
+      },
+      {
+        "row": 5,
+        "col": 1,
+        "world": {
+          "x": -2.0,
+          "z": -6.0
+        },
+        "pixel": {
+          "x": 197.5,
+          "y": 430.0
+        }
+      },
+      {
+        "row": 5,
+        "col": 2,
+        "world": {
+          "x": -2.0,
+          "z": -5.0
+        },
+        "pixel": {
+          "x": 197.5,
+          "y": 401.0
+        }
+      },
+      {
+        "row": 5,
+        "col": 3,
+        "world": {
+          "x": -2.0,
+          "z": -4.0
+        },
+        "pixel": {
+          "x": 197.5,
+          "y": 372.0
+        }
+      },
+      {
+        "row": 5,
+        "col": 4,
+        "world": {
+          "x": -2.0,
+          "z": -3.0
+        },
+        "pixel": {
+          "x": 197.5,
+          "y": 343.0
+        }
+      },
+      {
+        "row": 5,
+        "col": 5,
+        "world": {
+          "x": -2.0,
+          "z": -2.0
+        },
+        "pixel": {
+          "x": 197.5,
+          "y": 313.5
+        }
+      },
+      {
+        "row": 5,
+        "col": 6,
+        "world": {
+          "x": -2.0,
+          "z": -1.0
+        },
+        "pixel": {
+          "x": 197.5,
+          "y": 284.5
+        }
+      },
+      {
+        "row": 5,
+        "col": 7,
+        "world": {
+          "x": -2.0,
+          "z": 0.0
+        },
+        "pixel": {
+          "x": 197.5,
+          "y": 255.0
+        }
+      },
+      {
+        "row": 5,
+        "col": 8,
+        "world": {
+          "x": -2.0,
+          "z": 1.0
+        },
+        "pixel": {
+          "x": 197.5,
+          "y": 226.5
+        }
+      },
+      {
+        "row": 5,
+        "col": 9,
+        "world": {
+          "x": -2.0,
+          "z": 2.0
+        },
+        "pixel": {
+          "x": 197.5,
+          "y": 197.5
+        }
+      },
+      {
+        "row": 5,
+        "col": 10,
+        "world": {
+          "x": -2.0,
+          "z": 3.0
+        },
+        "pixel": {
+          "x": 197.5,
+          "y": 168.0
+        }
+      },
+      {
+        "row": 5,
+        "col": 11,
+        "world": {
+          "x": -2.0,
+          "z": 4.0
+        },
+        "pixel": {
+          "x": 197.5,
+          "y": 139.0
+        }
+      },
+      {
+        "row": 5,
+        "col": 12,
+        "world": {
+          "x": -2.0,
+          "z": 5.0
+        },
+        "pixel": {
+          "x": 197.5,
+          "y": 110.0
+        }
+      },
+      {
+        "row": 5,
+        "col": 13,
+        "world": {
+          "x": -2.0,
+          "z": 6.0
+        },
+        "pixel": {
+          "x": 197.5,
+          "y": 81.0
+        }
+      },
+      {
+        "row": 5,
+        "col": 14,
+        "world": {
+          "x": -2.0,
+          "z": 7.0
+        },
+        "pixel": {
+          "x": 197.5,
+          "y": 52.5
+        }
+      },
+      {
+        "row": 6,
+        "col": 0,
+        "world": {
+          "x": -1.0,
+          "z": -7.0
+        },
+        "pixel": {
+          "x": 226.5,
+          "y": 458.5
+        }
+      },
+      {
+        "row": 6,
+        "col": 1,
+        "world": {
+          "x": -1.0,
+          "z": -6.0
+        },
+        "pixel": {
+          "x": 226.5,
+          "y": 430.0
+        }
+      },
+      {
+        "row": 6,
+        "col": 2,
+        "world": {
+          "x": -1.0,
+          "z": -5.0
+        },
+        "pixel": {
+          "x": 226.5,
+          "y": 401.0
+        }
+      },
+      {
+        "row": 6,
+        "col": 3,
+        "world": {
+          "x": -1.0,
+          "z": -4.0
+        },
+        "pixel": {
+          "x": 226.5,
+          "y": 372.0
+        }
+      },
+      {
+        "row": 6,
+        "col": 4,
+        "world": {
+          "x": -1.0,
+          "z": -3.0
+        },
+        "pixel": {
+          "x": 226.5,
+          "y": 343.0
+        }
+      },
+      {
+        "row": 6,
+        "col": 5,
+        "world": {
+          "x": -1.0,
+          "z": -2.0
+        },
+        "pixel": {
+          "x": 226.5,
+          "y": 313.5
+        }
+      },
+      {
+        "row": 6,
+        "col": 6,
+        "world": {
+          "x": -1.0,
+          "z": -1.0
+        },
+        "pixel": {
+          "x": 226.5,
+          "y": 284.5
+        }
+      },
+      {
+        "row": 6,
+        "col": 7,
+        "world": {
+          "x": -1.0,
+          "z": 0.0
+        },
+        "pixel": {
+          "x": 226.5,
+          "y": 255.5
+        }
+      },
+      {
+        "row": 6,
+        "col": 8,
+        "world": {
+          "x": -1.0,
+          "z": 1.0
+        },
+        "pixel": {
+          "x": 226.5,
+          "y": 226.5
+        }
+      },
+      {
+        "row": 6,
+        "col": 9,
+        "world": {
+          "x": -1.0,
+          "z": 2.0
+        },
+        "pixel": {
+          "x": 226.5,
+          "y": 197.5
+        }
+      },
+      {
+        "row": 6,
+        "col": 10,
+        "world": {
+          "x": -1.0,
+          "z": 3.0
+        },
+        "pixel": {
+          "x": 226.5,
+          "y": 168.0
+        }
+      },
+      {
+        "row": 6,
+        "col": 11,
+        "world": {
+          "x": -1.0,
+          "z": 4.0
+        },
+        "pixel": {
+          "x": 226.5,
+          "y": 139.0
+        }
+      },
+      {
+        "row": 6,
+        "col": 12,
+        "world": {
+          "x": -1.0,
+          "z": 5.0
+        },
+        "pixel": {
+          "x": 226.5,
+          "y": 110.0
+        }
+      },
+      {
+        "row": 6,
+        "col": 13,
+        "world": {
+          "x": -1.0,
+          "z": 6.0
+        },
+        "pixel": {
+          "x": 226.5,
+          "y": 81.0
+        }
+      },
+      {
+        "row": 6,
+        "col": 14,
+        "world": {
+          "x": -1.0,
+          "z": 7.0
+        },
+        "pixel": {
+          "x": 226.5,
+          "y": 52.5
+        }
+      },
+      {
+        "row": 7,
+        "col": 0,
+        "world": {
+          "x": 0.0,
+          "z": -7.0
+        },
+        "pixel": {
+          "x": 255.5,
+          "y": 458.5
+        }
+      },
+      {
+        "row": 7,
+        "col": 1,
+        "world": {
+          "x": 0.0,
+          "z": -6.0
+        },
+        "pixel": {
+          "x": 255.5,
+          "y": 430.0
+        }
+      },
+      {
+        "row": 7,
+        "col": 2,
+        "world": {
+          "x": 0.0,
+          "z": -5.0
+        },
+        "pixel": {
+          "x": 255.5,
+          "y": 401.0
+        }
+      },
+      {
+        "row": 7,
+        "col": 3,
+        "world": {
+          "x": 0.0,
+          "z": -4.0
+        },
+        "pixel": {
+          "x": 255.5,
+          "y": 372.0
+        }
+      },
+      {
+        "row": 7,
+        "col": 4,
+        "world": {
+          "x": 0.0,
+          "z": -3.0
+        },
+        "pixel": {
+          "x": 255.5,
+          "y": 343.0
+        }
+      },
+      {
+        "row": 7,
+        "col": 5,
+        "world": {
+          "x": 0.0,
+          "z": -2.0
+        },
+        "pixel": {
+          "x": 255.5,
+          "y": 313.5
+        }
+      },
+      {
+        "row": 7,
+        "col": 6,
+        "world": {
+          "x": 0.0,
+          "z": -1.0
+        },
+        "pixel": {
+          "x": 255.5,
+          "y": 284.5
+        }
+      },
+      {
+        "row": 7,
+        "col": 7,
+        "world": {
+          "x": 0.0,
+          "z": 0.0
+        },
+        "pixel": {
+          "x": 255.5,
+          "y": 255.5
+        }
+      },
+      {
+        "row": 7,
+        "col": 8,
+        "world": {
+          "x": 0.0,
+          "z": 1.0
+        },
+        "pixel": {
+          "x": 255.5,
+          "y": 226.5
+        }
+      },
+      {
+        "row": 7,
+        "col": 9,
+        "world": {
+          "x": 0.0,
+          "z": 2.0
+        },
+        "pixel": {
+          "x": 256.0,
+          "y": 197.5
+        }
+      },
+      {
+        "row": 7,
+        "col": 10,
+        "world": {
+          "x": 0.0,
+          "z": 3.0
+        },
+        "pixel": {
+          "x": 255.5,
+          "y": 168.0
+        }
+      },
+      {
+        "row": 7,
+        "col": 11,
+        "world": {
+          "x": 0.0,
+          "z": 4.0
+        },
+        "pixel": {
+          "x": 255.5,
+          "y": 139.0
+        }
+      },
+      {
+        "row": 7,
+        "col": 12,
+        "world": {
+          "x": 0.0,
+          "z": 5.0
+        },
+        "pixel": {
+          "x": 255.5,
+          "y": 110.0
+        }
+      },
+      {
+        "row": 7,
+        "col": 13,
+        "world": {
+          "x": 0.0,
+          "z": 6.0
+        },
+        "pixel": {
+          "x": 255.5,
+          "y": 81.0
+        }
+      },
+      {
+        "row": 7,
+        "col": 14,
+        "world": {
+          "x": 0.0,
+          "z": 7.0
+        },
+        "pixel": {
+          "x": 255.5,
+          "y": 52.5
+        }
+      },
+      {
+        "row": 8,
+        "col": 0,
+        "world": {
+          "x": 1.0,
+          "z": -7.0
+        },
+        "pixel": {
+          "x": 284.0,
+          "y": 458.5
+        }
+      },
+      {
+        "row": 8,
+        "col": 1,
+        "world": {
+          "x": 1.0,
+          "z": -6.0
+        },
+        "pixel": {
+          "x": 284.0,
+          "y": 430.0
+        }
+      },
+      {
+        "row": 8,
+        "col": 2,
+        "world": {
+          "x": 1.0,
+          "z": -5.0
+        },
+        "pixel": {
+          "x": 284.0,
+          "y": 401.0
+        }
+      },
+      {
+        "row": 8,
+        "col": 3,
+        "world": {
+          "x": 1.0,
+          "z": -4.0
+        },
+        "pixel": {
+          "x": 284.0,
+          "y": 372.0
+        }
+      },
+      {
+        "row": 8,
+        "col": 4,
+        "world": {
+          "x": 1.0,
+          "z": -3.0
+        },
+        "pixel": {
+          "x": 284.0,
+          "y": 343.0
+        }
+      },
+      {
+        "row": 8,
+        "col": 5,
+        "world": {
+          "x": 1.0,
+          "z": -2.0
+        },
+        "pixel": {
+          "x": 284.0,
+          "y": 313.5
+        }
+      },
+      {
+        "row": 8,
+        "col": 6,
+        "world": {
+          "x": 1.0,
+          "z": -1.0
+        },
+        "pixel": {
+          "x": 284.0,
+          "y": 284.5
+        }
+      },
+      {
+        "row": 8,
+        "col": 7,
+        "world": {
+          "x": 1.0,
+          "z": 0.0
+        },
+        "pixel": {
+          "x": 284.3333333333333,
+          "y": 255.33333333333334
+        }
+      },
+      {
+        "row": 8,
+        "col": 8,
+        "world": {
+          "x": 1.0,
+          "z": 1.0
+        },
+        "pixel": {
+          "x": 284.5,
+          "y": 226.5
+        }
+      },
+      {
+        "row": 8,
+        "col": 9,
+        "world": {
+          "x": 1.0,
+          "z": 2.0
+        },
+        "pixel": {
+          "x": 284.5,
+          "y": 197.5
+        }
+      },
+      {
+        "row": 8,
+        "col": 10,
+        "world": {
+          "x": 1.0,
+          "z": 3.0
+        },
+        "pixel": {
+          "x": 284.5,
+          "y": 168.0
+        }
+      },
+      {
+        "row": 8,
+        "col": 11,
+        "world": {
+          "x": 1.0,
+          "z": 4.0
+        },
+        "pixel": {
+          "x": 284.5,
+          "y": 139.0
+        }
+      },
+      {
+        "row": 8,
+        "col": 12,
+        "world": {
+          "x": 1.0,
+          "z": 5.0
+        },
+        "pixel": {
+          "x": 284.5,
+          "y": 110.0
+        }
+      },
+      {
+        "row": 8,
+        "col": 13,
+        "world": {
+          "x": 1.0,
+          "z": 6.0
+        },
+        "pixel": {
+          "x": 284.5,
+          "y": 81.0
+        }
+      },
+      {
+        "row": 8,
+        "col": 14,
+        "world": {
+          "x": 1.0,
+          "z": 7.0
+        },
+        "pixel": {
+          "x": 284.5,
+          "y": 52.5
+        }
+      },
+      {
+        "row": 9,
+        "col": 7,
+        "world": {
+          "x": 2.0,
+          "z": 0.0
+        },
+        "pixel": {
+          "x": 313.5,
+          "y": 255.5
+        }
+      },
+      {
+        "row": 9,
+        "col": 8,
+        "world": {
+          "x": 2.0,
+          "z": 1.0
+        },
+        "pixel": {
+          "x": 313.5,
+          "y": 226.5
+        }
+      },
+      {
+        "row": 9,
+        "col": 9,
+        "world": {
+          "x": 2.0,
+          "z": 2.0
+        },
+        "pixel": {
+          "x": 313.5,
+          "y": 197.5
+        }
+      },
+      {
+        "row": 9,
+        "col": 10,
+        "world": {
+          "x": 2.0,
+          "z": 3.0
+        },
+        "pixel": {
+          "x": 313.5,
+          "y": 168.0
+        }
+      },
+      {
+        "row": 9,
+        "col": 11,
+        "world": {
+          "x": 2.0,
+          "z": 4.0
+        },
+        "pixel": {
+          "x": 313.5,
+          "y": 139.0
+        }
+      },
+      {
+        "row": 9,
+        "col": 12,
+        "world": {
+          "x": 2.0,
+          "z": 5.0
+        },
+        "pixel": {
+          "x": 313.5,
+          "y": 110.0
+        }
+      },
+      {
+        "row": 9,
+        "col": 13,
+        "world": {
+          "x": 2.0,
+          "z": 6.0
+        },
+        "pixel": {
+          "x": 313.5,
+          "y": 81.0
+        }
+      },
+      {
+        "row": 9,
+        "col": 14,
+        "world": {
+          "x": 2.0,
+          "z": 7.0
+        },
+        "pixel": {
+          "x": 313.5,
+          "y": 52.5
+        }
+      },
+      {
+        "row": 10,
+        "col": 7,
+        "world": {
+          "x": 3.0,
+          "z": 0.0
+        },
+        "pixel": {
+          "x": 343.0,
+          "y": 255.5
+        }
+      },
+      {
+        "row": 10,
+        "col": 8,
+        "world": {
+          "x": 3.0,
+          "z": 1.0
+        },
+        "pixel": {
+          "x": 343.0,
+          "y": 226.5
+        }
+      },
+      {
+        "row": 10,
+        "col": 9,
+        "world": {
+          "x": 3.0,
+          "z": 2.0
+        },
+        "pixel": {
+          "x": 343.0,
+          "y": 197.5
+        }
+      },
+      {
+        "row": 10,
+        "col": 10,
+        "world": {
+          "x": 3.0,
+          "z": 3.0
+        },
+        "pixel": {
+          "x": 343.0,
+          "y": 168.0
+        }
+      },
+      {
+        "row": 10,
+        "col": 11,
+        "world": {
+          "x": 3.0,
+          "z": 4.0
+        },
+        "pixel": {
+          "x": 343.0,
+          "y": 139.0
+        }
+      },
+      {
+        "row": 10,
+        "col": 12,
+        "world": {
+          "x": 3.0,
+          "z": 5.0
+        },
+        "pixel": {
+          "x": 343.0,
+          "y": 110.0
+        }
+      },
+      {
+        "row": 10,
+        "col": 13,
+        "world": {
+          "x": 3.0,
+          "z": 6.0
+        },
+        "pixel": {
+          "x": 342.875,
+          "y": 80.875
+        }
+      },
+      {
+        "row": 10,
+        "col": 14,
+        "world": {
+          "x": 3.0,
+          "z": 7.0
+        },
+        "pixel": {
+          "x": 342.8,
+          "y": 52.4
+        }
+      },
+      {
+        "row": 11,
+        "col": 7,
+        "world": {
+          "x": 4.0,
+          "z": 0.0
+        },
+        "pixel": {
+          "x": 372.0,
+          "y": 255.5
+        }
+      },
+      {
+        "row": 11,
+        "col": 8,
+        "world": {
+          "x": 4.0,
+          "z": 1.0
+        },
+        "pixel": {
+          "x": 372.0,
+          "y": 226.5
+        }
+      },
+      {
+        "row": 11,
+        "col": 9,
+        "world": {
+          "x": 4.0,
+          "z": 2.0
+        },
+        "pixel": {
+          "x": 372.0,
+          "y": 197.5
+        }
+      },
+      {
+        "row": 11,
+        "col": 10,
+        "world": {
+          "x": 4.0,
+          "z": 3.0
+        },
+        "pixel": {
+          "x": 372.0,
+          "y": 168.0
+        }
+      },
+      {
+        "row": 11,
+        "col": 11,
+        "world": {
+          "x": 4.0,
+          "z": 4.0
+        },
+        "pixel": {
+          "x": 372.0,
+          "y": 139.0
+        }
+      },
+      {
+        "row": 11,
+        "col": 12,
+        "world": {
+          "x": 4.0,
+          "z": 5.0
+        },
+        "pixel": {
+          "x": 372.0,
+          "y": 110.0
+        }
+      },
+      {
+        "row": 11,
+        "col": 13,
+        "world": {
+          "x": 4.0,
+          "z": 6.0
+        },
+        "pixel": {
+          "x": 372.0,
+          "y": 81.0
+        }
+      },
+      {
+        "row": 11,
+        "col": 14,
+        "world": {
+          "x": 4.0,
+          "z": 7.0
+        },
+        "pixel": {
+          "x": 372.0,
+          "y": 52.5
+        }
+      },
+      {
+        "row": 12,
+        "col": 7,
+        "world": {
+          "x": 5.0,
+          "z": 0.0
+        },
+        "pixel": {
+          "x": 401.0,
+          "y": 255.5
+        }
+      },
+      {
+        "row": 12,
+        "col": 8,
+        "world": {
+          "x": 5.0,
+          "z": 1.0
+        },
+        "pixel": {
+          "x": 401.0,
+          "y": 226.5
+        }
+      },
+      {
+        "row": 12,
+        "col": 9,
+        "world": {
+          "x": 5.0,
+          "z": 2.0
+        },
+        "pixel": {
+          "x": 401.0,
+          "y": 197.5
+        }
+      },
+      {
+        "row": 12,
+        "col": 10,
+        "world": {
+          "x": 5.0,
+          "z": 3.0
+        },
+        "pixel": {
+          "x": 401.0,
+          "y": 168.0
+        }
+      },
+      {
+        "row": 12,
+        "col": 11,
+        "world": {
+          "x": 5.0,
+          "z": 4.0
+        },
+        "pixel": {
+          "x": 401.0,
+          "y": 139.0
+        }
+      },
+      {
+        "row": 12,
+        "col": 12,
+        "world": {
+          "x": 5.0,
+          "z": 5.0
+        },
+        "pixel": {
+          "x": 401.0,
+          "y": 110.0
+        }
+      },
+      {
+        "row": 12,
+        "col": 13,
+        "world": {
+          "x": 5.0,
+          "z": 6.0
+        },
+        "pixel": {
+          "x": 401.0,
+          "y": 81.0
+        }
+      },
+      {
+        "row": 12,
+        "col": 14,
+        "world": {
+          "x": 5.0,
+          "z": 7.0
+        },
+        "pixel": {
+          "x": 401.0,
+          "y": 52.5
+        }
+      },
+      {
+        "row": 13,
+        "col": 7,
+        "world": {
+          "x": 6.0,
+          "z": 0.0
+        },
+        "pixel": {
+          "x": 430.0,
+          "y": 255.5
+        }
+      },
+      {
+        "row": 13,
+        "col": 8,
+        "world": {
+          "x": 6.0,
+          "z": 1.0
+        },
+        "pixel": {
+          "x": 430.0,
+          "y": 226.5
+        }
+      },
+      {
+        "row": 13,
+        "col": 9,
+        "world": {
+          "x": 6.0,
+          "z": 2.0
+        },
+        "pixel": {
+          "x": 430.0,
+          "y": 197.5
+        }
+      },
+      {
+        "row": 13,
+        "col": 10,
+        "world": {
+          "x": 6.0,
+          "z": 3.0
+        },
+        "pixel": {
+          "x": 430.125,
+          "y": 168.125
+        }
+      },
+      {
+        "row": 13,
+        "col": 11,
+        "world": {
+          "x": 6.0,
+          "z": 4.0
+        },
+        "pixel": {
+          "x": 430.0,
+          "y": 139.0
+        }
+      },
+      {
+        "row": 13,
+        "col": 12,
+        "world": {
+          "x": 6.0,
+          "z": 5.0
+        },
+        "pixel": {
+          "x": 430.0,
+          "y": 110.0
+        }
+      },
+      {
+        "row": 13,
+        "col": 13,
+        "world": {
+          "x": 6.0,
+          "z": 6.0
+        },
+        "pixel": {
+          "x": 430.0,
+          "y": 81.0
+        }
+      },
+      {
+        "row": 13,
+        "col": 14,
+        "world": {
+          "x": 6.0,
+          "z": 7.0
+        },
+        "pixel": {
+          "x": 430.0,
+          "y": 52.5
+        }
+      },
+      {
+        "row": 14,
+        "col": 7,
+        "world": {
+          "x": 7.0,
+          "z": 0.0
+        },
+        "pixel": {
+          "x": 458.8,
+          "y": 255.6
+        }
+      },
+      {
+        "row": 14,
+        "col": 8,
+        "world": {
+          "x": 7.0,
+          "z": 1.0
+        },
+        "pixel": {
+          "x": 458.5,
+          "y": 226.5
+        }
+      },
+      {
+        "row": 14,
+        "col": 9,
+        "world": {
+          "x": 7.0,
+          "z": 2.0
+        },
+        "pixel": {
+          "x": 458.5,
+          "y": 197.5
+        }
+      },
+      {
+        "row": 14,
+        "col": 10,
+        "world": {
+          "x": 7.0,
+          "z": 3.0
+        },
+        "pixel": {
+          "x": 458.6,
+          "y": 168.2
+        }
+      },
+      {
+        "row": 14,
+        "col": 11,
+        "world": {
+          "x": 7.0,
+          "z": 4.0
+        },
+        "pixel": {
+          "x": 458.5,
+          "y": 139.0
+        }
+      },
+      {
+        "row": 14,
+        "col": 12,
+        "world": {
+          "x": 7.0,
+          "z": 5.0
+        },
+        "pixel": {
+          "x": 458.5,
+          "y": 110.0
+        }
+      },
+      {
+        "row": 14,
+        "col": 13,
+        "world": {
+          "x": 7.0,
+          "z": 6.0
+        },
+        "pixel": {
+          "x": 458.5,
+          "y": 81.0
+        }
+      },
+      {
+        "row": 14,
+        "col": 14,
+        "world": {
+          "x": 7.0,
+          "z": 7.0
+        },
+        "pixel": {
+          "x": 458.5,
+          "y": 52.5
+        }
+      }
+    ]
+  }
+}

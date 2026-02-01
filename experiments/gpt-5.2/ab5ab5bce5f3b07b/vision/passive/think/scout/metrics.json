@@ -1,0 +1,102 @@
+{
+  "exploration": {
+    "last_node_coverage": null,
+    "last_edge_coverage": null,
+    "n_exploration_steps": null,
+    "action_counts": null,
+    "action_cost": null,
+    "information_gain_per_turn": [],
+    "final_information_gain": null,
+    "action_fail_ratio": null,
+    "valid_action_ratio": null,
+    "false_belief_steps": null,
+    "false_belief_f1": null
+  },
+  "evaluation": {
+    "overall": {
+      "n_total": 27,
+      "total_score": 14.61926310160749,
+      "avg_accuracy": 0.5414541889484256
+    },
+    "per_task": {
+      "DirectionEvaluationTask": {
+        "n_total": 3,
+        "task_score": 2.0,
+        "avg_accuracy": 0.6666666666666666
+      },
+      "PovEvaluationTask": {
+        "n_total": 3,
+        "task_score": 0.0,
+        "avg_accuracy": 0.0
+      },
+      "BackwardPovTextEvaluationTask": {
+        "n_total": 3,
+        "task_score": 2.0,
+        "avg_accuracy": 0.6666666666666666
+      },
+      "BackwardPovVisionEvaluationTask": {
+        "n_total": 3,
+        "task_score": 0.0,
+        "avg_accuracy": 0.0
+      },
+      "View2ActionTextEvaluationTask": {
+        "n_total": 3,
+        "task_score": 0.0,
+        "avg_accuracy": 0.0
+      },
+      "View2ActionVisionEvaluationTask": {
+        "n_total": 3,
+        "task_score": 1.0,
+        "avg_accuracy": 0.3333333333333333
+      },
+      "AlloMappingEvaluationTask": {
+        "n_total": 3,
+        "task_score": 2.0335549795542187,
+        "avg_accuracy": 0.6778516598514063
+      },
+      "RotEvaluationTask": {
+        "n_total": 3,
+        "task_score": 3.0,
+        "avg_accuracy": 1.0
+      },
+      "RotDualEvaluationTask": {
+        "n_total": 3,
+        "task_score": 2.0,
+        "avg_accuracy": 0.6666666666666666
+      },
+      "Location2ViewEvaluationTask": {
+        "n_total": 3,
+        "task_score": 2.0,
+        "avg_accuracy": 0.6666666666666666
+      },
+      "View2LocationTextEvaluationTask": {
+        "n_total": 3,
+        "task_score": 1.5857081220532725,
+        "avg_accuracy": 0.5285693740177575
+      },
+      "View2LocationVisionEvaluationTask": {
+        "n_total": 3,
+        "task_score": 1.8786500131982524,
+        "avg_accuracy": 0.6262166710660841
+      },
+      "Action2ViewEvaluationTask": {
+        "n_total": 3,
+        "task_score": 2.0,
+        "avg_accuracy": 0.6666666666666666
+      }
+    }
+  },
+  "cogmap": {
+    "exploration": {
+      "error": {},
+      "correctness": {},
+      "consistency": {},
+      "fog_probe": {
+        "f1_avg": null,
+        "precision_avg": null,
+        "recall_avg": null
+      }
+    },
+    "per_turn_metrics": {}
+  }
+}

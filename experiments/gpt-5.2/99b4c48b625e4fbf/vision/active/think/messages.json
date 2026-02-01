@@ -1,0 +1,187 @@
+[
+  {
+    "role": "system",
+    "content": "You answer should strictly follow this format:\nTHINK: Your thoughts\nFINAL ANSWER: Your final answer"
+  },
+  {
+    "role": "user",
+    "content": "# Spatial Exploration Task\n\nYou are a spatial reasoner in a 3D simulated environment. The world is rendered in 3D but abstracted into a discrete 2D grid of size N×M. Every entity, including yourself, is represented by integer coordinates (x, y) on this grid.\n\nGoal: **Minimize total COST** while building a complete and accurate map of the environment.\n\nMulti-room rules (may exist multiple rooms):\n- Your vision is confined to your current room.\n- Doors block vision between rooms.\n- Exception: When located in a doorway, door is open and invisible, you can see into both connected rooms.\n- Rooms connect via doors on vertical (front/back) or horizontal (left/right) walls.\n\n\nRelationship instructions:\nRelationship: bearing in degrees; distance is Euclidean. Use binned labels.\nBearing is a degree in [-180, 180]; 0° is front. +: clockwise, -: counterclockwise.\nOrientation:\n\t-forward/backward/right/left (ego) or north/east/south/west (allo).\n\t-When agent faces north: forward = north, right = east, etc.\n\t-Gate's orientation: report wall position (e.g., 'on left wall').\nBinned relationship reporting:\nEgoFront (egocentric, object-to-agent); Cardinal (object-to-object).\nEgocentric angle bins (0° is front): [-45°,-22.5°)→front-left, [-22.5°,0°)→front-slight-left, 0°→front, (0°,22.5°]→front-slight-right, (22.5°,45°]→front-right, otherwise→beyond-fov.\nCardinal angle bins (45° each): (-22.5°,22.5°]→north, (22.5°,67.5°]→north east, (67.5°,112.5°]→east, (112.5°,157.5°]→south east, (157.5°,202.5°]→south, (202.5°,247.5°]→south west, (247.5°,292.5°]→west, (292.5°,337.5°]→north west, \nDistance bins: =0→same distance, (0,2]→near, (2,4]→mid distance, (4,8]→slightly far, (8,16]→far, (16,32]→very far, 32→extremely far.\n\nAction Instructions:\nYou can jump to objects within and across rooms, turn, and observe.\nWhen you are at a door, you can see objects from both connected rooms (within FOV).\n\nAvailable Actions:\nMovement (<M>):\n- JumpTo(OBJ): Jump to the same position as the object or door. Your orientation does NOT change. The object you jump to MUST be in your field of view and previously observed. Use object or door names only. NO numbers or directions or others. Invalid: JumpTo(left), JumpTo(1).\n- Rotate(DEG): Rotate relative to your current orientation. Positive = clockwise, negative = counterclockwise. Valid: -270, -180, -90, 0, 90, 180, 270. You must rotate by these specified degrees; otherwise your action will be invalid.\nFinal (<F>):\n- Observe(): Return an RGB image of your current field of view from your current position and facing. Use exactly one Observe() per step and make it the last action. Never call Term() after Observe().\n- Query(obj): Return object's coordinates with agent's initial position as origin, north as y+ axis. You can only query objects that you have previously observed. High cost, only use when necessary to eliminate ambiguities.\n- Term(): Terminate the exploration phase. Term() must be alone with no movement actions. You MUST ONLY use it in the last turn and no other turns. Otherwise your action sequence will be invalid.\n\nAction Grammar (HARD CONSTRAINT):\nActions: [ <M>* <F> ]\n<M> = \"JumpTo(OBJ)\" | \"Rotate(DEG)\"\n<F> = \"Observe()\" | \"Query(OBJ)\" | \"Term()\"\nConstraints:\n- Zero, one or more <M>. No JumpTo at first step.\n- Exactly one <F>, and it must be the final action.\n- No more than one Observe().\n- Term() may appear only alone.\n- Any violation is invalid.\n\nExamples:\nValid: Actions: [JumpTo(red door), Rotate(90), JumpTo(table), Observe()]\nValid: Actions: [Observe()] | Query(table)\nInvalid (no final action): Actions: [JumpTo(table)]\nInvalid (more than one final action): Actions: [Observe(), Rotate(90), Observe()]\nInvalid (termination with other actions): Actions: [JumpTo(table), Term()]\n\n\nRules:\n- Observe action only reports from your current position and facing direction. If you jump multiple times, the final Observe() action gives the view only from your last position.\n- Actions execute in order. Field of view: 90°.\n\nObserve and Query action have costs:\n- Observe(): 1\n- Query(obj): 2\n\n\nRules:\n- Achieve complete coverage with the fewest steps;\n- Prefer actions that reveal more unknowns; avoid redundancy\n- FOV is 90°, you can NOT see objects outside your FOV.\n- Track your current and initial pose\n\n\nRoom Layout and initial state:\nImagine 3 rooms connected by doors: room 1, room 2, room 3. You current (initial) position is in room 1 and you face north. Unless otherwise specified, treat your initial position as the origin (0, 0), and north is +y.\nObjects: 1: laptop, 2: bike, 3: airplane, 4: pan, 5: truck, 6: lego man, 7: teddybear, 8: desklamp, 9: chair, 10: candle, 11: table, 12: fire extinguisher\nDoors: green door, blue door\n\n\nYou have a maximum of 20 exploration steps.\n\nHere is an example of your observation: blue cylinder 1 m straight ahead; red cylinder 2 m straight ahead; yellow cylinder 2 m at 45° to your front-left; green cylinder 3 m at 22.5° to your front-slight-right:\n<image>\n\nThe image shows all objects in the room. Each tile is numbered (1-N) in the top-left, matching the object order in the room layout.\nFor items with a facing direction, two copies are shown side-by-side: the left copy has its front facing the camera; the right copy has its front facing left.\nItems without a meaningful facing direction are shown once.\n<image>\n\n\n\n\nStrictly follow this format:\nTHINK:\n[Your thoughts on next step actions]\nFINAL ANSWER:\nActions: [ ... ]",
+    "images": [
+      "example_data/3-room/instruction.png",
+      "example_data/3-room/run02/orientation_instruction.png"
+    ]
+  },
+  {
+    "role": "assistant",
+    "content": "THINK: Start by observing from the initial position (facing north) to identify visible objects and any doors in room 1 before deciding where to jump/rotate next.\nFINAL ANSWER:\nActions: [Observe()]"
+  },
+  {
+    "role": "user",
+    "content": "You observe: <image>.\nYou have a maximum of 19 exploration steps left.\nStrictly follow this format:\nTHINK:\n[Your thoughts on next step actions]\nFINAL ANSWER:\nActions: [ ... ]",
+    "images": [
+      "example_data/3-room/run02/agent_facing_north.png"
+    ]
+  },
+  {
+    "role": "assistant",
+    "content": "THINK: Jump to the nearer visible doorway to maximize information gain; from a doorway we can see into both connected rooms in a single observe. Green door is clearly in FOV, so move there and observe.\nFINAL ANSWER:\nActions: [JumpTo(green door), Observe()]"
+  },
+  {
+    "role": "user",
+    "content": "You jumped to green door. You observe: <image>.\nYou have a maximum of 18 exploration steps left.\nStrictly follow this format:\nTHINK:\n[Your thoughts on next step actions]\nFINAL ANSWER:\nActions: [ ... ]",
+    "images": [
+      "example_data/3-room/run02/20035_facing_north.png"
+    ]
+  },
+  {
+    "role": "assistant",
+    "content": "THINK: At the green doorway, the current view is mostly wall/partition; rotate to face through the doorway into the adjacent room to reveal its contents.\nFINAL ANSWER:\nActions: [Rotate(90), Observe()]"
+  },
+  {
+    "role": "user",
+    "content": "You rotated clockwise 90°. You observe: <image>.\nYou have a maximum of 17 exploration steps left.\nStrictly follow this format:\nTHINK:\n[Your thoughts on next step actions]\nFINAL ANSWER:\nActions: [ ... ]",
+    "images": [
+      "example_data/3-room/run02/20035_facing_east.png"
+    ]
+  },
+  {
+    "role": "assistant",
+    "content": "THINK: From the green doorway we’ve seen several objects in the adjacent room. Next, rotate back to look into room 1 from the doorway to re-acquire the blue door in FOV so we can jump to it and access the third room efficiently.\nFINAL ANSWER:\nActions: [Rotate(-90), Observe()]"
+  },
+  {
+    "role": "user",
+    "content": "You rotated counterclockwise 90°. You observe: <image>.\nYou have a maximum of 16 exploration steps left.\nStrictly follow this format:\nTHINK:\n[Your thoughts on next step actions]\nFINAL ANSWER:\nActions: [ ... ]",
+    "images": [
+      "example_data/3-room/run02/20035_facing_north.png"
+    ]
+  },
+  {
+    "role": "assistant",
+    "content": "THINK: From the doorway facing north I still can’t see the blue door; rotate counterclockwise to face west along room 1’s wall, which should bring the blue door into FOV so I can jump to it next.\nFINAL ANSWER:\nActions: [Rotate(-90), Observe()]"
+  },
+  {
+    "role": "user",
+    "content": "You rotated counterclockwise 90°. You observe: <image>.\nYou have a maximum of 15 exploration steps left.\nStrictly follow this format:\nTHINK:\n[Your thoughts on next step actions]\nFINAL ANSWER:\nActions: [ ... ]",
+    "images": [
+      "example_data/3-room/run02/20035_facing_west.png"
+    ]
+  },
+  {
+    "role": "assistant",
+    "content": "THINK: Blue door is now in FOV; jump to it so the doorway view can reveal the connected room (and potentially objects in both rooms) in one observe.\nFINAL ANSWER:\nActions: [JumpTo(blue door), Observe()]"
+  },
+  {
+    "role": "user",
+    "content": "You jumped to blue door. You observe: <image>.\nYou have a maximum of 14 exploration steps left.\nStrictly follow this format:\nTHINK:\n[Your thoughts on next step actions]\nFINAL ANSWER:\nActions: [ ... ]",
+    "images": [
+      "example_data/3-room/run02/20137_facing_west.png"
+    ]
+  },
+  {
+    "role": "assistant",
+    "content": "THINK: I’m at the blue doorway but currently facing along the wall; rotate to look through the doorway into the connected room to reveal its contents.\nFINAL ANSWER:\nActions: [Rotate(90), Observe()]"
+  },
+  {
+    "role": "user",
+    "content": "You rotated clockwise 90°. You observe: <image>.\nYou have a maximum of 13 exploration steps left.\nStrictly follow this format:\nTHINK:\n[Your thoughts on next step actions]\nFINAL ANSWER:\nActions: [ ... ]",
+    "images": [
+      "example_data/3-room/run02/20137_facing_north.png"
+    ]
+  },
+  {
+    "role": "assistant",
+    "content": "THINK: From the blue doorway looking into the connected room, I can see several objects including the fire extinguisher. Jumping to the fire extinguisher (keeping the same orientation) should give a deeper vantage into this room and help reveal any remaining unseen objects with a single Observe.\nFINAL ANSWER:\nActions: [JumpTo(fire extinguisher), Observe()]"
+  },
+  {
+    "role": "user",
+    "content": "You jumped to fire extinguisher. You observe: <image>.\nYou have a maximum of 12 exploration steps left.\nStrictly follow this format:\nTHINK:\n[Your thoughts on next step actions]\nFINAL ANSWER:\nActions: [ ... ]",
+    "images": [
+      "example_data/3-room/run02/9945548_facing_north.png"
+    ]
+  },
+  {
+    "role": "assistant",
+    "content": "THINK: We’ve already visually covered all three rooms and observed all 12 objects. With 12 steps left, use them to Query each object’s coordinates (no more movement) to complete an accurate map.\nFINAL ANSWER:\nActions: [Query(fire extinguisher)]"
+  },
+  {
+    "role": "user",
+    "content": "Cannot query: object not observed yet\nYou have a maximum of 11 exploration steps left.\nStrictly follow this format:\nTHINK:\n[Your thoughts on next step actions]\nFINAL ANSWER:\nActions: [ ... ]",
+    "images": [
+      "example_data/3-room/run02/9945548_facing_north.png"
+    ]
+  },
+  {
+    "role": "assistant",
+    "content": "THINK: The failed Query suggests “fire extinguisher” hasn’t been registered as observed (likely because when I jumped onto it, it’s no longer in view). I’ll rotate to face back toward the doorway to get a clearer view of the room and enable a jump back to the blue door for a doorway observation that should include the extinguisher in view.\nFINAL ANSWER:\nActions: [Rotate(180), Observe()]"
+  },
+  {
+    "role": "user",
+    "content": "You rotated clockwise 180°. You observe: <image>.\nYou have a maximum of 10 exploration steps left.\nStrictly follow this format:\nTHINK:\n[Your thoughts on next step actions]\nFINAL ANSWER:\nActions: [ ... ]",
+    "images": [
+      "example_data/3-room/run02/9945548_facing_south.png"
+    ]
+  },
+  {
+    "role": "assistant",
+    "content": "THINK: I need to re-establish a reliable viewpoint/orientation at the blue doorway. I’ll jump back to the blue door and observe first (without extra rotation) to see which side/room I’m currently facing, then plan the next rotations/jumps from there.\nFINAL ANSWER:\nActions: [JumpTo(blue door), Observe()]"
+  },
+  {
+    "role": "user",
+    "content": "You jumped to blue door. You observe: <image>.\nYou have a maximum of 9 exploration steps left.\nStrictly follow this format:\nTHINK:\n[Your thoughts on next step actions]\nFINAL ANSWER:\nActions: [ ... ]",
+    "images": [
+      "example_data/3-room/run02/20137_facing_south.png"
+    ]
+  },
+  {
+    "role": "assistant",
+    "content": "THINK: I’m at the blue doorway currently looking into room 1 (I can see the laptop/candle area and a teddy bear). To complete coverage, I should rotate to face through the blue doorway into the other connected room and observe again to ensure all objects there are registered/seen in one view.\nFINAL ANSWER:\nActions: [Rotate(180), Observe()]"
+  },
+  {
+    "role": "user",
+    "content": "You rotated clockwise 180°. You observe: <image>.\nYou have a maximum of 8 exploration steps left.\nStrictly follow this format:\nTHINK:\n[Your thoughts on next step actions]\nFINAL ANSWER:\nActions: [ ... ]",
+    "images": [
+      "example_data/3-room/run02/20137_facing_north.png"
+    ]
+  },
+  {
+    "role": "assistant",
+    "content": "THINK: The fire extinguisher is clearly visible in the current view, so it should now count as “observed”; query it to lock in at least one exact coordinate anchor in this room.\nFINAL ANSWER:\nActions: [Query(fire extinguisher)]"
+  },
+  {
+    "role": "user",
+    "content": "Cannot query: object not observed yet\nYou have a maximum of 7 exploration steps left.\nStrictly follow this format:\nTHINK:\n[Your thoughts on next step actions]\nFINAL ANSWER:\nActions: [ ... ]",
+    "images": [
+      "example_data/3-room/run02/20137_facing_north.png"
+    ]
+  },
+  {
+    "role": "assistant",
+    "content": "THINK: Query has failed twice for an object that is clearly visible; to diagnose whether querying is generally unavailable vs. specific to that object, try querying the currently visited/observed door itself (blue door). If this also fails, terminate exploration to avoid wasting remaining steps.\nFINAL ANSWER:\nActions: [Query(blue door)]"
+  },
+  {
+    "role": "user",
+    "content": "Cannot query: object not observed yet\nYou have a maximum of 6 exploration steps left.\nStrictly follow this format:\nTHINK:\n[Your thoughts on next step actions]\nFINAL ANSWER:\nActions: [ ... ]",
+    "images": [
+      "example_data/3-room/run02/20137_facing_north.png"
+    ]
+  },
+  {
+    "role": "assistant",
+    "content": "THINK: Query failures likely come from a naming mismatch rather than lack of visibility. Try querying another clearly visible listed object name exactly as provided (“lego man”) to test whether any queries succeed.\nFINAL ANSWER:\nActions: [Query(lego man)]"
+  },
+  {
+    "role": "user",
+    "content": "Cannot query: object not observed yet\nYou have a maximum of 5 exploration steps left.\nStrictly follow this format:\nTHINK:\n[Your thoughts on next step actions]\nFINAL ANSWER:\nActions: [ ... ]",
+    "images": [
+      "example_data/3-room/run02/20137_facing_north.png"
+    ]
+  },
+  {
+    "role": "assistant",
+    "content": "THINK: Query appears unusable (all attempts return “object not observed yet” despite clear visibility), so further steps would waste budget without improving the map. I will terminate exploration now.\nFINAL ANSWER:\nActions: [Term()]"
+  },
+  {
+    "role": "user",
+    "content": "Task finished"
+  }
+]

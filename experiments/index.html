@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theory of Space - Experiments</title>
+    <style>
+        :root {
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --bg-card: #21262d;
+            --text-primary: #f0f6fc;
+            --text-secondary: #8b949e;
+            --accent: #58a6ff;
+            --accent-hover: #79c0ff;
+            --border: #30363d;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 24px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, var(--accent), #a371f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .models-grid {
+            display: grid;
+            gap: 16px;
+        }
+
+        .model-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            transition: all 0.2s ease;
+        }
+
+        .model-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+        }
+
+        .model-card a {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .model-name {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .model-name::before {
+            content: '🤖';
+        }
+
+        .model-desc {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .links-list {
+            margin-top: 12px;
+            padding-left: 28px;
+        }
+
+        .links-list li {
+            margin: 6px 0;
+        }
+
+        .links-list a {
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .links-list a:hover {
+            text-decoration: underline;
+            color: var(--accent-hover);
+        }
+
+        footer {
+            margin-top: 60px;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Theory of Space</h1>
+            <p class="subtitle">Model Experiment Visualizations</p>
+        </header>
+
+        <div class="models-grid">
+            <!-- GPT-5.2 -->
+            <div class="model-card">
+                <a href="gpt-5.2/env_data.html">
+                    <div class="model-name">GPT-5.2</div>
+                    <p class="model-desc">OpenAI GPT-5.2 spatial reasoning experiments</p>
+                </a>
+            </div>
+
+            <div class="model-card">
+                <a href="gemini-3-pro-preview/env_data.html">
+                    <div class="model-name">Gemini</div>
+                    <p class="model-desc">Google Gemini spatial reasoning experiments</p>
+                </a>
+            </div>
+
+        </div>
+
+        <footer>
+            <p>
+                <a href="https://github.com/williamzhangNU/Theory-of-Space">GitHub Repository</a>
+            </p>
+        </footer>
+    </div>
+</body>
+
+</html>

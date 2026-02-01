@@ -1,0 +1,1160 @@
+{
+  "observation_config": {
+    "render_mode": "text",
+    "exp_type": "active",
+    "prompt_config": {
+      "enable_think": true
+    },
+    "proxy_agent": null
+  },
+  "model_config": {
+    "model_name": "gemini-3-pro-preview",
+    "max_tokens": 32768,
+    "temperature": 1.0,
+    "seed": null,
+    "max_workers": 32,
+    "api_key": null,
+    "organization": "google",
+    "base_url": "https://generativelanguage.googleapis.com/v1beta/openai/",
+    "max_retries": 5,
+    "max_retries_api": 2,
+    "timeout": 500,
+    "max_completion_tokens": null,
+    "presence_penalty": 0.0,
+    "frequency_penalty": 0.0,
+    "reasoning_effort": "medium",
+    "provider": "openai"
+  },
+  "room_dict": {
+    "name": "room_from_json",
+    "objects": [
+      {
+        "name": "bike",
+        "pos": [
+          9.0,
+          6.0
+        ],
+        "ori": [
+          0,
+          -1
+        ],
+        "label": "1",
+        "has_orientation": true,
+        "room_id": 1
+      },
+      {
+        "name": "airplane",
+        "pos": [
+          15.0,
+          2.0
+        ],
+        "ori": [
+          0,
+          -1
+        ],
+        "label": "2",
+        "has_orientation": true,
+        "room_id": 2
+      },
+      {
+        "name": "rubberduck",
+        "pos": [
+          1.0,
+          6.0
+        ],
+        "ori": [
+          0,
+          1
+        ],
+        "label": "3",
+        "has_orientation": true,
+        "room_id": 3
+      },
+      {
+        "name": "lego man",
+        "pos": [
+          9.0,
+          8.0
+        ],
+        "ori": [
+          0,
+          -1
+        ],
+        "label": "4",
+        "has_orientation": true,
+        "room_id": 1
+      },
+      {
+        "name": "toilet",
+        "pos": [
+          19.0,
+          4.0
+        ],
+        "ori": [
+          1,
+          0
+        ],
+        "label": "5",
+        "has_orientation": true,
+        "room_id": 2
+      },
+      {
+        "name": "truck",
+        "pos": [
+          5.0,
+          6.0
+        ],
+        "ori": [
+          1,
+          0
+        ],
+        "label": "6",
+        "has_orientation": true,
+        "room_id": 3
+      },
+      {
+        "name": "backpack",
+        "pos": [
+          11.0,
+          3.0
+        ],
+        "ori": [
+          0,
+          -1
+        ],
+        "label": "7",
+        "has_orientation": true,
+        "room_id": 1
+      },
+      {
+        "name": "shoppingcart",
+        "pos": [
+          13.0,
+          3.0
+        ],
+        "ori": [
+          -1,
+          0
+        ],
+        "label": "8",
+        "has_orientation": true,
+        "room_id": 1
+      },
+      {
+        "name": "fridge",
+        "pos": [
+          17.0,
+          2.0
+        ],
+        "ori": [
+          1,
+          0
+        ],
+        "label": "9",
+        "has_orientation": false,
+        "room_id": 2
+      },
+      {
+        "name": "soda can",
+        "pos": [
+          5.0,
+          8.0
+        ],
+        "ori": [
+          1,
+          0
+        ],
+        "label": "10",
+        "has_orientation": false,
+        "room_id": 3
+      },
+      {
+        "name": "basket",
+        "pos": [
+          17.0,
+          6.0
+        ],
+        "ori": [
+          1,
+          0
+        ],
+        "label": "11",
+        "has_orientation": false,
+        "room_id": 2
+      },
+      {
+        "name": "lamp",
+        "pos": [
+          1.0,
+          10.0
+        ],
+        "ori": [
+          1,
+          0
+        ],
+        "label": "12",
+        "has_orientation": false,
+        "room_id": 3
+      }
+    ],
+    "gates": [
+      {
+        "name": "red door",
+        "pos": [
+          7,
+          5
+        ],
+        "ori": [
+          1,
+          0
+        ],
+        "label": null,
+        "has_orientation": true,
+        "room_id": [
+          3,
+          1
+        ],
+        "ori_by_room": {
+          "3": [
+            -1,
+            0
+          ],
+          "1": [
+            1,
+            0
+          ]
+        }
+      },
+      {
+        "name": "green door",
+        "pos": [
+          14,
+          5
+        ],
+        "ori": [
+          1,
+          0
+        ],
+        "label": null,
+        "has_orientation": true,
+        "room_id": [
+          1,
+          2
+        ],
+        "ori_by_room": {
+          "1": [
+            -1,
+            0
+          ],
+          "2": [
+            1,
+            0
+          ]
+        }
+      }
+    ],
+    "all_objects": [
+      {
+        "name": "bike",
+        "pos": [
+          9.0,
+          6.0
+        ],
+        "ori": [
+          0,
+          -1
+        ],
+        "label": "1",
+        "has_orientation": true,
+        "room_id": 1
+      },
+      {
+        "name": "airplane",
+        "pos": [
+          15.0,
+          2.0
+        ],
+        "ori": [
+          0,
+          -1
+        ],
+        "label": "2",
+        "has_orientation": true,
+        "room_id": 2
+      },
+      {
+        "name": "rubberduck",
+        "pos": [
+          1.0,
+          6.0
+        ],
+        "ori": [
+          0,
+          1
+        ],
+        "label": "3",
+        "has_orientation": true,
+        "room_id": 3
+      },
+      {
+        "name": "lego man",
+        "pos": [
+          9.0,
+          8.0
+        ],
+        "ori": [
+          0,
+          -1
+        ],
+        "label": "4",
+        "has_orientation": true,
+        "room_id": 1
+      },
+      {
+        "name": "toilet",
+        "pos": [
+          19.0,
+          4.0
+        ],
+        "ori": [
+          1,
+          0
+        ],
+        "label": "5",
+        "has_orientation": true,
+        "room_id": 2
+      },
+      {
+        "name": "truck",
+        "pos": [
+          5.0,
+          6.0
+        ],
+        "ori": [
+          1,
+          0
+        ],
+        "label": "6",
+        "has_orientation": true,
+        "room_id": 3
+      },
+      {
+        "name": "backpack",
+        "pos": [
+          11.0,
+          3.0
+        ],
+        "ori": [
+          0,
+          -1
+        ],
+        "label": "7",
+        "has_orientation": true,
+        "room_id": 1
+      },
+      {
+        "name": "shoppingcart",
+        "pos": [
+          13.0,
+          3.0
+        ],
+        "ori": [
+          -1,
+          0
+        ],
+        "label": "8",
+        "has_orientation": true,
+        "room_id": 1
+      },
+      {
+        "name": "fridge",
+        "pos": [
+          17.0,
+          2.0
+        ],
+        "ori": [
+          1,
+          0
+        ],
+        "label": "9",
+        "has_orientation": false,
+        "room_id": 2
+      },
+      {
+        "name": "soda can",
+        "pos": [
+          5.0,
+          8.0
+        ],
+        "ori": [
+          1,
+          0
+        ],
+        "label": "10",
+        "has_orientation": false,
+        "room_id": 3
+      },
+      {
+        "name": "basket",
+        "pos": [
+          17.0,
+          6.0
+        ],
+        "ori": [
+          1,
+          0
+        ],
+        "label": "11",
+        "has_orientation": false,
+        "room_id": 2
+      },
+      {
+        "name": "lamp",
+        "pos": [
+          1.0,
+          10.0
+        ],
+        "ori": [
+          1,
+          0
+        ],
+        "label": "12",
+        "has_orientation": false,
+        "room_id": 3
+      },
+      {
+        "name": "red door",
+        "pos": [
+          7,
+          5
+        ],
+        "ori": [
+          1,
+          0
+        ],
+        "label": null,
+        "has_orientation": true,
+        "room_id": [
+          3,
+          1
+        ],
+        "ori_by_room": {
+          "3": [
+            -1,
+            0
+          ],
+          "1": [
+            1,
+            0
+          ]
+        }
+      },
+      {
+        "name": "green door",
+        "pos": [
+          14,
+          5
+        ],
+        "ori": [
+          1,
+          0
+        ],
+        "label": null,
+        "has_orientation": true,
+        "room_id": [
+          1,
+          2
+        ],
+        "ori_by_room": {
+          "1": [
+            -1,
+            0
+          ],
+          "2": [
+            1,
+            0
+          ]
+        }
+      }
+    ],
+    "gates_by_room": {
+      "3": [
+        "red door"
+      ],
+      "1": [
+        "red door",
+        "green door"
+      ],
+      "2": [
+        "green door"
+      ]
+    },
+    "rooms_by_gate": {
+      "red door": [
+        3,
+        1
+      ],
+      "green door": [
+        1,
+        2
+      ]
+    },
+    "adjacent_rooms_by_room": {
+      "3": [
+        1
+      ],
+      "1": [
+        2,
+        3
+      ],
+      "2": [
+        1
+      ]
+    },
+    "mask": [
+      [
+        -1,
+        -1,
+        -1,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        -1,
+        -1,
+        -1,
+        -1,
+        0,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        0
+      ],
+      [
+        -1,
+        -1,
+        -1,
+        -1,
+        0,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        0
+      ],
+      [
+        -1,
+        -1,
+        -1,
+        -1,
+        0,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        0
+      ],
+      [
+        -1,
+        -1,
+        -1,
+        -1,
+        0,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        0
+      ],
+      [
+        -1,
+        -1,
+        -1,
+        -1,
+        0,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        0
+      ],
+      [
+        -1,
+        -1,
+        -1,
+        -1,
+        0,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        0
+      ],
+      [
+        -1,
+        -1,
+        0,
+        0,
+        0,
+        100,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        -1,
+        -1,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        -1,
+        -1
+      ],
+      [
+        -1,
+        -1,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        -1,
+        -1
+      ],
+      [
+        -1,
+        -1,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        -1,
+        -1
+      ],
+      [
+        -1,
+        -1,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        -1,
+        -1
+      ],
+      [
+        -1,
+        -1,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        -1,
+        -1
+      ],
+      [
+        -1,
+        -1,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        -1,
+        -1
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        100,
+        0,
+        0,
+        0,
+        0,
+        -1,
+        -1
+      ],
+      [
+        0,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        0,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      [
+        0,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        0,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      [
+        0,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        0,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      [
+        0,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        0,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      [
+        0,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        0,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      [
+        0,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        0,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        -1,
+        -1,
+        -1,
+        -1
+      ]
+    ],
+    "object_map": [
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        3,
+        0,
+        0,
+        0,
+        12,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        6,
+        0,
+        10,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        13,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        4,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        7,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        8,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        14,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        9,
+        0,
+        0,
+        0,
+        11,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        5,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    ]
+  },
+  "agent_dict": {
+    "name": "agent",
+    "pos": [
+      17.0,
+      6.0
+    ],
+    "ori": [
+      0,
+      1
+    ],
+    "label": null,
+    "has_orientation": true,
+    "room_id": 1,
+    "init_pos": [
+      12.0,
+      5.0
+    ],
+    "init_ori": [
+      0,
+      1
+    ],
+    "init_room_id": 1
+  },
+  "image_dir": "room_data/3-room/run06",
+  "seed": 6
+}
