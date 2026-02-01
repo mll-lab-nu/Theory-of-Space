@@ -9,6 +9,7 @@
 <p align="center">
   <a href="#"><img src="https://img.shields.io/badge/📜_Paper-B31B1B?style=for-the-badge&logo=arXiv&logoColor=white" alt="Paper"></a>
   <a href="https://theory-of-space.github.io"><img src="https://img.shields.io/badge/🌐_Website-00C851?style=for-the-badge&logoColor=white" alt="Website"></a>
+  <a href="https://huggingface.co/datasets/yw12356/tos_data"><img src="https://img.shields.io/badge/🗂️_Datasets-1E88E5?style=for-the-badge&logoColor=white" alt="Datasets"></a>
   <a href="https://williamzhangnu.github.io/Theory-of-Space/experiments/"><img src="https://img.shields.io/badge/📊_Results-FB8C00?style=for-the-badge&logoColor=white" alt="Results"></a>
 </p>
 

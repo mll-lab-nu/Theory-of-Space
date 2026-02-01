@@ -20,11 +20,14 @@ python -m pip install -e .
 # export ANTHROPIC_API_KEY=
 # export GOOGLE_API_KEY=
 
+# Add huggingface token (optional, avoid 429 rate limit)
+# export HF_TOKEN=
+
 # Download the dataset (skip only if room_data/3-room exists AND is non-empty)
 if [ -d "room_data/3-room" ] && [ "$(ls -A room_data/3-room 2>/dev/null)" ]; then
   echo "room_data/3-room already exists and is not empty, skipping."
 else
-  hf download yw12356/tos_dataset_0127_3room_100runs --repo-type dataset --local-dir room_data
+  hf download yw12356/tos_data --repo-type dataset --local-dir room_data
   mkdir -p room_data/3-room
   unzip room_data/*.zip -d room_data/3-room
 
