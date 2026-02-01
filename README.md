@@ -547,6 +547,8 @@ Each sample page features comprehensive data for each turn, along with relevant 
 
 The `ToS-vision-scenes/` submodule provides tools to generate custom multi-room 3D environments using TDW (ThreeDWorld). Use this if you want to create your own visual scene datasets.
 
+> **Remote Server Requirement**: If running on a remote server, make sure the server has a **graphical display** attached (not headless). TDW and Unity require a display for rendering.
+
 ### Pre-generated Datasets
 
 We provide pre-generated visual scene datasets on Hugging Face:
