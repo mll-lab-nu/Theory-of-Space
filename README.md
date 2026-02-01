@@ -439,10 +439,16 @@ Vision perception remains a key bottleneck, especially for object orientation. U
 ## Usage
 
 ### Setup (run everything)
-Run `setup.sh` to install deps, download data into `room_data/3-room/`, and run the default experiment (a subset of 10 runs). Set API keys in the script before running.
-```bash
-source setup.sh
-```
+1. **Clone the `release` branch**
+   ```bash
+   git clone --single-branch --branch release https://github.com/williamzhangNU/Theory-of-Space.git
+   cd Theory-of-Space
+2. **Configure keys and run setup**
+  - Open `setup.sh` and set any required API keys / environment variables.
+  - The run:
+    ```bash
+    source setup.sh
+    ```
 
 ### Model configuration
 
@@ -527,7 +533,7 @@ Results are organized as:
 ```
 
 ### Visulization & Analysis
-You can find the visulization html under result/gpt-5.2/env_data.html.
+After running the experiments, you can find the visulization html under `result/gpt-5.2/env_data.html`.
 
 By executing `python -m http.server <port>` under the root directory, you can access the visulization html at `http://localhost:<port>/result/gpt-5.2/env_data.html`.
 
