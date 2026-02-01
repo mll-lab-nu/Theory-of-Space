@@ -1294,7 +1294,7 @@
         "symbolic_map": "###############\n#...AE.#......#\n#..B.C.#......#\n#.....*#......#\n#......#......#\n#......+......#\n#.F.D..#......#\n#####+#########\n##......#######\n##......#######\n##......#######\n##......#######\n##......#######\n##......#######\n###############",
         "message_images": [
           "room_data/3-room/run08/agent_facing_north.png",
-          "results_arxiv/gpt-5.2/bf30f4c4682e89b9/vision/active/think/cogmap/top_down_candidates_t1.png"
+          "experiments/gpt-5.2/bf30f4c4682e89b9/vision/active/think/cogmap/top_down_candidates_t1.png"
         ]
       },
       "consistency": {
@@ -3480,7 +3480,7 @@
         "symbolic_map": "###############\n#...E.F#......#\n#..B.C.#......#\n#..D..*#......#\n#......#......#\n#...A..+......#\n#......#......#\n#####+#########\n##......#######\n##......#######\n##......#######\n##......#######\n##......#######\n##......#######\n###############",
         "message_images": [
           "room_data/3-room/run08/agent_facing_east.png",
-          "results_arxiv/gpt-5.2/bf30f4c4682e89b9/vision/active/think/cogmap/top_down_candidates_t2.png"
+          "experiments/gpt-5.2/bf30f4c4682e89b9/vision/active/think/cogmap/top_down_candidates_t2.png"
         ]
       },
       "consistency": {
@@ -6100,7 +6100,7 @@
         "symbolic_map": "###############\n#......#......#\n#...C..#......#\n#.....*#......#\n#...BE.#......#\n#..A.F.+......#\n#....D.#......#\n#####+#########\n##......#######\n##......#######\n##......#######\n##......#######\n##......#######\n##......#######\n###############",
         "message_images": [
           "room_data/3-room/run08/agent_facing_south.png",
-          "results_arxiv/gpt-5.2/bf30f4c4682e89b9/vision/active/think/cogmap/top_down_candidates_t3.png"
+          "experiments/gpt-5.2/bf30f4c4682e89b9/vision/active/think/cogmap/top_down_candidates_t3.png"
         ]
       },
       "consistency": {
@@ -9573,7 +9573,7 @@
         "symbolic_map": "###############\n#..H...#......#\n#..F.D.#......#\n#.C....#......#\n#....G.#......#\n#......+......#\n#.....I#......#\n#####*#########\n##.J...L#######\n##E.....#######\n##......#######\n##...K..#######\n##.B....#######\n##...A..#######\n###############",
         "message_images": [
           "room_data/3-room/run08/20172_facing_south.png",
-          "results_arxiv/gpt-5.2/bf30f4c4682e89b9/vision/active/think/cogmap/top_down_candidates_t4.png"
+          "experiments/gpt-5.2/bf30f4c4682e89b9/vision/active/think/cogmap/top_down_candidates_t4.png"
         ]
       },
       "consistency": {
@@ -12716,7 +12716,7 @@
         "symbolic_map": "###############\n#H..C..#......#\n#..G...#......#\n#....E.#......#\n#......#......#\n#......+......#\n#F..A..#......#\n#####*#########\n##.....B#######\n##......#######\n##..D...#######\n##......#######\n##......#######\n##......#######\n###############",
         "message_images": [
           "room_data/3-room/run08/20172_facing_west.png",
-          "results_arxiv/gpt-5.2/bf30f4c4682e89b9/vision/active/think/cogmap/top_down_candidates_t5.png"
+          "experiments/gpt-5.2/bf30f4c4682e89b9/vision/active/think/cogmap/top_down_candidates_t5.png"
         ]
       },
       "consistency": {
@@ -16013,7 +16013,7 @@
         "symbolic_map": "###############\n#......#......#\n#......#......#\n#......#......#\n#......#......#\n#......+......#\n#......#......#\n#####*#########\n##....AB#######\n##......#######\n##......#######\n##......#######\n##......#######\n##......#######\n###############",
         "message_images": [
           "room_data/3-room/run08/20172_facing_north.png",
-          "results_arxiv/gpt-5.2/bf30f4c4682e89b9/vision/active/think/cogmap/top_down_candidates_t6.png"
+          "experiments/gpt-5.2/bf30f4c4682e89b9/vision/active/think/cogmap/top_down_candidates_t6.png"
         ]
       },
       "consistency": {
@@ -19584,7 +19584,7 @@
         "symbolic_map": "###############\n#......#...B..#\n#......#..H...#\n#......#......#\n#......#CE...A#\n#......*....D.#\n#......#......#\n#####+#########\n##.....F#######\n##......#######\n##......#######\n##......#######\n##....G.#######\n##......#######\n###############",
         "message_images": [
           "room_data/3-room/run08/20062_facing_north.png",
-          "results_arxiv/gpt-5.2/bf30f4c4682e89b9/vision/active/think/cogmap/top_down_candidates_t7.png"
+          "experiments/gpt-5.2/bf30f4c4682e89b9/vision/active/think/cogmap/top_down_candidates_t7.png"
         ]
       },
       "consistency": {
@@ -23063,7 +23063,7 @@
         "symbolic_map": "###############\n#......#......#\n#......#......#\n#......#......#\n#......#......#\n#......*......#\n#......#......#\n#####+#########\n##.....A#######\n##......#######\n##..B...#######\n##......#######\n##......#######\n##......#######\n###############",
         "message_images": [
           "room_data/3-room/run08/20062_facing_east.png",
-          "results_arxiv/gpt-5.2/bf30f4c4682e89b9/vision/active/think/cogmap/top_down_candidates_t8.png"
+          "experiments/gpt-5.2/bf30f4c4682e89b9/vision/active/think/cogmap/top_down_candidates_t8.png"
         ]
       },
       "consistency": {
@@ -26264,7 +26264,7 @@
         "symbolic_map": "###############\n#......#......#\n#......#......#\n#......#......#\n#......#......#\n#......*......#\n#......#......#\n#####+#########\n##.....A#######\n##......#######\n##......#######\n##......#######\n##......#######\n##B.....#######\n###############",
         "message_images": [
           "room_data/3-room/run08/20062_facing_south.png",
-          "results_arxiv/gpt-5.2/bf30f4c4682e89b9/vision/active/think/cogmap/top_down_candidates_t9.png"
+          "experiments/gpt-5.2/bf30f4c4682e89b9/vision/active/think/cogmap/top_down_candidates_t9.png"
         ]
       },
       "consistency": {
@@ -29626,7 +29626,7 @@
         "symbolic_map": "###############\n#......#......#\n#......#......#\n#......#......#\n#......#......#\n#......*......#\n#......#......#\n#####+#########\n##.....B#######\n##.A....#######\n##......#######\n##......#######\n##......#######\n##......#######\n###############",
         "message_images": [
           "room_data/3-room/run08/20062_facing_west.png",
-          "results_arxiv/gpt-5.2/bf30f4c4682e89b9/vision/active/think/cogmap/top_down_candidates_t10.png"
+          "experiments/gpt-5.2/bf30f4c4682e89b9/vision/active/think/cogmap/top_down_candidates_t10.png"
         ]
       },
       "consistency": {
@@ -32918,7 +32918,7 @@
         "symbolic_map": "###############\n#......#......#\n#......#......#\n#......#......#\n#......#......#\n#......*......#\n#......#......#\n#####+#########\n##.....B#######\n##......#######\n##......#######\n##..A...#######\n##......#######\n##......#######\n###############",
         "message_images": [
           "room_data/3-room/run08/20062_facing_north.png",
-          "results_arxiv/gpt-5.2/bf30f4c4682e89b9/vision/active/think/cogmap/top_down_candidates_t11.png"
+          "experiments/gpt-5.2/bf30f4c4682e89b9/vision/active/think/cogmap/top_down_candidates_t11.png"
         ]
       },
       "consistency": {
@@ -36280,7 +36280,7 @@
         "symbolic_map": "###############\n#......#......#\n#......#......#\n#......#......#\n#......#......#\n#......*......#\n#......#......#\n#####+#########\n##.....B#######\n##......#######\n##......#######\n##......#######\n##......#######\n##A.....#######\n###############",
         "message_images": [
           "room_data/3-room/run08/20062_facing_west.png",
-          "results_arxiv/gpt-5.2/bf30f4c4682e89b9/vision/active/think/cogmap/top_down_candidates_t12.png"
+          "experiments/gpt-5.2/bf30f4c4682e89b9/vision/active/think/cogmap/top_down_candidates_t12.png"
         ]
       },
       "consistency": {
@@ -39483,7 +39483,7 @@
         "symbolic_map": "###############\n#......#......#\n#......#......#\n#......#......#\n#......#......#\n#......+......#\n#......#......#\n#####*#########\n##.....A#######\n##......#######\n##......#######\n##......#######\n##......#######\n##..B...#######\n###############",
         "message_images": [
           "room_data/3-room/run08/20172_facing_west.png",
-          "results_arxiv/gpt-5.2/bf30f4c4682e89b9/vision/active/think/cogmap/top_down_candidates_t13.png"
+          "experiments/gpt-5.2/bf30f4c4682e89b9/vision/active/think/cogmap/top_down_candidates_t13.png"
         ]
       },
       "consistency": {
@@ -42842,7 +42842,7 @@
         "symbolic_map": "###############\n#......#......#\n#......#......#\n#......#......#\n#......#......#\n#......+......#\n#......#......#\n#####*#########\n##.....B#######\n##......#######\n##..A...#######\n##......#######\n##......#######\n##......#######\n###############",
         "message_images": [
           "room_data/3-room/run08/20172_facing_south.png",
-          "results_arxiv/gpt-5.2/bf30f4c4682e89b9/vision/active/think/cogmap/top_down_candidates_t14.png"
+          "experiments/gpt-5.2/bf30f4c4682e89b9/vision/active/think/cogmap/top_down_candidates_t14.png"
         ]
       },
       "consistency": {
@@ -46295,7 +46295,7 @@
         "symbolic_map": "###############\n#......#......#\n#......#......#\n#......#......#\n#......#......#\n#......+......#\n#......#......#\n#####*#########\n##.....A#######\n##......#######\n##......#######\n##......#######\n##...B..#######\n##......#######\n###############",
         "message_images": [
           "room_data/3-room/run08/20172_facing_north.png",
-          "results_arxiv/gpt-5.2/bf30f4c4682e89b9/vision/active/think/cogmap/top_down_candidates_t15.png"
+          "experiments/gpt-5.2/bf30f4c4682e89b9/vision/active/think/cogmap/top_down_candidates_t15.png"
         ]
       },
       "consistency": {
@@ -49747,7 +49747,7 @@
         "symbolic_map": "###############\n#......#......#\n#......#......#\n#......#......#\n#......#......#\n#......+......#\n#......#......#\n#####*#########\n##.....B#######\n##......#######\n##......#######\n##......#######\n##...A..#######\n##......#######\n###############",
         "message_images": [
           "room_data/3-room/run08/20172_facing_north.png",
-          "results_arxiv/gpt-5.2/bf30f4c4682e89b9/vision/active/think/cogmap/top_down_candidates_t16.png"
+          "experiments/gpt-5.2/bf30f4c4682e89b9/vision/active/think/cogmap/top_down_candidates_t16.png"
         ]
       },
       "consistency": {
@@ -53033,7 +53033,7 @@
         "symbolic_map": "###############\n#......#......#\n#......#......#\n#......#......#\n#......#......#\n#......*......#\n#......#......#\n#####+#########\n##.....B#######\n##......#######\n##A.....#######\n##......#######\n##......#######\n##......#######\n###############",
         "message_images": [
           "room_data/3-room/run08/20062_facing_east.png",
-          "results_arxiv/gpt-5.2/bf30f4c4682e89b9/vision/active/think/cogmap/top_down_candidates_t17.png"
+          "experiments/gpt-5.2/bf30f4c4682e89b9/vision/active/think/cogmap/top_down_candidates_t17.png"
         ]
       },
       "consistency": {
@@ -56068,7 +56068,7 @@
         "symbolic_map": "###############\n#......#......#\n#......#......#\n#......#...*..#\n#......#......#\n#......+......#\n#......#......#\n#####+#########\n##.....B#######\n##......#######\n##......#######\n##......#######\n##......#######\n##...A..#######\n###############",
         "message_images": [
           "room_data/3-room/run08/1377592_facing_east.png",
-          "results_arxiv/gpt-5.2/bf30f4c4682e89b9/vision/active/think/cogmap/top_down_candidates_t18.png"
+          "experiments/gpt-5.2/bf30f4c4682e89b9/vision/active/think/cogmap/top_down_candidates_t18.png"
         ]
       },
       "consistency": {
@@ -59328,7 +59328,7 @@
         "symbolic_map": "###############\n#......#......#\n#......#......#\n#......#...*..#\n#......#......#\n#......+......#\n#......#......#\n#####+#########\n##.....A#######\n##......#######\n##......#######\n##......#######\n##....B.#######\n##......#######\n###############",
         "message_images": [
           "room_data/3-room/run08/1377592_facing_west.png",
-          "results_arxiv/gpt-5.2/bf30f4c4682e89b9/vision/active/think/cogmap/top_down_candidates_t19.png"
+          "experiments/gpt-5.2/bf30f4c4682e89b9/vision/active/think/cogmap/top_down_candidates_t19.png"
         ]
       },
       "consistency": {

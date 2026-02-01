@@ -1286,7 +1286,7 @@
         "symbolic_map": "###############\n###......######\n###......######\n###......######\n###......######\n###......######\n###......######\n######+########\n#....C.########\n#...A.F#......#\n#....*.#......#\n#.E....#......#\n#..D...+......#\n#..B...#......#\n########......#\n###############",
         "message_images": [
           "room_data/3-room/run09/agent_facing_north.png",
-          "results_arxiv/gpt-5.2/ec2d73866de1aead/vision/active/think/cogmap/top_down_candidates_t1.png"
+          "experiments/gpt-5.2/ec2d73866de1aead/vision/active/think/cogmap/top_down_candidates_t1.png"
         ]
       },
       "consistency": {
@@ -4500,7 +4500,7 @@
         "symbolic_map": "###############\n###.H....######\n###......######\n###......######\n###.....D######\n###I....A######\n###C....G######\n######*########\n#....F.########\n#....B.#......#\n#...JE.#......#\n#....K.#......#\n#......+......#\n#..L...#......#\n########......#\n###############",
         "message_images": [
           "room_data/3-room/run09/20172_facing_north.png",
-          "results_arxiv/gpt-5.2/ec2d73866de1aead/vision/active/think/cogmap/top_down_candidates_t2.png"
+          "experiments/gpt-5.2/ec2d73866de1aead/vision/active/think/cogmap/top_down_candidates_t2.png"
         ]
       },
       "consistency": {
@@ -7141,7 +7141,7 @@
         "symbolic_map": "###############\n###......######\n###..I...######\n###L.....######\n###......######\n###D..H..######\n###GJ....######\n######*########\n#......########\n#...C.F#......#\n#....B.#......#\n#A.....#......#\n#......+......#\n#....KE#......#\n########......#\n###############",
         "message_images": [
           "room_data/3-room/run09/20172_facing_east.png",
-          "results_arxiv/gpt-5.2/ec2d73866de1aead/vision/active/think/cogmap/top_down_candidates_t3.png"
+          "experiments/gpt-5.2/ec2d73866de1aead/vision/active/think/cogmap/top_down_candidates_t3.png"
         ]
       },
       "consistency": {
@@ -10156,7 +10156,7 @@
         "symbolic_map": "###############\n###......######\n###......######\n###......######\n###......######\n###......######\n###......######\n######*########\n#......########\n#.B..DC#......#\n#......#......#\n#..EA..#......#\n#......+......#\n#.....F#......#\n########......#\n###############",
         "message_images": [
           "room_data/3-room/run09/20172_facing_west.png",
-          "results_arxiv/gpt-5.2/ec2d73866de1aead/vision/active/think/cogmap/top_down_candidates_t4.png"
+          "experiments/gpt-5.2/ec2d73866de1aead/vision/active/think/cogmap/top_down_candidates_t4.png"
         ]
       },
       "consistency": {
@@ -16314,7 +16314,7 @@
         "symbolic_map": "###############\n###......######\n###......######\n###......######\n###......######\n###......######\n###......######\n######+########\n#......########\n#......#.....F#\n#......#......#\n#......#......#\n#......*.....C#\n#......#A..D..#\n########EB....#\n###############",
         "message_images": [
           "room_data/3-room/run09/20016_facing_south.png",
-          "results_arxiv/gpt-5.2/ec2d73866de1aead/vision/active/think/cogmap/top_down_candidates_t6.png"
+          "experiments/gpt-5.2/ec2d73866de1aead/vision/active/think/cogmap/top_down_candidates_t6.png"
         ]
       },
       "consistency": {
@@ -19601,7 +19601,7 @@
         "symbolic_map": "###############\n###......######\n###......######\n###......######\n###......######\n###......######\n###......######\n######+########\n#......########\n#......#......#\n#......#...D.B#\n#......#......#\n#......*......#\n#......#CE....#\n########FA....#\n###############",
         "message_images": [
           "room_data/3-room/run09/20016_facing_west.png",
-          "results_arxiv/gpt-5.2/ec2d73866de1aead/vision/active/think/cogmap/top_down_candidates_t7.png"
+          "experiments/gpt-5.2/ec2d73866de1aead/vision/active/think/cogmap/top_down_candidates_t7.png"
         ]
       },
       "consistency": {
@@ -22595,7 +22595,7 @@
         "symbolic_map": "###############\n###......######\n###......######\n###......######\n###......######\n###......######\n###......######\n######+########\n#......########\n#......#A.....#\n#......#B..CF.#\n#......#E.....#\n#......*......#\n#......#.....D#\n########......#\n###############",
         "message_images": [
           "room_data/3-room/run09/20016_facing_north.png",
-          "results_arxiv/gpt-5.2/ec2d73866de1aead/vision/active/think/cogmap/top_down_candidates_t8.png"
+          "experiments/gpt-5.2/ec2d73866de1aead/vision/active/think/cogmap/top_down_candidates_t8.png"
         ]
       },
       "consistency": {

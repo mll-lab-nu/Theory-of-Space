@@ -1675,7 +1675,7 @@
         "symbolic_map": "######################\n#......###############\n#......#......#......#\n#......#..E...+......#\n#......#..F...#......#\n#......#A.B..C#......#\n#......+..*...#......#\n########.....D#......#\n######################",
         "message_images": [
           "room_data/3-room/run03/agent_facing_north.png",
-          "results_arxiv/gemini-3-pro-preview/66b32ca3d0e68f66/vision/active/think/cogmap/top_down_candidates_t1.png"
+          "experiments/gemini-3-pro-preview/66b32ca3d0e68f66/vision/active/think/cogmap/top_down_candidates_t1.png"
         ]
       },
       "consistency": {
@@ -4393,7 +4393,7 @@
         "symbolic_map": "######################\n#......###############\n#......#......#......#\n#......#......+......#\n#......#.E....#......#\n#......#BFD...#......#\n#......+.C*...#......#\n########..A...#......#\n######################",
         "message_images": [
           "room_data/3-room/run03/agent_facing_east.png",
-          "results_arxiv/gemini-3-pro-preview/66b32ca3d0e68f66/vision/active/think/cogmap/top_down_candidates_t2.png"
+          "experiments/gemini-3-pro-preview/66b32ca3d0e68f66/vision/active/think/cogmap/top_down_candidates_t2.png"
         ]
       },
       "consistency": {
@@ -6799,7 +6799,7 @@
         "symbolic_map": "######################\n#......###############\n#......#......#......#\n#......#......+......#\n#......#.C....#......#\n#......#E....D#......#\n#......+BA*...#......#\n########..F...#......#\n######################",
         "message_images": [
           "room_data/3-room/run03/agent_facing_south.png",
-          "results_arxiv/gemini-3-pro-preview/66b32ca3d0e68f66/vision/active/think/cogmap/top_down_candidates_t3.png"
+          "experiments/gemini-3-pro-preview/66b32ca3d0e68f66/vision/active/think/cogmap/top_down_candidates_t3.png"
         ]
       },
       "consistency": {
@@ -12911,7 +12911,7 @@
         "symbolic_map": "######################\n#......###############\n#......#......#.....D#\n#......#......*......#\n#......#......#F...E.#\n#......#......#......#\n#......+......#.A....#\n########......#.CB...#\n######################",
         "message_images": [
           "room_data/3-room/run03/25808_facing_east.png",
-          "results_arxiv/gemini-3-pro-preview/66b32ca3d0e68f66/vision/active/think/cogmap/top_down_candidates_t5.png"
+          "experiments/gemini-3-pro-preview/66b32ca3d0e68f66/vision/active/think/cogmap/top_down_candidates_t5.png"
         ]
       },
       "consistency": {
@@ -16085,7 +16085,7 @@
         "symbolic_map": "######################\n#......###############\n#......#......#......#\n#......#......+......#\n#......#......#B.*...#\n#......#......#..D.C.#\n#......+......#.F....#\n########......#A.E...#\n######################",
         "message_images": [
           "room_data/3-room/run03/9986487_facing_east.png",
-          "results_arxiv/gemini-3-pro-preview/66b32ca3d0e68f66/vision/active/think/cogmap/top_down_candidates_t6.png"
+          "experiments/gemini-3-pro-preview/66b32ca3d0e68f66/vision/active/think/cogmap/top_down_candidates_t6.png"
         ]
       },
       "consistency": {
@@ -19149,7 +19149,7 @@
         "symbolic_map": "######################\n#......###############\n#......#......#......#\n#......#......+...B..#\n#......#......#..*...#\n#......#......#A.....#\n#......+......#......#\n########......#......#\n######################",
         "message_images": [
           "room_data/3-room/run03/9986487_facing_south.png",
-          "results_arxiv/gemini-3-pro-preview/66b32ca3d0e68f66/vision/active/think/cogmap/top_down_candidates_t7.png"
+          "experiments/gemini-3-pro-preview/66b32ca3d0e68f66/vision/active/think/cogmap/top_down_candidates_t7.png"
         ]
       },
       "consistency": {
@@ -31294,7 +31294,7 @@
         "symbolic_map": "######################\n#...EAD###############\n#......#......#......#\n#..C...#......+......#\n#......#......#......#\n#..F...#......#......#\n#.....B*......#......#\n########......#......#\n######################",
         "message_images": [
           "room_data/3-room/run03/24668_facing_west.png",
-          "results_arxiv/gemini-3-pro-preview/66b32ca3d0e68f66/vision/active/think/cogmap/top_down_candidates_t11.png"
+          "experiments/gemini-3-pro-preview/66b32ca3d0e68f66/vision/active/think/cogmap/top_down_candidates_t11.png"
         ]
       },
       "consistency": {
@@ -34398,7 +34398,7 @@
         "symbolic_map": "######################\n#A...B.###############\n#.....C#......#......#\n#.....D#......+......#\n#E.*...#......#......#\n#......#......#......#\n#.....F+......#......#\n########......#......#\n######################",
         "message_images": [
           "room_data/3-room/run03/5583367_facing_west.png",
-          "results_arxiv/gemini-3-pro-preview/66b32ca3d0e68f66/vision/active/think/cogmap/top_down_candidates_t12.png"
+          "experiments/gemini-3-pro-preview/66b32ca3d0e68f66/vision/active/think/cogmap/top_down_candidates_t12.png"
         ]
       },
       "consistency": {
@@ -37585,7 +37585,7 @@
         "symbolic_map": "######################\n#......###############\n#.....F#......#......#\n#...BD.#......+......#\n#..*CEA#......#......#\n#......#......#......#\n#......+......#......#\n########......#......#\n######################",
         "message_images": [
           "room_data/3-room/run03/5583367_facing_north.png",
-          "results_arxiv/gemini-3-pro-preview/66b32ca3d0e68f66/vision/active/think/cogmap/top_down_candidates_t13.png"
+          "experiments/gemini-3-pro-preview/66b32ca3d0e68f66/vision/active/think/cogmap/top_down_candidates_t13.png"
         ]
       },
       "consistency": {

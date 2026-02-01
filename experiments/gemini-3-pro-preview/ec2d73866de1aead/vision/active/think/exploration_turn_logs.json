@@ -1277,7 +1277,7 @@
         "symbolic_map": "###############\n###......######\n###......######\n###......######\n###......######\n###......######\n###......######\n######+########\n#....C.########\n#...A.F#......#\n#....*.#......#\n#.E....#......#\n#..D...+......#\n#..B...#......#\n########......#\n###############",
         "message_images": [
           "room_data/3-room/run09/agent_facing_north.png",
-          "results_arxiv/gemini-3-pro-preview/ec2d73866de1aead/vision/active/think/cogmap/top_down_candidates_t1.png"
+          "experiments/gemini-3-pro-preview/ec2d73866de1aead/vision/active/think/cogmap/top_down_candidates_t1.png"
         ]
       },
       "consistency": {
@@ -4476,7 +4476,7 @@
         "symbolic_map": "###############\n###.H....######\n###......######\n###......######\n###.....D######\n###I....A######\n###C....G######\n######*########\n#....F.########\n#....B.#......#\n#...JE.#......#\n#....K.#......#\n#......+......#\n#..L...#......#\n########......#\n###############",
         "message_images": [
           "room_data/3-room/run09/20172_facing_north.png",
-          "results_arxiv/gemini-3-pro-preview/ec2d73866de1aead/vision/active/think/cogmap/top_down_candidates_t2.png"
+          "experiments/gemini-3-pro-preview/ec2d73866de1aead/vision/active/think/cogmap/top_down_candidates_t2.png"
         ]
       },
       "consistency": {
@@ -7174,7 +7174,7 @@
         "symbolic_map": "###############\n###......######\n###..I...######\n###L.....######\n###......######\n###D..H..######\n###GJ....######\n######*########\n#......########\n#...C.F#......#\n#....B.#......#\n#A.....#......#\n#......+......#\n#....KE#......#\n########......#\n###############",
         "message_images": [
           "room_data/3-room/run09/20172_facing_east.png",
-          "results_arxiv/gemini-3-pro-preview/ec2d73866de1aead/vision/active/think/cogmap/top_down_candidates_t3.png"
+          "experiments/gemini-3-pro-preview/ec2d73866de1aead/vision/active/think/cogmap/top_down_candidates_t3.png"
         ]
       },
       "consistency": {
@@ -10468,7 +10468,7 @@
         "symbolic_map": "###############\n###......######\n###......######\n###...F..######\n###......######\n###H...J.######\n###LB...D######\n######*########\n#.A...C########\n#.I....#......#\n#K...G.#......#\n#....E.#......#\n#......+......#\n#......#......#\n########......#\n###############",
         "message_images": [
           "room_data/3-room/run09/20172_facing_south.png",
-          "results_arxiv/gemini-3-pro-preview/ec2d73866de1aead/vision/active/think/cogmap/top_down_candidates_t4.png"
+          "experiments/gemini-3-pro-preview/ec2d73866de1aead/vision/active/think/cogmap/top_down_candidates_t4.png"
         ]
       },
       "consistency": {
@@ -14588,7 +14588,7 @@
         "symbolic_map": "###############\n###...A.L######\n###..R...######\n###......######\n###......######\n###H.....######\n###DJ....######\n######+########\n#....F.########\n#.PMI..#OG....#\n#E.....#K....Q#\n#......#...C..#\n#......*......#\n#..N...#.B....#\n########......#\n###############",
         "message_images": [
           "room_data/3-room/run09/20016_facing_east.png",
-          "results_arxiv/gemini-3-pro-preview/ec2d73866de1aead/vision/active/think/cogmap/top_down_candidates_t5.png"
+          "experiments/gemini-3-pro-preview/ec2d73866de1aead/vision/active/think/cogmap/top_down_candidates_t5.png"
         ]
       },
       "consistency": {
@@ -18708,7 +18708,7 @@
         "symbolic_map": "###############\n###......######\n###......######\n###......######\n###.C....######\n###F....A######\n###EKG...######\n######+########\n#......########\n#......#ILH...#\n#......#B.D...#\n#......#......#\n#......*......#\n#......#......#\n########...J..#\n###############",
         "message_images": [
           "room_data/3-room/run09/20016_facing_west.png",
-          "results_arxiv/gemini-3-pro-preview/ec2d73866de1aead/vision/active/think/cogmap/top_down_candidates_t6.png"
+          "experiments/gemini-3-pro-preview/ec2d73866de1aead/vision/active/think/cogmap/top_down_candidates_t6.png"
         ]
       },
       "consistency": {
