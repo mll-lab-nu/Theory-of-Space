@@ -395,11 +395,14 @@ def reevaluate_cogmaps_combo_dir(combo_dir: str) -> int:
         if not cogmap:
             continue
 
-        # Extract original responses
+        # Extract original responses and preserve message_images
         responses_by_type = {}
+        existing_message_images: Dict[str, List[str]] = {}
         for map_type, map_data in cogmap.items():
             if isinstance(map_data, dict) and map_data.get("original_response"):
                 responses_by_type[map_type] = map_data["original_response"]
+                if map_data.get("message_images"):
+                    existing_message_images[map_type] = map_data["message_images"]
 
         if not responses_by_type:
             continue
@@ -407,7 +410,12 @@ def reevaluate_cogmaps_combo_dir(combo_dir: str) -> int:
         # Re-evaluate using current turn log's ground truth
         try:
             cogmap_log = _evaluate_cogmaps(cm, responses_by_type, turn_log)
-            turn_log["cogmap_log"] = cogmap_log.to_dict() if cogmap_log else {}
+            result = cogmap_log.to_dict() if cogmap_log else {}
+            # Restore message_images (e.g., fog_probe annotated images)
+            for mtype, imgs in existing_message_images.items():
+                if mtype in result and isinstance(result[mtype], dict):
+                    result[mtype]["message_images"] = imgs
+            turn_log["cogmap_log"] = result
             history.update_cogmap({
                 "is_exploration_phase": True,
                 "turn_number": turn_idx + 1,

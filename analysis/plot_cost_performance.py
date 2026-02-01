@@ -460,7 +460,7 @@ def main():
     plot_scatter(
         data,
         "text",
-        "Text: Exploration Cost vs Performance",
+        "Text: Evaluation Performance vs Exploration Cost",
         os.path.join(args.output_dir, "scatter_active_text.png"),
         connect_points=False,
         show_badges=False,
@@ -471,7 +471,7 @@ def main():
     plot_scatter(
         data,
         "vision",
-        "Vision: Exploration Cost vs Performance",
+        "Vision: Evaluation Performance vs Exploration Cost",
         os.path.join(args.output_dir, "scatter_active_vision.png"),
         connect_points=False,
         show_badges=False,
@@ -482,7 +482,7 @@ def main():
     plot_scatter(
         data,
         "active",
-        "Text + Vision (Active): Exploration Cost vs Performance",
+        "Text + Vision (Active): Evaluation Performance vs Exploration Cost",
         os.path.join(args.output_dir, "scatter_active_combined.png"),
         connect_points=False,
         show_badges=False,
@@ -493,7 +493,7 @@ def main():
     plot_scatter(
         data,
         "",
-        "All: Passive vs Active (Text & Vision)",
+        "All: Evaluation Performance vs Exploration Cost",
         os.path.join(args.output_dir, "scatter_all_strategies.png"),
         connect_points=False,
         show_badges=True,

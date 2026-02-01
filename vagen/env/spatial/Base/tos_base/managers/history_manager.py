@@ -543,15 +543,27 @@ class HistoryManager:
 
         # Process image paths if save_images is enabled
         if save_images:
+            def _process_cogmap_imgs(cogmap_log: dict) -> None:
+                """Process message_images inside cogmap_log."""
+                for map_data in cogmap_log.values():
+                    if isinstance(map_data, dict) and map_data.get('message_images'):
+                        map_data['message_images'] = [os.path.relpath(p, model_dir) for p in map_data['message_images']]
+
             # Process exploration turn logs
             for turn_log in sample_data["env_turn_logs"]:
                 if turn_log.get('message_images'):
                     turn_log['message_images'] = [os.path.relpath(img_path, model_dir) for img_path in turn_log['message_images']]
+                if turn_log.get('cogmap_log'):
+                    _process_cogmap_imgs(turn_log['cogmap_log'])
 
             # Process false belief turn logs
             for turn_log in sample_data["false_belief_turn_logs"]:
                 if turn_log.get('message_images'):
                     turn_log['message_images'] = [os.path.relpath(img_path, model_dir) for img_path in turn_log['message_images']]
+                fb_log = turn_log.get('false_belief_log') or {}
+                if fb_log.get('cogmap_log'):
+                    _process_cogmap_imgs(fb_log['cogmap_log'])
+
 
             # Process evaluation tasks (all modes)
             eval_sets = {"evaluation_tasks": sample_data.get("evaluation_tasks") or {}}

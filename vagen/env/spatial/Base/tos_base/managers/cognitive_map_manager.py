@@ -235,11 +235,32 @@ class CognitiveMapManager:
         responses_by_type = {"global": str(assistant_response or "")}
         changed_objects_metrics: Dict[str, Dict[str, float]] = {}
         retention_metrics: Dict[str, Dict[str, Optional[float]]] = {}
+        # Store raw positions for inertia computation at sample level
+        inertia_data_per_object: Dict[str, Dict[str, List[float]]] = {}
 
-        # Extract last exploration pred_json for retention metric
+        # Extract last exploration pred_json for retention/inertia metric
         exp_pred_json = ((last_exploration_cogmap or {}).get("global") or {}).get("pred_json") or {}
 
-        # Evaluate each newly observed changed object separately (pos+facing only; ignore dir).
+        # Evaluate unchanged objects
+        unchanged_log = (
+            self.evaluate_cogmaps(responses_by_type, gt_room, gt_agent, unchanged_object_names)
+            if unchanged_object_names else None
+        )
+        # Collect squared distances for newly_observed_unchanged (for sigma at sample level)
+        unchanged_dists_sq: List[float] = []
+        newly_unchanged_set = {str(n).replace("_", " ") for n in newly_observed_unchanged if isinstance(n, str)}
+        if unchanged_log and unchanged_log.global_log and newly_unchanged_set:
+            pred_br = unchanged_log.global_log.pred_room_state
+            gt_br = unchanged_log.global_log.gt_room_state
+            if pred_br and gt_br:
+                for po in pred_br.objects:
+                    if po.name not in newly_unchanged_set:
+                        continue
+                    go = next((o for o in gt_br.objects if o.name == po.name), None)
+                    if go is not None:
+                        unchanged_dists_sq.append(float(np.sum((np.array(po.pos) - np.array(go.pos)) ** 2)))
+
+        # Evaluate each newly observed changed object
         for obj_name in newly_observed_changed:
             if not isinstance(obj_name, str) or not obj_name:
                 continue
@@ -257,14 +278,18 @@ class CognitiveMapManager:
                 "facing": (float(m.facing) if flags.get("ori") else None),
                 "overall": None,
             }
-            # Compute retention: current prediction vs last exploration prediction
             retention_metrics[name] = self._compute_retention(pred_only, exp_pred_json, name, flags)
-
-        # Evaluate unchanged objects as a single (global) cogmap log.
-        unchanged_log = (
-            self.evaluate_cogmaps(responses_by_type, gt_room, gt_agent, unchanged_object_names)
-            if unchanged_object_names else None
-        )
+            # Store raw positions for inertia (position-changed objects only)
+            if flags.get("pos") and pred_only and pred_only.objects and gt_only and gt_only.objects:
+                exp_info = exp_pred_json.get(name) or exp_pred_json.get(name.replace(" ", "_"))
+                new_obj = pred_only.objects[0]
+                gt_obj = gt_only.objects[0]
+                if exp_info and isinstance(exp_info, dict) and isinstance(exp_info.get("position"), list):
+                    inertia_data_per_object[name] = {
+                        "old_pos": [float(exp_info["position"][0]), float(exp_info["position"][1])],
+                        "new_pos": list(new_obj.pos),
+                        "gt_pos": list(gt_obj.pos),
+                    }
 
         # Compute unchanged_retention for newly observed unchanged objects
         unchanged_retention_metrics: Dict[str, Dict[str, Optional[float]]] = {}
@@ -281,6 +306,8 @@ class CognitiveMapManager:
             "original_response": str(assistant_response or ""),
             "changed_objects_per_object": changed_objects_metrics,
             "retention_per_object": retention_metrics,
+            "inertia_data_per_object": inertia_data_per_object,
+            "unchanged_dists_sq": unchanged_dists_sq,
             "unchanged_retention_per_object": unchanged_retention_metrics,
             "unchanged_objects": (unchanged_log.to_dict() if unchanged_log else {}),
             "newly_observed_changed_objects": [str(x).replace("_", " ") for x in newly_observed_changed if isinstance(x, str)],
@@ -556,13 +583,17 @@ class CognitiveMapManager:
             cogmap_fb_list = [m.get('cogmap_fb') or {} for m in pre_list if isinstance(m, dict) and m.get('cogmap_fb')]
             cogmap_fb_aggregated = {}
             if cogmap_fb_list:
-                # Aggregate sample averages
                 fb_metrics_list = [fb.get('metrics') or {} for fb in cogmap_fb_list]
                 fb_avg_summary = avg_nested_dicts(fb_metrics_list)
-
-                cogmap_fb_aggregated = {
-                    'metrics': fb_avg_summary,
-                }
+                # Compute summary inertia from all samples' inertia_lists
+                all_inertia = []
+                for fb in cogmap_fb_list:
+                    il = (fb.get('metrics') or {}).get('inertia_list') or []
+                    all_inertia.extend([float(v) for v in il if isinstance(v, (int, float))])
+                summary_inertia = (sum(all_inertia) / len(all_inertia)) if all_inertia else None
+                fb_avg_summary['inertia'] = summary_inertia
+                fb_avg_summary.pop('inertia_list', None)
+                cogmap_fb_aggregated = {'metrics': fb_avg_summary}
             
             # Separate fog_probe
             fog_probe = exploration.pop('fog_probe', {}) if exploration else {}
@@ -723,6 +754,33 @@ class CognitiveMapManager:
                     v = m_ret.get('facing')
                     if isinstance(v, (int, float)):
                         ret_facing_vals.append(float(v))
+
+        # Compute sigma from all unchanged_dists_sq across all turns, then compute inertia
+        all_unchanged_dists_sq: List[float] = []
+        all_inertia_data: List[Dict] = []
+        for fb_turn in (fb_turn_logs or []):
+            cm_log = ((fb_turn.get('false_belief_log') or {}).get('cogmap_log') or {})
+            all_unchanged_dists_sq.extend(cm_log.get('unchanged_dists_sq') or [])
+            for name, data in (cm_log.get('inertia_data_per_object') or {}).items():
+                if isinstance(data, dict):
+                    all_inertia_data.append(data)
+        sigma = float(np.sqrt(sum(all_unchanged_dists_sq) / len(all_unchanged_dists_sq))) if all_unchanged_dists_sq else 1.0
+        # Compute inertia for each object using sample-level sigma
+        inertia_list: List[float] = []
+        for data in all_inertia_data:
+            old_pos = np.array(data.get('old_pos', [0, 0]))
+            new_pos = np.array(data.get('new_pos', [0, 0]))
+            gt_pos = np.array(data.get('gt_pos', [0, 0]))
+            v = old_pos - gt_pos
+            e = new_pos - gt_pos
+            v_norm, e_norm = float(np.linalg.norm(v)), float(np.linalg.norm(e))
+            if v_norm < 1e-9 or e_norm < 1e-9:
+                continue
+            cos_theta = float(np.dot(e, v)) / (e_norm * v_norm + 1e-9)
+            dist_sq = float(np.sum((new_pos - old_pos) ** 2))
+            w = float(np.exp(-dist_sq / (2 * sigma ** 2 + 1e-9))) if sigma > 1e-9 else 1.0
+            inertia_list.append(cos_theta * w)
+        inertia = _avg(inertia_list)
         
         changed_avg = {'dir': None, 'pos': _avg(pos_vals), 'facing': _avg(facing_vals), 'overall': None}
         retention_avg = {'dir': None, 'pos': _avg(ret_pos_vals), 'facing': _avg(ret_facing_vals), 'overall': None}
@@ -744,6 +802,8 @@ class CognitiveMapManager:
             'changed': changed_avg,
             'retention': retention_avg,
             'unchanged': unchanged_avg,
+            'inertia': inertia,
+            'inertia_list': inertia_list,  # stored for summary-level aggregation
         }
         if unchanged_retention_avg:
             metrics['unchanged_retention'] = unchanged_retention_avg
@@ -754,7 +814,8 @@ class CognitiveMapManager:
                 r_v = retention_avg.get(k)
                 if isinstance(ur_v, (int, float)) and isinstance(r_v, (int, float)):
                     if float(ur_v) != 0:
-                        diff[k] = (float(ur_v) - float(r_v)) / float(ur_v)
+                        # diff[k] = (float(ur_v) - float(r_v)) / float(ur_v)
+                        diff[k] = 1 - (float(r_v) / float(ur_v)) ** 2
             if diff:
                 metrics['unchanged_retention_minus_retention'] = diff
         if isinstance(last_exploration_unchanged, dict) and last_exploration_unchanged:

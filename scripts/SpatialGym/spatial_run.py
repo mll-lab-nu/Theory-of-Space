@@ -679,7 +679,7 @@ def main():
         server_url: str | None = None
         
         # Start server only for exploration phase
-        if args.phase in ['explore', 'all'] and not args.no_server:
+        if args.phase in ['explore', 'explore_fb', 'all'] and not args.no_server:
             actual_port = get_adaptive_port(args.server_port, 5000)
             if actual_port != args.server_port:
                 print(f"Using port {actual_port} instead of requested {args.server_port}")

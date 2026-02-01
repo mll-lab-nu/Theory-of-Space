@@ -115,10 +115,7 @@ class HTMLGenerator:
         return p
 
     def _load_passive_prompt_context(self, entry: Dict) -> Optional[Dict[str, object]]:
-        """Load (system/user) prompt and attached images before evaluation questions for passive runs.
-
-        We reconstruct the combo directory from history_state.json stored in entry["config"].
-        """
+        """Load (system/user) prompt and attached images before evaluation questions for passive runs."""
         if not self._is_passive_combo(entry):
             return None
         cfg = (entry or {}).get("config") or {}
@@ -152,14 +149,25 @@ class HTMLGenerator:
         images: List[str] = []
         if messages and isinstance(messages[0], dict) and messages[0].get("role") == "system":
             sys_prompt = messages[0].get("content") or ""
-        # First user message is the initial prompt (before evaluation questions are appended).
         for m in messages:
             if isinstance(m, dict) and m.get("role") == "user":
                 user_prompt = m.get("content") or ""
                 images = list(m.get("images") or [])
                 break
-        images = [self._relpath_from_html(p) for p in images if isinstance(p, str)]
-        return {"system": sys_prompt, "user": user_prompt, "images": images}
+
+        # Resolve image paths: paths in messages.json are relative to project root (cwd)
+        resolved_images = []
+        for p in images:
+            if not isinstance(p, str) or not p:
+                continue
+            # paths are stored relative to project root (cwd)
+            abs_p = os.path.abspath(p)
+            if os.path.exists(abs_p):
+                resolved_images.append(os.path.relpath(abs_p, self.html_dir))
+            else:
+                # Fallback to existing logic
+                resolved_images.append(self._relpath_from_html(p))
+        return {"system": sys_prompt, "user": user_prompt, "images": resolved_images}
 
     def _extract_combinations_from_samples(self) -> List[str]:
         """Extract unique combination keys from all samples"""
@@ -196,10 +204,10 @@ class HTMLGenerator:
     def _order_fb_metrics(metrics: Dict) -> Dict:
         if not isinstance(metrics, dict):
             return metrics
-        preferred = ["changed", "retention", "unchanged", "unchanged_retention", "unchanged_retention_minus_retention", "unchanged_exploration"]
+        preferred = ["inertia", "changed", "retention", "unchanged", "unchanged_retention", "unchanged_retention_minus_retention", "unchanged_exploration"]
         ordered = {k: metrics[k] for k in preferred if k in metrics}
         for k, v in metrics.items():
-            if k not in ordered:
+            if k not in ordered and k != "inertia_list":  # exclude inertia_list from display
                 ordered[k] = v
         return ordered
 
@@ -410,7 +418,7 @@ class HTMLGenerator:
                 if cogmap_fb_data and cogmap_fb_data.get('metrics'):
                     f.write("<div class='metrics-box cogmap-fb'>\n")
                     f.write("<h4>🧭 False Belief CogMap</h4>\n")
-                    f.write(VisualizationHelper.dict_to_html(cogmap_fb_data['metrics']))
+                    f.write(VisualizationHelper.dict_to_html(self._order_fb_metrics(cogmap_fb_data['metrics'])))
                     f.write("</div>\n")
 
             # Group correlation performance
