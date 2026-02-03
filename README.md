@@ -17,7 +17,7 @@
 **[2026/01]** Theory of Space is accepted by ICLR 2026
 
 ## Introduction
-We introduce **Theory of Space (ToS)**, a benchmark evaluating whether foundation models can actively construct spatial beliefs from partial observations. Unlike passive reasoning, ToS requires agents to explore, update, and exploit a globally consistent spatial memory. Current multimodal models struggle with this active, self-directed construction of spatial belief, often relying on passive reasoning from static views.
+We introduce **Theory of Space (ToS)**, a benchmark evaluating whether foundation models can actively construct spatial beliefs from partial observations. Unlike passive reasoning, ToS requires agents to explore, revise, and exploit a globally consistent spatial memory. Current multimodal models struggle with this active, self-directed construction of spatial belief, often relying on passive reasoning from static views.
 
 ![image](assets/main.jpg)
 
@@ -25,7 +25,7 @@ We introduce **Theory of Space (ToS)**, a benchmark evaluating whether foundatio
 
 Theory of Space is the ability to build a mental map from partial views. We define it as three coupled abilities:
 *   **Construct**: Actively explore and integrate partial observations into a globally consistent belief.
-*   **Update**: Revise the belief when new evidence conflicts with earlier assumptions.
+*   **Revision**: Revise the belief when new evidence conflicts with earlier assumptions.
 *   **Exploit**: Use the current belief to answer spatial queries and guide the next action.
 
 ### Exploration Environment
@@ -316,9 +316,9 @@ We probe the agent's internal belief state to understand *why* failures occur. W
 *   **Perception is the bottleneck**: Vision perception remains a key bottleneck, especially for object orientation.
 *   **Unstable belief**: Unstable cognitive map prediction degrades spatial belief beyond initial perception.
 
-### Belief Update
+### Belief Revision
 
-An agent must revise its belief when new evidence conflicts with earlier assumptions. We introduce a dynamic perturbation task to probe **Belief Update**. After exploration, objects are secretly relocated, creating a "false belief" that conflicts with new observations. The agent must actively re-explore to identify changes and revise its map.
+An agent must revise its belief when new evidence conflicts with earlier assumptions. We introduce a dynamic perturbation task to probe **Belief Revision**. After exploration, objects are secretly relocated, creating a "false belief" that conflicts with new observations. The agent must actively re-explore to identify changes and revise its map.
 
 #### Results
 <table style="font-size: 12px;">
@@ -385,7 +385,7 @@ Active exploration is a key bottleneck: performance drops when models must choos
 </p>
 
 #### 02. Modality Gap
-A clear modality gap persists: text-based settings consistently outperform vision-based settings in spatial belief construction and utilization.
+A clear modality gap persists: text-based settings consistently outperform vision-based settings in spatial belief construction and exploitation.
 
 <p align="center">
   <img src="assets/vision-text-gap-passive.png" width="45%" alt="Vision vs text gap under passive setting" />
@@ -438,16 +438,16 @@ Vision perception remains a key bottleneck, especially for object orientation. U
 
 ## Usage
 
-### Setup (run everything)
+### Setup
 1. **Clone the `release` branch**
    ```bash
    git clone --single-branch --branch release https://github.com/williamzhangNU/Theory-of-Space.git
    cd Theory-of-Space
 2. **Configure keys and run setup**
   - Open `setup.sh` and set any required API keys / environment variables.
-  - The run:
+  - Run:
     ```bash
-    source setup.sh
+    source setup.sh --run-exp    # setup + run experiments
     ```
 
 ### Model configuration
