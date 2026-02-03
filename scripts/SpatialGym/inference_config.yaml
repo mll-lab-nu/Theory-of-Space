@@ -16,15 +16,16 @@ eval_task_counts:
   dir: 3
   pov: 3
   bwd_pov_text: 3
-  bwd_pov_vision: 3
   fwd_fov: 3
   bwd_nav_text: 3
-  bwd_nav_vision: 3
   e2a: 3
   rot: 3
   fwd_loc: 3
   bwd_loc_text: 3
-  bwd_loc_vision: 3
+  # vision question (not included in paper)
+  # bwd_pov_vision: 3
+  # bwd_nav_vision: 3
+  # bwd_loc_vision: 3
 
 # Output configuration
 output_dir: "results"

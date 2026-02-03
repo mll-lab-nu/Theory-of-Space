@@ -26,11 +26,6 @@ if ! conda env list | awk '{print $1}' | grep -qx "tos"; then
   python -m pip install -e .
 fi
 
-# Add api keys (if you have not set them up yet)
-# export OPENAI_API_KEY=
-# export ANTHROPIC_API_KEY=
-# export GOOGLE_API_KEY=
-
 # Add huggingface token (optional, avoid 429 rate limit)
 # export HF_TOKEN=
 
@@ -51,6 +46,12 @@ else
 
   rm -f room_data/*.zip
 fi
+
+
+# Add api keys (if you have not set them up yet)
+# export OPENAI_API_KEY=
+# export ANTHROPIC_API_KEY=
+# export GOOGLE_API_KEY=
 
 # run experiments
 if $RUN_EXP; then

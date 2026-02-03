@@ -547,3 +547,10 @@ Each sample page features comprehensive data for each turn, along with relevant 
 <p align="center">
   <img src="assets/visualization_sample.png" width="60%" alt="Visulization of each sample" />
 </p>
+
+
+## Related Resources
+- [ToS-vision-scenes](https://github.com/yw2544/ToS-vision-scenes): repo for generating 3D scenes for Theory of Space.
+- [VAGEN](https://github.com/mll-lab-nu/VAGEN): active exploration is implemented based on VAGEN.
+
+## Citation
