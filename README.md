@@ -65,6 +65,7 @@ Survey-level probes ask whether a model can infer unseen views and handle geomet
   </thead>
   <tbody>
     <tr><td colspan="12"><strong>Vision-based World</strong></td></tr>
+    <tr><td colspan="12"><em>Proprietary Models</em></td></tr>
     <tr>
       <td>GPT-5.2</td>
       <td>17.2</td>
@@ -86,9 +87,10 @@ Survey-level probes ask whether a model can infer unseen views and handle geomet
       <td>37.4</td><td>34.7</td><td>33.7</td><td>50.9</td>
       <td>29.6</td>
     </tr>
+    <tr><td colspan="12"><em>Open-source Models</em></td></tr>
     <tr>
       <td>GLM-4.6V</td>
-      <td>15.0</td>
+      <td><b>15.0</b></td>
       <td>15.8</td><td>18.5</td><td>3.3</td><td>14.0</td><td>0.7</td>
       <td>18.9</td><td>8.0</td><td>18.5</td><td>31.8</td>
       <td>14.4</td>
@@ -101,6 +103,7 @@ Survey-level probes ask whether a model can infer unseen views and handle geomet
       <td><b>21.3</b></td>
     </tr>
     <tr><td colspan="12"><strong>Text-based World</strong></td></tr>
+    <tr><td colspan="12"><em>Proprietary Models</em></td></tr>
     <tr>
       <td>GPT-5.2</td>
       <td><b>11.4</b></td>
@@ -122,6 +125,7 @@ Survey-level probes ask whether a model can infer unseen views and handle geomet
       <td>68.8</td><td>76.3</td><td>57.0</td><td>67.0</td>
       <td>65.9</td>
     </tr>
+    <tr><td colspan="12"><em>Open-source Models</em></td></tr>
     <tr>
       <td>GLM-4.6V</td>
       <td>14.5</td>
@@ -132,15 +136,15 @@ Survey-level probes ask whether a model can infer unseen views and handle geomet
     <tr>
       <td>InternVL-3.5</td>
       <td>15.0</td>
-      <td>28.8</td><td>44.8</td><td>26.0</td><td>36.8</td><td>7.3</td>
+      <td>28.8</td><td>44.8</td><td>26.0</td><td><b>36.8</b></td><td>7.3</td>
       <td>31.0</td><td>27.7</td><td>33.8</td><td>38.9</td>
       <td>30.6</td>
     </tr>
     <tr>
       <td>Qwen3-VL</td>
-      <td>14.1</td>
+      <td><b>14.1</b></td>
       <td><b>32.3</b></td><td><b>45.7</b></td><td><b>48.2</b></td><td>33.3</td><td><b>11.7</b></td>
-      <td><b>36.4</b></td><td><b>34.7</b></td><td>35.7</td><td><b>49.9</b></td>
+      <td><b>36.4</b></td><td><b>34.7</b></td><td><b>35.7</b></td><td><b>49.9</b></td>
       <td><b>36.8</b></td>
     </tr>
   </tbody>
@@ -163,16 +167,17 @@ Survey-level probes ask whether a model can infer unseen views and handle geomet
   </thead>
   <tbody>
     <tr><td colspan="11"><strong>Vision-based World</strong></td></tr>
+    <tr><td colspan="11"><em>Proprietary Models</em></td></tr>
     <tr>
       <td>GPT-5.2</td>
       <td>47.3</td><td>35.0</td><td><b>63.9</b></td><td><b>54.5</b></td><td>49.3</td>
-      <td>64.8</td><td>83.3</td><td>50.3</td><td>65.6</td>
+      <td>64.8</td><td>83.3</td><td>50.3</td><td><b>65.6</b></td>
       <td>57.1</td>
     </tr>
     <tr>
       <td>Gemini-3 Pro</td>
       <td><b>63.8</b></td><td><b>36.3</b></td><td>57.5</td><td>49.0</td><td><b>58.0</b></td>
-      <td><b>67.2</b></td><td><b>85.3</b></td><td><b>70.4</b></td><td><b>57.0</b></td>
+      <td><b>67.2</b></td><td><b>85.3</b></td><td><b>70.4</b></td><td>57.0</td>
       <td><b>60.5</b></td>
     </tr>
     <tr>
@@ -181,19 +186,21 @@ Survey-level probes ask whether a model can infer unseen views and handle geomet
       <td>54.8</td><td>58.3</td><td>44.7</td><td>54.8</td>
       <td>43.1</td>
     </tr>
+    <tr><td colspan="11"><em>Open-source Models</em></td></tr>
     <tr>
       <td>GLM-4.6V</td>
-      <td>11.5</td><td>24.5</td><td>4.7</td><td>19.0</td><td>2.7</td>
+      <td>11.5</td><td>24.5</td><td>4.7</td><td><b>19.0</b></td><td>2.7</td>
       <td>22.9</td><td>11.7</td><td>20.0</td><td>33.6</td>
       <td>16.7</td>
     </tr>
     <tr>
       <td>Qwen3-VL</td>
-      <td>20.8</td><td>28.3</td><td>22.7</td><td>16.7</td><td>4.7</td>
-      <td>33.2</td><td>21.7</td><td>27.3</td><td>40.8</td>
+      <td><b>20.8</b></td><td><b>28.3</b></td><td><b>22.7</b></td><td>16.7</td><td><b>4.7</b></td>
+      <td><b>33.2</b></td><td><b>21.7</b></td><td><b>27.3</b></td><td><b>40.8</b></td>
       <td><b>24.9</b></td>
     </tr>
     <tr><td colspan="11"><strong>Text-based World</strong></td></tr>
+    <tr><td colspan="11"><em>Proprietary Models</em></td></tr>
     <tr>
       <td>GPT-5.2</td>
       <td><b>84.5</b></td><td>88.2</td><td><b>97.0</b></td><td><b>89.0</b></td><td><b>76.0</b></td>
@@ -202,7 +209,7 @@ Survey-level probes ask whether a model can infer unseen views and handle geomet
     </tr>
     <tr>
       <td>Gemini-3 Pro</td>
-      <td>82.7</td><td><b>92.7</b></td><td><b>97.0</b></td><td>87.5</td><td><b>75.7</b></td>
+      <td>82.7</td><td><b>92.7</b></td><td><b>97.0</b></td><td>87.5</td><td>75.7</td>
       <td>86.2</td><td>91.3</td><td>85.7</td><td>80.0</td>
       <td>86.5</td>
     </tr>
@@ -212,6 +219,7 @@ Survey-level probes ask whether a model can infer unseen views and handle geomet
       <td>76.9</td><td>74.3</td><td>59.2</td><td>70.7</td>
       <td>73.6</td>
     </tr>
+    <tr><td colspan="11"><em>Open-source Models</em></td></tr>
     <tr>
       <td>GLM-4.6V</td>
       <td>22.3</td><td>39.8</td><td>25.0</td><td>25.3</td><td>4.7</td>
@@ -226,8 +234,8 @@ Survey-level probes ask whether a model can infer unseen views and handle geomet
     </tr> 
     <tr>
       <td>Qwen3-VL</td>
-      <td>40.8</td><td>69.3</td><td>56.5</td><td>50.0</td><td>17.7</td>
-      <td>42.8</td><td>40.3</td><td>42.5</td><td>54.6</td>
+      <td><b>40.8</b></td><td><b>69.3</b></td><td><b>56.5</b></td><td><b>50.0</b></td><td><b>17.7</b></td>
+      <td><b>42.8</b></td><td><b>40.3</b></td><td><b>42.5</b></td><td><b>54.6</b></td>
       <td><b>45.6</b></td>
     </tr>
   </tbody>
@@ -282,13 +290,13 @@ We probe the agent's internal belief state to understand *why* failures occur. W
       <td>53.7</td>
     </tr>
     <tr>
-      <td>GEMINI-3 PRO</td>
+      <td>Gemini-3 Pro</td>
       <td><b>32.2</b></td><td><b>62.5</b></td><td><b>52.1</b></td>
       <td><b>43.8</b></td><td>68.5</td>
       <td>52.9</td><td><b>68.3</b></td>
       <td>61.8</td><td><b>62.0</b></td>
       <td><b>98.8</b></td><td><b>73.9</b></td>
-      <td><b>68.8</b></td>
+      <td><b>70.2</b></td>
     </tr>
     <tr><td colspan="13"><strong>Text-based World</strong></td></tr>
     <tr>
@@ -297,16 +305,16 @@ We probe the agent's internal belief state to understand *why* failures occur. W
       <td><b>100</b></td><td>86.8</td>
       <td><b>96.4</b></td><td><b>86.0</b></td>
       <td><b>96.7</b></td><td>67.6</td>
-      <td>98.0</td><td>86.7</td>
+      <td>98.0</td><td><b>86.7</b></td>
       <td>64.5</td>
     </tr>
     <tr>
-      <td>GEMINI-3 PRO</td>
+      <td>Gemini-3 Pro</td>
       <td><b>92.5</b></td><td><b>75.5</b></td><td><b>81.4</b></td>
       <td>99.9</td><td><b>88.2</b></td>
       <td>91.6</td><td>84.8</td>
       <td>90.8</td><td><b>67.7</b></td>
-      <td><b>99.9</b></td><td><b>85.2</b></td>
+      <td><b>99.9</b></td><td>85.2</td>
       <td><b>79.2</b></td>
     </tr>
   </tbody>
@@ -348,25 +356,25 @@ An agent must revise its belief when new evidence conflicts with earlier assumpt
     </tr>
     <tr>
       <td>Gemini-3 Pro</td>
-      <td>10.29</td><td>3.23</td>
-      <td>23.9</td><td>82.5</td>
-      <td>30.3</td><td>63.1</td>
-      <td>51.1</td><td>14.4</td>
+      <td><b>10.29</b></td><td><b>3.23</b></td>
+      <td><b>23.9</b></td><td><b>82.5</b></td>
+      <td><b>30.3</b></td><td><b>63.1</b></td>
+      <td><b>51.1</b></td><td><b>14.4</b></td>
     </tr>
     <tr><td colspan="9"><strong>Text-based World</strong></td></tr>
     <tr>
       <td>GPT-5.2</td>
-      <td>6.92</td><td>0.55</td>
+      <td><b>6.92</b></td><td>0.55</td>
       <td>97.9</td><td>98.4</td>
       <td>89.5</td><td>69.7</td>
-      <td>5.5</td><td>12.5</td>
+      <td><b>5.5</b></td><td>12.5</td>
     </tr>
     <tr>
       <td>Gemini-3 Pro</td>
-      <td>7.79</td><td>0.18</td>
-      <td>98.7</td><td>98.8</td>
-      <td>91.8</td><td>72.9</td>
-      <td>7.9</td><td>5.7</td>
+      <td>7.79</td><td><b>0.18</b></td>
+      <td><b>98.7</b></td><td><b>98.8</b></td>
+      <td><b>91.8</b></td><td><b>72.9</b></td>
+      <td>7.9</td><td><b>5.7</b></td>
     </tr>
   </tbody>
 </table>
@@ -418,24 +426,24 @@ Performance drops when models must actively explore.
     <tr><td colspan="7"><strong>Text-based World</strong></td></tr>
     <tr>
       <td>GPT-5.2</td>
-      <td>92.3</td><td>77.8</td><td>6.2</td>
-      <td>86.5</td><td>66.0</td><td>16.4</td>
+      <td><b>92.3</b></td><td>77.8</td><td><b>6.2</b></td>
+      <td><b>86.5</b></td><td>66.0</td><td><b>16.4</b></td>
     </tr>
     <tr>
       <td>Gemini-3 Pro</td>
-      <td>86.7</td><td>80.6</td><td>6.2</td>
-      <td>81.2</td><td>77.7</td><td>19.7</td>
+      <td>86.7</td><td><b>80.6</b></td><td><b>6.2</b></td>
+      <td>81.2</td><td><b>77.7</b></td><td>19.7</td>
     </tr>
     <tr><td colspan="7"><strong>Vision-based World</strong></td></tr>
     <tr>
       <td>GPT-5.2</td>
-      <td>59.3</td><td>51.5</td><td>10.8</td>
+      <td><b>59.3</b></td><td>51.5</td><td>10.8</td>
       <td>52.6</td><td>40.3</td><td>23.2</td>
     </tr>
     <tr>
       <td>Gemini-3 Pro</td>
-      <td>58.3</td><td>57.8</td><td>6.6</td>
-      <td>56.2</td><td>51.5</td><td>19.7</td>
+      <td>58.3</td><td><b>57.8</b></td><td><b>6.6</b></td>
+      <td><b>56.2</b></td><td><b>51.5</b></td><td><b>19.7</b></td>
     </tr>
   </tbody>
 </table>
