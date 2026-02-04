@@ -9,7 +9,7 @@
 <p align="center">
   <a href="#"><img src="https://img.shields.io/badge/📜_Paper-B31B1B?style=for-the-badge&logo=arXiv&logoColor=white" alt="Paper"></a>
   <a href="https://theory-of-space.github.io"><img src="https://img.shields.io/badge/🌐_Website-00C851?style=for-the-badge&logoColor=white" alt="Website"></a>
-  <a href="https://huggingface.co/datasets/yw12356/tos_data"><img src="https://img.shields.io/badge/🗂️_Datasets-1E88E5?style=for-the-badge&logoColor=white" alt="Datasets"></a>
+  <a href="https://huggingface.co/datasets/MLL-Lab/tos-data"><img src="https://img.shields.io/badge/🗂️_Datasets-1E88E5?style=for-the-badge&logoColor=white" alt="Datasets"></a>
   <a href="https://williamzhangnu.github.io/Theory-of-Space/experiments/"><img src="https://img.shields.io/badge/📊_Results-FB8C00?style=for-the-badge&logoColor=white" alt="Results"></a>
 </p>
 
@@ -371,10 +371,24 @@ An agent must revise its belief when new evidence conflicts with earlier assumpt
   </tbody>
 </table>
 
+#### Belief Revision Conclusion
+*   **Severe Belief Inertia in Vision**: Vision agents fail to overwrite obsolete orientation beliefs despite new evidence.
+*   **High Redundancy**: Vision agents take many redundant steps after changes are visible, indicating failure to recognize the revision is complete.
+
 ### Key Findings
 
-#### 01. Active Exploration Bottleneck
-Active exploration is a key bottleneck: performance drops when models must choose actions under partial observability, compared to passive comprehension from standardized logs.
+#### 01. Modality Gap
+A clear modality gap persists: text-based settings consistently outperform vision-based settings in spatial belief construction and exploitation.
+
+<p align="center">
+  <img src="assets/vision-text-gap-passive.png" width="45%" alt="Vision vs text gap under passive setting" />
+  <img src="assets/vision-text-gap-active.png" width="45%" alt="Vision vs text gap under active setting" />
+</p>
+
+#### 02. Active Exploration is the Bottleneck
+Performance drops when models must actively explore.
+
+**a) Performance and Efficiency Deficit**: Active agents score lower than reasoning on rule-based program histories, and explore less efficiently than the program.
 
 <p align="center">
   <img src="assets/passive-active-gap-text.png" width="45%" alt="Passive vs active gap in text world" />
@@ -384,16 +398,9 @@ Active exploration is a key bottleneck: performance drops when models must choos
   <img src="assets/infogain.png" width="45%" alt="Information gain analysis" />
 </p>
 
-#### 02. Modality Gap
-A clear modality gap persists: text-based settings consistently outperform vision-based settings in spatial belief construction and exploitation.
+**b) Incomplete Coverage**: Active agent fails to achieve complete information coverage. Models explore redundantly, requiring ≥14 steps without improving belief accuracy, while rule-based proxies reach target coverage in ~9 steps.
 
-<p align="center">
-  <img src="assets/vision-text-gap-passive.png" width="45%" alt="Vision vs text gap under passive setting" />
-  <img src="assets/vision-text-gap-active.png" width="45%" alt="Vision vs text gap under active setting" />
-</p>
-
-#### 03. Active-Passive Gap Increases with Complexity
-The active–passive gap increases with complexity; Gemini-3 Pro scales much better. As the number of rooms increases, exploration cost rises accordingly. For both GPT-5.2 and Gemini-3 Pro, performance declines as the room number increases, and the active–passive performance gap widens with room number.
+**c) Complexity-Widened Gap**: The active–passive gap increases with complexity; Gemini-3 Pro scales much better. As the number of rooms increases, exploration cost rises accordingly.
 
 <table style="font-size: 12px;">
   <thead>
@@ -433,8 +440,31 @@ The active–passive gap increases with complexity; Gemini-3 Pro scales much bet
   </tbody>
 </table>
 
-#### 04. Bottleneck: Perception & Stability
-Vision perception remains a key bottleneck, especially for object orientation. Unstable cognitive map prediction degrades spatial belief beyond initial perception.
+#### 03. Cognitive Map Failures
+Orientation, stability, and belief drift issues:
+*   **Orientation Gap**: Vision perception is a bottleneck, especially for object orientation.
+*   **Unstable Map**: Beliefs about previously observed objects degrade over time.
+*   **Belief Drift**: New updates corrupt earlier correct perceptions, lowering final correctness.
+
+#### 04. Maps as a Diagnostic Proxy
+Map correctness correlates with downstream success.
+
+*   **Sufficiency Test**: Conditioning on ground-truth maps yields near-perfect accuracy (~95%), confirming the JSON map format captures all necessary information for tasks.
+*   **Alignment Test**: Prompting models to explicitly generate maps before answering slightly degrades performance. This *externalization gap* indicates the model's latent internal belief is richer than its discretized JSON output.
+
+**While lossy, the explicit map remains a strong diagnostic proxy.** Map correctness correlates significantly with downstream success:
+
+| Methods | Text (%) | Vision (%) |
+|---------|----------|------------|
+| GPT-5.2 | 41.8 | 57.0 |
+| Gemini-3 Pro | 46.6 | 64.5 |
+
+*Pearson correlation (r) between spatial-belief correctness and downstream evaluation performance. All correlations are significant (p<.001).*
+
+#### 05. Vision Deficiencies & Belief Inertia
+Vision agents persist in obsolete beliefs.
+*   **Vision-based Revision Failures**: Vision agents suffer from excessive exploration redundancy and poor accuracy in identifying object shifts.
+*   **Belief Inertia**: Agents, especially vision-based ones, persist in obsolete spatial coordinates despite new observations.
 
 ## Usage
 
