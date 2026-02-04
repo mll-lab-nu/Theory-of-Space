@@ -33,7 +33,7 @@ fi
 if [ -d "room_data/3-room" ] && [ "$(ls -A room_data/3-room 2>/dev/null)" ]; then
   echo "room_data/3-room already exists and is not empty, skipping."
 else
-  hf download williamzhangNU/tos_data --repo-type dataset --local-dir room_data
+  hf download MLL-Lab/tos-data --repo-type dataset --local-dir room_data
   mkdir -p room_data/3-room
   unzip room_data/*.zip -d room_data/3-room
 
