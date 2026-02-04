@@ -383,9 +383,9 @@ An agent must revise its belief when new evidence conflicts with earlier assumpt
 *   **Severe Belief Inertia in Vision**: Vision agents fail to overwrite obsolete orientation beliefs despite new evidence.
 *   **High Redundancy**: Vision agents take many redundant steps after changes are visible, indicating failure to recognize the revision is complete.
 
-### Key Findings
+## Key Findings
 
-#### 01. Modality Gap
+### 01. Modality Gap
 A clear modality gap persists: text-based settings consistently outperform vision-based settings in spatial belief construction and exploitation.
 
 <p align="center">
@@ -393,7 +393,7 @@ A clear modality gap persists: text-based settings consistently outperform visio
   <img src="assets/vision-text-gap-active.png" width="45%" alt="Vision vs text gap under active setting" />
 </p>
 
-#### 02. Active Exploration is the Bottleneck
+### 02. Active Exploration is the Bottleneck
 Performance drops when models must actively explore.
 
 **a) Performance and Efficiency Deficit**: Active agents score lower than reasoning on rule-based program histories, and explore less efficiently than the program.
@@ -448,13 +448,13 @@ Performance drops when models must actively explore.
   </tbody>
 </table>
 
-#### 03. Cognitive Map Failures
+### 03. Cognitive Map Failures
 Orientation, stability, and belief drift issues:
 *   **Orientation Gap**: Vision perception is a bottleneck, especially for object orientation.
 *   **Unstable Map**: Beliefs about previously observed objects degrade over time.
 *   **Belief Drift**: New updates corrupt earlier correct perceptions, lowering final correctness.
 
-#### 04. Maps as a Diagnostic Proxy
+### 04. Maps as a Diagnostic Proxy
 Map correctness correlates with downstream success.
 
 *   **Sufficiency Test**: Conditioning on ground-truth maps yields near-perfect accuracy (~95%), confirming the JSON map format captures all necessary information for tasks.
@@ -469,7 +469,7 @@ Map correctness correlates with downstream success.
 
 *Pearson correlation (r) between spatial-belief correctness and downstream evaluation performance. All correlations are significant (p<.001).*
 
-#### 05. Vision Deficiencies & Belief Inertia
+### 05. Vision Deficiencies & Belief Inertia
 Vision agents persist in obsolete beliefs.
 *   **Vision-based Revision Failures**: Vision agents suffer from excessive exploration redundancy and poor accuracy in identifying object shifts.
 *   **Belief Inertia**: Agents, especially vision-based ones, persist in obsolete spatial coordinates despite new observations.
