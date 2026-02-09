@@ -481,7 +481,7 @@ Vision agents persist in obsolete beliefs.
 ### Setup
 1. **Clone the `release` branch**
    ```bash
-   git clone --single-branch --branch release https://github.com/williamzhangNU/Theory-of-Space.git
+   git clone --single-branch --branch release https://github.com/mll-lab-nu/Theory-of-Space.git
    cd Theory-of-Space
 2. **Configure keys and run setup**
   - Open `setup.sh` and set any required API keys / environment variables.
