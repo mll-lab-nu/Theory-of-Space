@@ -589,6 +589,9 @@ Each sample page features comprehensive data for each turn, along with relevant 
 </p>
 
 
+## Visual Scene Generation
+To generate your own scenes, check https://github.com/yw2544/ToS-vision-scenes
+
 ## Related Resources
 - [ToS-vision-scenes](https://github.com/yw2544/ToS-vision-scenes): repo for generating 3D scenes for Theory of Space.
 - [VAGEN](https://github.com/mll-lab-nu/VAGEN): active exploration is implemented based on VAGEN.
