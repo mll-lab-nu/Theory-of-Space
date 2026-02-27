@@ -119,8 +119,8 @@ class ExplorationManager:
         
     def _execute_and_update(self, action: BaseAction, **kwargs) -> ActionResult:
         """Execute action and update exploration state."""
-        # Enforce "observed-before-move"
-        if isinstance(action, MoveAction):
+        # Enforce "observed-before-move" and "observed-before-query"
+        if isinstance(action, (MoveAction, QueryAction)):
             kwargs['observed_items'] = list(self.observed_items)
         result = action.execute(self.exploration_room, self.agent, **kwargs)
         # Log every action result to history immediately

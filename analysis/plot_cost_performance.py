@@ -83,7 +83,8 @@ def preprocess_icon(
     img_path: str,
     target_size: int = 256,
     badge_path: Optional[str] = None,
-    alpha_scale: float = 1.0
+    alpha_scale: float = 1.0,
+    to_greyscale: bool = False
 ) -> Image.Image:
     """
     Load, crop transparent borders, resize icon, and optionally add a badge.
@@ -117,6 +118,10 @@ def preprocess_icon(
         canvas.paste(img, (0, padding))
         canvas.paste(badge, (new_size - badge_size, 0), badge)
         composed = canvas
+
+    if to_greyscale:
+        # Convert to LA (Luminance + Alpha) then back to RGBA to preserve transparency
+        composed = composed.convert('LA').convert('RGBA')
 
     return _apply_alpha_scale(composed, alpha_scale)
 
@@ -238,6 +243,7 @@ def plot_scatter(
     connect_points: bool = True,
     show_badges: bool = False,
     alpha_rules: Optional[List[Tuple[str, float]]] = None,
+    greyscale_rules: Optional[List[str]] = None,
 ) -> None:
     """Create a scatter plot for cost vs performance."""
     _, ax = plt.subplots(figsize=(6.5, 5))
@@ -275,6 +281,15 @@ def plot_scatter(
             if key in name:
                 return alpha
         return 1.0
+
+    def resolve_greyscale(config_name: str) -> bool:
+        if not greyscale_rules:
+            return False
+        name = config_name.lower()
+        for key in greyscale_rules:
+            if key in name:
+                return True
+        return False
 
     colors = ['#4285f4', '#ea4335', '#34a853', '#fbbc05', '#ff6d00', '#795548', '#673ab7', '#9c27b0']
     all_points: List[dict] = []
@@ -315,6 +330,7 @@ def plot_scatter(
                 'color': color,
                 'badge_path': badge_path,
                 'alpha_scale': resolve_alpha(config_name),
+                'to_greyscale': resolve_greyscale(config_name),
                 'is_active': "active" in config_name.lower()
             })
             pts.append((cost, acc))
@@ -340,7 +356,8 @@ def plot_scatter(
             img = preprocess_icon(
                 p['icon_path'],
                 badge_path=p.get('badge_path'),
-                alpha_scale=p.get('alpha_scale', 1.0)
+                alpha_scale=p.get('alpha_scale', 1.0),
+                to_greyscale=p.get('to_greyscale', False)
             )
             imagebox = OffsetImage(img, zoom=p['icon_zoom'] * 0.6)
             ax.add_artist(AnnotationBbox(
@@ -467,7 +484,7 @@ def main():
         alpha_rules=[("passive", 0.5)]
     )
 
-    # Vision: active + passive, no badges, passive faded
+    # Vision: active + passive, no badges, passive faded AND GREYSCALE
     plot_scatter(
         data,
         "vision",
@@ -475,7 +492,8 @@ def main():
         os.path.join(args.output_dir, "scatter_active_vision.png"),
         connect_points=False,
         show_badges=False,
-        alpha_rules=[("passive", 0.5)]
+        alpha_rules=[("passive", 0.15)],  # Reduced opacity (more faded)
+        greyscale_rules=["passive"]       # Apply greyscale to passive
     )
 
     # Text + Vision (active only), no badges, text faded
