@@ -33,6 +33,9 @@ class OpenAIModelInterface(BaseModelInterface):
                 api_key = "EMPTY"
         elif org == "openrouter":
             api_key = config.api_key or os.getenv("OPENROUTER_API_KEY")
+        elif org == "byteplus":
+            # Support both ARK_API_KEY (BytePlus Ark standard) and BYTEPLUS_API_KEY
+            api_key = config.api_key or os.getenv("ARK_API_KEY") or os.getenv("BYTEPLUS_API_KEY")
         else:
             api_key = config.api_key or os.getenv("OPENAI_API_KEY")
 
