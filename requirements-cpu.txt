@@ -1,0 +1,87 @@
+# CPU-only requirements for Theory of Space
+# Use this when running on machines without a GPU (Text World only).
+# Vision World requires a GPU and the full requirements.txt.
+#
+# Install with:
+#   pip install -r requirements-cpu.txt
+#
+# Note: vLLM (self-hosted open-source models) requires a GPU.
+#       All proprietary API models (OpenAI, Anthropic, Google, BytePlus) work fine CPU-only.
+
+aiohttp==3.13.3
+anthropic==0.71.0
+antlr4-python3-runtime==4.9.3
+anyio==4.12.1
+certifi==2026.1.4
+charset-normalizer==3.4.4
+click==8.3.1
+contourpy==1.3.2
+cycler==0.12.1
+datasets==4.1.1
+dill==0.4.0
+distro==1.9.0
+fastapi==0.128.0
+filelock==3.20.0
+Flask==3.1.2
+fonttools==4.61.1
+fsspec==2025.9.0
+google-auth==2.47.0
+google-genai==1.60.0
+gymnasium==1.2.3
+httpcore==1.0.9
+httpx==0.28.1
+huggingface-hub==0.36.0
+hydra-core==1.3.2
+idna==3.11
+imageio==2.37.0
+itsdangerous==2.2.0
+Jinja2==3.1.6
+jsonschema==4.26.0
+kiwisolver==1.4.9
+loguru==0.7.3
+markdown-it-py==4.0.0
+MarkupSafe==2.1.5
+matplotlib==3.10.8
+mpmath==1.3.0
+multiprocess==0.70.16
+networkx==3.4.2
+numpy==2.2.6
+omegaconf==2.3.0
+openai==2.15.0
+packaging==26.0
+pandas==2.3.3
+pillow==11.3.0
+platformdirs==4.5.1
+psutil==7.2.1
+pyarrow==23.0.0
+pydantic==2.12.5
+pydantic-settings==2.12.0
+pyparsing==3.3.2
+python-dateutil==2.9.0.post0
+python-dotenv==1.2.1
+PyYAML==6.0.3
+referencing==0.37.0
+regex==2026.1.15
+requests==2.32.5
+rich==14.2.0
+rpds-py==0.30.0
+scipy==1.15.3
+six==1.17.0
+sniffio==1.3.1
+starlette==0.50.0
+tabulate==0.9.0
+tenacity==9.1.2
+tiktoken==0.12.0
+# CPU-only PyTorch — install separately to pick the right index:
+# pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
+torch
+torchvision
+torchaudio
+tqdm==4.67.1
+transformers==4.57.6
+typing_extensions==4.15.0
+urllib3==2.6.3
+uvicorn==0.40.0
+wandb==0.22.0
+Werkzeug==3.1.5
+xxhash==3.6.0
