@@ -533,6 +533,42 @@ qwen3-vl-2b-instruct:
   timeout: 600
 ```
   
+#### BytePlus Ark Models (Seed-2.0)
+
+BytePlus Ark uses an OpenAI-compatible API. Set your API key and use an Endpoint ID from the [BytePlus Ark console](https://console.byteplus.com/ark).
+
+```bash
+export ARK_API_KEY=your-ark-api-key
+```
+
+```yaml
+seed-2.0-pro:
+  provider: openai
+  organization: byteplus              # triggers ARK_API_KEY lookup
+  model_name: ep-xxxxxxxxxxxxxxxxxx-xxxxx  # your Endpoint ID
+  max_completion_tokens: 32768
+  temperature: 1.0
+  max_workers: 32
+  max_retries: 5
+  max_retries_api: 5
+  base_url: https://ark.ap-southeast.bytepluses.com/api/v3  # ap-southeast region
+  # base_url: https://ark.cn-beijing.volces.com/api/v3      # cn-beijing region
+  timeout: 500
+```
+
+Run with:
+```bash
+python scripts/SpatialGym/spatial_run.py \
+  --phase all \
+  --model-name seed-2.0-pro \
+  --num 25 \
+  --data-dir room_data/3-room/ \
+  --output-root results/ \
+  --render-mode text \
+  --exp-type active \
+  --inference-mode batch
+```
+
 For other models, you can refer to the `scripts/SpatialGym/base_model_config.yaml` for more details.
 
 ### Commands

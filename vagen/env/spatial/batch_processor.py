@@ -49,6 +49,15 @@ class OpenAIBatchProcessor(BaseBatchProcessor):
     def __init__(self, model_config: dict):
         super().__init__(model_config)
         self.cfg = OpenAIModelConfig(**model_config)
+
+        # BytePlus Ark does not support the OpenAI Batch API.
+        # Fail fast with an actionable message instead of a cryptic 400 error.
+        if (self.cfg.organization or "").lower() == "byteplus":
+            raise ValueError(
+                "BytePlus Ark does not support the OpenAI Batch API. "
+                "Please use --inference-mode direct instead."
+            )
+
         self.interface = OpenAIModelInterface(self.cfg)
         self.client = self.interface.client
         self.is_gemini = (
@@ -141,8 +150,10 @@ class OpenAIBatchProcessor(BaseBatchProcessor):
             if not input_file_id:
                 raise RuntimeError(f"Gemini file upload returned no file id: {uploaded_file!r}")
         else:
+            # BytePlus Ark requires purpose="user_data"; OpenAI uses "batch"
+            file_purpose = "user_data" if (self.cfg.organization or "").lower() == "byteplus" else "batch"
             with open(jsonl_path, "rb") as f:
-                batch_input = self.client.files.create(file=f, purpose="batch")
+                batch_input = self.client.files.create(file=f, purpose=file_purpose)
             input_file_id = batch_input.id
 
         batch = self.client.batches.create(

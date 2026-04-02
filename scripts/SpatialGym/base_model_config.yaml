@@ -20,6 +20,26 @@ models:
     max_retries_api: 5
     timeout: 500
     reasoning_effort: medium
+
+  # BytePlus Ark — Seed-2.0 Pro
+  # model_name: use your Endpoint ID from https://console.byteplus.com/ark
+  #   e.g. "ep-xxxxxxxxxxxxxxxxxx-xxxxx" or a versioned alias like "seed-2-0-pro-260328"
+  # API key: set ARK_API_KEY in your environment (or BYTEPLUS_API_KEY as fallback)
+  # Regions: ap-southeast  →  https://ark.ap-southeast.bytepluses.com/api/v3
+  #          cn-beijing    →  https://ark.cn-beijing.volces.com/api/v3
+  seed-2.0-pro:
+    provider: openai
+    organization: byteplus
+    model_name: ep-xxxxxxxxxxxxxxxxxx-xxxxx  # replace with your Endpoint ID
+    max_completion_tokens: 32768
+    temperature: 1.0
+    max_workers: 32
+    presence_penalty: 0.0
+    frequency_penalty: 0.0
+    max_retries: 5
+    max_retries_api: 5
+    base_url: https://ark.ap-southeast.bytepluses.com/api/v3
+    timeout: 500
   
   gemini-3-pro-preview:
     provider: openai
