@@ -49,6 +49,15 @@ class OpenAIBatchProcessor(BaseBatchProcessor):
     def __init__(self, model_config: dict):
         super().__init__(model_config)
         self.cfg = OpenAIModelConfig(**model_config)
+
+        # BytePlus Ark does not support the OpenAI Batch API.
+        # Fail fast with an actionable message instead of a cryptic 400 error.
+        if (self.cfg.organization or "").lower() == "byteplus":
+            raise ValueError(
+                "BytePlus Ark does not support the OpenAI Batch API. "
+                "Please use --inference-mode direct instead."
+            )
+
         self.interface = OpenAIModelInterface(self.cfg)
         self.client = self.interface.client
         self.is_gemini = (
