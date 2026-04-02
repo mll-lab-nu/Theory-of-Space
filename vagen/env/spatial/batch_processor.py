@@ -141,8 +141,10 @@ class OpenAIBatchProcessor(BaseBatchProcessor):
             if not input_file_id:
                 raise RuntimeError(f"Gemini file upload returned no file id: {uploaded_file!r}")
         else:
+            # BytePlus Ark requires purpose="user_data"; OpenAI uses "batch"
+            file_purpose = "user_data" if (self.cfg.organization or "").lower() == "byteplus" else "batch"
             with open(jsonl_path, "rb") as f:
-                batch_input = self.client.files.create(file=f, purpose="batch")
+                batch_input = self.client.files.create(file=f, purpose=file_purpose)
             input_file_id = batch_input.id
 
         batch = self.client.batches.create(
