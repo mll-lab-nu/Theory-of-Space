@@ -479,11 +479,29 @@ Vision agents persist in obsolete beliefs.
 ## Usage
 
 ### Setup
+
+> **GPU requirement**: Vision World requires a GPU (CUDA). Text World and all API-based models (OpenAI, Anthropic, Google, BytePlus) run fine on CPU-only machines.
+
 1. **Clone the `release` branch**
    ```bash
    git clone --single-branch --branch release https://github.com/mll-lab-nu/Theory-of-Space.git
    cd Theory-of-Space
-2. **Configure keys and run setup**
+   ```
+
+2. **Install dependencies**
+
+   **Option A — GPU machine (full, including Vision World + vLLM):**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+   **Option B — CPU-only machine (Text World + API models only):**
+   ```bash
+   pip install -r requirements-cpu.txt
+   pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
+   ```
+
+3. **Configure keys and run setup**
   - Open `setup.sh` and set any required API keys / environment variables.
   - Run:
     ```bash
